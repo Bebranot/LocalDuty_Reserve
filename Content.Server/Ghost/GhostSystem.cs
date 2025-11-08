@@ -528,13 +528,18 @@ namespace Content.Server.Ghost
                 return null;
             }
 
-            // WWDP EDIT START
+            // Reserve edit start: port from WWDP
             CustomGhostPrototype? customGhost = null;
             if (mind.Comp.UserId is NetUserId userId)
-                customGhost = _prototypeManager.Index(_prefs.GetPreferences(userId).CustomGhost);
+
+            {
+                var prefs = _prefs.GetPreferencesOrNull(userId);
+                if (prefs != null)
+                    customGhost = _prototypeManager.Index(prefs.CustomGhost);
+            }
 
             var ghost = SpawnAtPosition(customGhost?.GhostEntityPrototype ?? GameTicker.ObserverPrototypeName, spawnPosition.Value);
-            // WWDP EDIT END
+            // Reserve edit end: port from WWDP
 
             var ghostComponent = Comp<GhostComponent>(ghost);
 
