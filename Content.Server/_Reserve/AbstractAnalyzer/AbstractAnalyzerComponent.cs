@@ -1,6 +1,7 @@
+// based on https://github.com/space-wizards/space-station-14/pull/34600
 using Robust.Shared.Audio;
 
-namespace Content.Server.AbstractAnalyzer;
+namespace Content.Server._Reserve.AbstractAnalyzer;
 
 /// <summary>
 /// After scanning, retrieves the target Uid to use with its related UI.
@@ -66,3 +67,4 @@ public abstract partial class AbstractAnalyzerComponent : Component
     [DataField]
     public bool Silent;
 }
+

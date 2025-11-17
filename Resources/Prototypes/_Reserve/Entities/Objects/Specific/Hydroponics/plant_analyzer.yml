@@ -1,3 +1,4 @@
+# based on https://github.com/space-wizards/space-station-14/pull/34600
 - type: entity
   id: PlantAnalyzer
   parent: BaseItem
@@ -5,7 +6,7 @@
   description: A scanner used to evaluate a plant's various areas of growth, genetic traits and chemicals.
   components:
   - type: Sprite
-    sprite: Objects/Specific/Hydroponics/plant_analyzer.rsi
+    sprite: _Reserve/Objects/Specific/Hydroponics/plant_analyzer.rsi
     layers:
     - state: icon
     - state: analyzer
@@ -51,3 +52,4 @@
     backgroundPatchMargin: 6.0, 0.0, 6.0, 0.0
     contentMargin: 6.0, 6.0, 6.0, 6.0
     maxWritableArea: 375.0, 600.0
+

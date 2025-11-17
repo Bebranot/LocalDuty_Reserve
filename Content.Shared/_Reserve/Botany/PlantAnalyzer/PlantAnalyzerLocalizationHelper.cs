@@ -1,10 +1,11 @@
+// based on https://github.com/space-wizards/space-station-14/pull/34600
 using Content.Shared.Atmos;
 using Content.Shared.Atmos.Prototypes;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Localizations;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared.Botany.PlantAnalyzer;
+namespace Content.Shared._Reserve.Botany.PlantAnalyzer;
 
 public sealed class PlantAnalyzerLocalizationHelper
 {
@@ -59,3 +60,4 @@ public sealed class PlantAnalyzerLocalizationHelper
         );
     }
 }
+

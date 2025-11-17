@@ -56,7 +56,7 @@
   id: HydroponicsToolClippers
   result: HydroponicsToolClippers
 
-# Europa-Start
+# Reserve-Start
 - type: latheRecipe
   parent: BaseHydroToolRecipe
   id: PlantAnalyzer
@@ -64,4 +64,4 @@
   materials:
     Steel: 300
     Plastic: 200
-# Europa-End
+# Reserve-End

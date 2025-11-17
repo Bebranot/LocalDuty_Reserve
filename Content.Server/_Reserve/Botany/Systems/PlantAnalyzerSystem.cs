@@ -1,10 +1,13 @@
+// based on https://github.com/space-wizards/space-station-14/pull/34600
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
-using Content.Server.AbstractAnalyzer;
+using Content.Server._Reserve.AbstractAnalyzer;
+using Content.Server._Reserve.Botany.Components;
 using Content.Server.Botany.Components;
+using Content.Server.Botany.Systems;
 using Content.Server.Popups;
-using Content.Shared.Botany.PlantAnalyzer;
+using Content.Shared._Reserve.Botany.PlantAnalyzer;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
@@ -16,7 +19,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
-namespace Content.Server.Botany.Systems;
+namespace Content.Server._Reserve.Botany.Systems;
 
 public sealed class PlantAnalyzerSystem : AbstractAnalyzerSystem<PlantAnalyzerComponent, PlantAnalyzerDoAfterEvent>
 {
@@ -204,3 +207,4 @@ public sealed class PlantAnalyzerSystem : AbstractAnalyzerSystem<PlantAnalyzerCo
         return HasComp<PlantHolderComponent>(target);
     }
 }
+

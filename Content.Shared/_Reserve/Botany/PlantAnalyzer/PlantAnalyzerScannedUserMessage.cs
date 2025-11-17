@@ -1,7 +1,8 @@
+// based on https://github.com/space-wizards/space-station-14/pull/34600
 using Content.Shared.Atmos;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared.Botany.PlantAnalyzer;
+namespace Content.Shared._Reserve.Botany.PlantAnalyzer;
 
 [Serializable, NetSerializable]
 public sealed class PlantAnalyzerScannedUserMessage(NetEntity? targetEntity, bool? scanMode, PlantAnalyzerPlantData? plantData, PlantAnalyzerTrayData? trayData, PlantAnalyzerTolerancesData? tolerancesData, PlantAnalyzerProduceData? produceData, TimeSpan? printReadyAt) : BoundUserInterfaceMessage
@@ -113,3 +114,4 @@ public sealed class PlantAnalyzerProduceData(int yield, float potency, List<stri
 public sealed class PlantAnalyzerPrintMessage : BoundUserInterfaceMessage
 {
 }
+

@@ -1,8 +1,9 @@
-using Content.Shared.Botany.PlantAnalyzer;
+// based on https://github.com/space-wizards/space-station-14/pull/34600
+using Content.Shared._Reserve.Botany.PlantAnalyzer;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
 
-namespace Content.Client.Botany.PlantAnalyzer;
+namespace Content.Client._Reserve.Botany.PlantAnalyzer;
 
 [UsedImplicitly]
 public sealed class PlantAnalyzerBoundUserInterface : BoundUserInterface
@@ -40,3 +41,4 @@ public sealed class PlantAnalyzerBoundUserInterface : BoundUserInterface
             _window.Print.Disabled = true;
     }
 }
+

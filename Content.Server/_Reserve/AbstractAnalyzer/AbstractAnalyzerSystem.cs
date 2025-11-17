@@ -1,3 +1,4 @@
+// based on https://github.com/space-wizards/space-station-14/pull/34600
 using System.Diagnostics.CodeAnalysis;
 using Content.Server.PowerCell;
 using Content.Shared.DoAfter;
@@ -11,7 +12,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Timing;
 
-namespace Content.Server.AbstractAnalyzer;
+namespace Content.Server._Reserve.AbstractAnalyzer;
 
 public abstract class AbstractAnalyzerSystem<TAnalyzerComponent, TAnalyzerDoAfterEvent> : EntitySystem
     where TAnalyzerComponent : AbstractAnalyzerComponent
@@ -191,3 +192,4 @@ public abstract class AbstractAnalyzerSystem<TAnalyzerComponent, TAnalyzerDoAfte
     /// </summary>
     protected abstract bool ValidScanTarget(EntityUid? target);
 }
+

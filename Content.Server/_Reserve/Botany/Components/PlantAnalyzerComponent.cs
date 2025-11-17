@@ -1,11 +1,12 @@
-using Content.Server.AbstractAnalyzer;
-using Content.Server.Botany.Systems;
+// based on https://github.com/space-wizards/space-station-14/pull/34600
+using Content.Server._Reserve.AbstractAnalyzer;
+using Content.Server._Reserve.Botany.Systems;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
-namespace Content.Server.Botany.Components;
+namespace Content.Server._Reserve.Botany.Components;
 
 /// <inheritdoc/>
 [RegisterComponent, AutoGenerateComponentPause]
@@ -41,3 +42,4 @@ public sealed partial class PlantAnalyzerComponent : AbstractAnalyzerComponent
     [DataField("machineOutput", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
     public string MachineOutput = "PlantAnalyzerReportPaper";
 }
+
