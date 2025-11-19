@@ -6,7 +6,7 @@
   proto: MobObserverCkeyPlaceholder
   restrictions:
   - !type:CkeyRestriction
-    ckey: [persikvin, reider207, nairsark, mapperian, dageff, RedFoxIV] # Reserve edit, сука редкокс добавил мой скей сюда
+    ckey: [Duga] # Reserve edit, сука редкокс добавил мой скей сюда
   name: custom-ghost-personal-placeholder-name
   desc: custom-ghost-personal-placeholder-desc
 
