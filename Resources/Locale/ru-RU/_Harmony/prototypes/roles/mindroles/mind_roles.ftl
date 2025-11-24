@@ -1,2 +1,2 @@
-ent-MindRoleConspirator = Роль конспиратора
+ent-MindRoleConspirator = Роль заговорщика
     .desc = { "" }

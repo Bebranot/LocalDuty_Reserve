@@ -1,1 +1,1 @@
-role-subtype-conspirator = Конспиратор
+role-subtype-conspirator = Заговорщик
