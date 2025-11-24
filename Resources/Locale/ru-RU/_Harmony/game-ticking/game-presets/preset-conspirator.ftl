@@ -11,7 +11,7 @@ conspirator-objective = Целью заговорщиков было: [color=whi
 
 conspirator-identities = Заговорщиками являются:
 conspirator-name = {$name} - заговорщик.
-conspirator-radio-implant = Общайтесь с другими заговорщиками с помощью своего импланта (:щ).
+conspirator-radio-implant = Кооперируйтесь с другими заговорщиками с помощью своего импланта (:щ).
 
 conspiracy-title = Заговорщики
 conspiracy-description = Готовится заговор!
