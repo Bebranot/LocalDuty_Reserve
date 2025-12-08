@@ -145,8 +145,8 @@
   id: TraitorObjectiveGroupState
   weights:
     EscapeShuttleObjective: 1
-    DieObjective: 0.05
-    HijackShuttleObjective: 0.02 # Goobstation - reenable hijack
+    DieObjective: 0.01 # Reserve edit: 0.05 -> 0.01
+    HijackShuttleObjective: 0.01 # Goobstation - reenable hijack; Reserve edit: 0.02 -> 0.01
 
 - type: weightedRandom
   id: TraitorObjectiveGroupSocial

@@ -9,12 +9,14 @@
     minSyllables: 2
     maxSyllables: 4
     replacement:
-      - r
-      - rr
-      - Rr
-      - gr
-      - sr
-      - ss
-      - sSs
-      - rer
-      - row
+    # reserve edit start
+      - р
+      - рр
+      - Рр
+      - гр
+      - ср
+      - сс
+      - сСс
+      - рер
+      - рав
+    # reserve edit end

@@ -26,19 +26,19 @@ chat-speech-verb-sign-nalrasan-11 = стучит хвостом
 chat-speech-verb-sign-nalrasan-12 = постучал хвостом
 chat-speech-verb-sign-nalrasan-13 = энергично постучал хвостом
 chat-speech-verb-sign-nalrasan-14 = дергает ушами и хвостом
-chat-speech-verb-sign-nalrasan-15 = подергал ушами и хвостом
+chat-speech-verb-sign-nalrasan-15 = подергивает ушами и хвостом
 chat-speech-verb-sign-nalrasan-16 = медленно дергает ушами и хвостом
-chat-speech-verb-sign-nalrasan-17 = энергично подергал ушами и хвостом
+chat-speech-verb-sign-nalrasan-17 = энергично подергивает ушами и хвостом
 
 # There has to be a better way
 
-chat-speech-verb-sign-siiktajr-1 = двигает хвостом и помурчал
-chat-speech-verb-sign-siiktajr-2 = бвгает хвостом и мяукнул
-chat-speech-verb-sign-siiktajr-3 = дернул ушами и мяукнул
-chat-speech-verb-sign-siiktajr-4 = дернул ушами и мурлыкнул
-chat-speech-verb-sign-siiktajr-5 = навострил уши и мурлычет
-chat-speech-verb-sign-siiktajr-6 = навострил уши не мяукнул
+chat-speech-verb-sign-siiktajr-1 = двигает хвостом и мурлычет
+chat-speech-verb-sign-siiktajr-2 = дергает хвостом и мяукает
+chat-speech-verb-sign-siiktajr-3 = дергает ушами и мяукает
+chat-speech-verb-sign-siiktajr-4 = дергает ушами и мурлыкает
+chat-speech-verb-sign-siiktajr-5 = навострил уши и мурлыкает
+chat-speech-verb-sign-siiktajr-6 = навострил уши не мяукает
 chat-speech-verb-sign-siiktajr-7 = подёргал хвостом и мурлычет
 chat-speech-verb-sign-siiktajr-8 = подёргивает хвостом и мяукает
-chat-speech-verb-sign-siiktajr-9 = дернул ушами и хвостом, после чего мурлыкнул
-chat-speech-verb-sign-siiktajr-10 = дернул ушами и хвостом, после чего мяукнул
+chat-speech-verb-sign-siiktajr-9 = дергает ушами и хвостом, после чего мурлыкает
+chat-speech-verb-sign-siiktajr-10 = дергает ушами и хвостом, после чего мяукает

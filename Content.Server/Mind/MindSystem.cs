@@ -309,6 +309,8 @@ public sealed class MindSystem : SharedMindSystem
             mind.OwnedEntity = null;
             Entity<MindComponent> mindEnt = (mindId, mind);
             Entity<MindContainerComponent> containerEnt = (oldEntity.Value, oldContainer);
+            // Reserve: Set LastMindStored here instead of in MindRemovedMessage constructor to avoid side effects
+            oldContainer.LastMindStored = mindId;
             RaiseLocalEvent(oldEntity.Value, new MindRemovedMessage(mindEnt, containerEnt));
             RaiseLocalEvent(mindId, new MindGotRemovedEvent(mindEnt, containerEnt));
             Dirty(oldEntity.Value, oldContainer);

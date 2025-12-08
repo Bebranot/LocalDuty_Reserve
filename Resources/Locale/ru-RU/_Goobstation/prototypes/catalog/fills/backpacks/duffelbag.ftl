@@ -1,11 +1,11 @@
 ent-ClothingBackpackDuffelSyndicateMedicHardsuitBundle = набор скафандра медика Синдиката
     .desc = Запасной боевой скафандр медика, предназначенный для вашей миссии.
-ent-ClothingBackpackDuffelSyndicateStealthHardsuitBundle = набор стелс-костюма Киберсан
-    .desc = Набор содержащий стелс костюм.
+ent-ClothingBackpackDuffelSyndicateStealthHardsuitBundle = набор стелс-костюма Cybersun
+    .desc = Набор содержащий стелс-костюм.
 ent-ClothingBackpackDuffelSyndicateBurner = набор Горелка
-    .desc = Набор Горелка. Содержит Взрывные и крупнокалиберные магазины и саму винтовку.
+    .desc = Набор, содержащий винтовку, а так же взрывные и крупнокалиберные магазины.
 ent-ClothingBackpackDuffelSyndicateM90Bundle = набор M-90
-    .desc = Набор с автоматом синдиката М-90 и двумя запасными магазинами..
+    .desc = Набор с автоматом Синдиката М-90 и двумя запасными магазинами.
 ent-ClothingBackpackDuffelSyndicateFilledWSPR = набор WSPR
     .desc = Набор, содержащий WSPR и два запасных магазина к нему
 ent-ClothingBackpackDuffelSyndicateFilledWhimsy = набор "радости и капризы" Синдиката.

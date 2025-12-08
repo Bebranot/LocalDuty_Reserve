@@ -49,8 +49,10 @@ public sealed class ForceGhostCommand : LocalizedEntityCommands
         if (!_mind.TryGetMind(player, out var mindId, out var mind))
             (mindId, mind) = _mind.CreateMind(player.UserId);
 
-        if (!_ghost.OnGhostAttempt(mindId, false, true, mind))
+        // Reserve-Start
+        if (!_ghost.OnGhostAttempt(mindId, false, viaCommand: true, forced: true, mind: mind))
             shell.WriteLine(Loc.GetString("cmd-forceghost-denied"));
+        // Reserve-End
     }
 
     public override CompletionResult GetCompletion(IConsoleShell shell, string[] args)

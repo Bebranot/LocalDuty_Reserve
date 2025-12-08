@@ -43,3 +43,6 @@ ent-SyringeIbuprofen = шприц
 ent-SyringeHeroin = шприц
     .desc = Чувааааак!
     .suffix = Героин 15u
+ent-SyringeMicroplastics = шприц
+    .suffix = Микропластик
+    .desc = Человечество привыкло принимать это в больших дозах. Теперь это просто лекарство от вокса.

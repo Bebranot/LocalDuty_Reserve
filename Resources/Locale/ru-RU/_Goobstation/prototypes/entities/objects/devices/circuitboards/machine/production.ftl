@@ -16,3 +16,6 @@ ent-TeslaCoilCircuitboard = катушка теслы (машинная плат
 ent-RadiationCollectorCircuitboard = коллектор радиации (машинная плата)
     .desc = { ent-BaseMachineCircuitboard.desc }
     .suffix = { ent-BaseMachineCircuitboard.suffix }
+ent-PlumbingPumpCircuitboard = жидкостная помпа (машинная плата)
+    .desc = { ent-BaseMachineCircuitboard.suffix }
+    .suffix = { ent-BaseMachineCircuitboard.suffix }

@@ -43,7 +43,7 @@ artifact-trigger-hint-examine = Внимательное изучение
 artifact-trigger-hint-medical = Терапевтические химикаты
 
 xenoarch-trigger-tip-music = Гармоничные звуковые колебания
-xenoarch-trigger-tip-heat = Высокотемпературный гах
+xenoarch-trigger-tip-heat = Высокотемпературный газ
 xenoarch-trigger-tip-cold = Низкотемпературный газ
 xenoarch-trigger-tip-no-oxygen = Бескислородная среда
 xenoarch-trigger-tip-water = Вода

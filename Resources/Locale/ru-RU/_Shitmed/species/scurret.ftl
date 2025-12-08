@@ -1,1 +1,1 @@
-species-name-scurret = Слизенок
+species-name-scurret = Слизнекот

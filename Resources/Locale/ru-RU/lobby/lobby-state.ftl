@@ -26,8 +26,8 @@ lobby-state-song-unknown-artist = [color=dimgray]Неизвестный испо
 lobby-state-playtime-comment-normal =
     Вы провели {$hours} {$hours ->
     [1] час
-    *[other]часов
+    *[other] часов
     } в игре сегодня. Не забывайте делать перерывы!
-lobby-state-playtime-comment-concerning = Сегодня вы играли в течение {$hours}. Пожалуйста, сделайте перерыв.
-lobby-state-playtime-comment-grasstouchless = {$hours}. Подумайте о том, чтобы выйти из игры и удовлетворить свои потребности.
-lobby-state-playtime-comment-selfdestructive = {$hours}. Реально?
+lobby-state-playtime-comment-concerning = Сегодня вы играли в течение {$hours} часов. Пожалуйста, сделайте перерыв.
+lobby-state-playtime-comment-grasstouchless = {$hours} часов. Подумайте о том, чтобы выйти из игры и удовлетворить свои потребности.
+lobby-state-playtime-comment-selfdestructive = {$hours} часов. Реально?

@@ -40,3 +40,4 @@ JobGovernmentMan = Джи-мэн
 JobConquest = Завоеватель
 JobInspector = Аудитор Центрального Командования
 JobMercenaryCaptain = Капитан наёмников
+JobRoboticist = Робототехник
