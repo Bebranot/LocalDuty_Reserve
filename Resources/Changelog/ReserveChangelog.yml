@@ -226,3 +226,55 @@ Entries:
       message: Добавлены изменения с Goob Station на момент 12.07!
   id: 33
   time: '2025-07-13T07:07:54.0000000+00:00'
+- author: Svarshik
+  changes:
+    - type: Add
+      message: Изменения с Goob Station на момент 26.09
+    - type: Add
+      message: Изменения с Space Wizards на момент 20.07
+  id: 34
+  time: '2025-09-28T19:13:32.0000000+00:00'
+- author: Kutos
+  changes:
+    - type: Add
+      message: IC передача резервкоинов
+  id: 35
+  time: '2025-09-28T19:29:13.0000000+00:00'
+- author: Hero_010
+  changes:
+    - type: Add
+      message: Добавлен реагент карпозин, позволяющий выживать в космосе.
+  id: 36
+  time: '2025-11-09T13:17:11.0000000+00:00'
+- author: Kutosss
+  changes:
+    - type: Tweak
+      message: Анализаторы растений обновлены.
+  id: 37
+  time: '2025-11-23T21:17:18.0000000+00:00'
+- author: thxmqninq
+  changes:
+    - type: Add
+      message: Конспираторы!
+  id: 38
+  time: '2025-11-27T20:59:08.0000000+00:00'
+- author: Kutosss
+  changes:
+    - type: Add
+      message: Добавлена красивая и удобная меню для телепортации призраков
+  id: 39
+  time: '2025-12-06T11:38:17.0000000+00:00'
+- author: Svarshik
+  changes:
+    - type: Add
+      message: UwU
+  id: 40
+  time: '2025-12-08T19:16:13.0000000+00:00'
+- author: nabegator220
+  changes:
+    - type: Add
+      message: >-
+        Добавлена настройка, позволяющая транслитерировать чат с латиницы на
+        кириллицу и интерфейс с кириллицы на латиницу.
+  id: 41
+  time: '2025-12-08T20:46:29.0000000+00:00'

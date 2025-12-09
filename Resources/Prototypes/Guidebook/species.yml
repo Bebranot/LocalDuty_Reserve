@@ -37,7 +37,7 @@
     - Reptilian
     - SlimePerson
     # Goobstation
-    # - Felinid
+    - Felinid
     - Gingerbread
     - Harpy
     - Vox
@@ -50,6 +50,7 @@
     - Tajaran
     - Chitinid
     - Plasmaman
+    - Feroxi
 
 - type: guideEntry
   id: Arachnid
@@ -94,10 +95,11 @@
   text: "/ServerInfo/Guidebook/Mobs/SlimePerson.xml"
 
 # Goobstation
-#- type: guideEntry
-#  id: Felinid
-#  name: species-name-felinid
-#  text: "/ServerInfo/Guidebook/Mobs/Felinid.xml"
+- type: guideEntry
+  id: Felinid
+  abstract: true #Reserve guidebook
+  name: species-name-felinid
+  text: "/ServerInfo/Guidebook/Mobs/Felinid.xml"
 
 - type: guideEntry
   id: Gingerbread

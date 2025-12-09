@@ -86,6 +86,7 @@ using System.Numerics;
 using Content.Shared._Goobstation.Wizard.Projectiles;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Audio;
+using Content.Shared.CombatMode;
 using Content.Shared.Damage;
 using Content.Shared.Database;
 using Content.Shared.Hands;
@@ -192,7 +193,8 @@ public sealed class ReflectSystem : EntitySystem
             (reflector.Comp.Reflects & reflective.Reflective) == 0x0 ||
             !_toggle.IsActivated(reflector.Owner) ||
             !_random.Prob(reflector.Comp.ReflectProb) ||
-            !TryComp<PhysicsComponent>(projectile, out var physics))
+            !TryComp<PhysicsComponent>(projectile, out var physics) || // Goob Edit - Scarp fix
+            !TryComp<CombatModeComponent>(reflector, out var combat) || !combat.IsInCombatMode && reflector.Comp.CombatModeRequired) // Goob Edit - Scarp fix
         {
             return false;
         }
@@ -252,9 +254,9 @@ public sealed class ReflectSystem : EntitySystem
     {
         if ((reflector.Comp.Reflects & hitscanReflectType) == 0x0 ||
             !_toggle.IsActivated(reflector.Owner) ||
-            // Goob edit start
-            !((reflector.Comp.Reflects & hitscanReflectType) != 0x0 && _random.Prob(reflector.Comp.ReflectProb)))
-            // Goob edit end
+            !((reflector.Comp.Reflects & hitscanReflectType) != 0x0 && _random.Prob(reflector.Comp.ReflectProb)) // Goob edit
+            || !TryComp<CombatModeComponent>(reflector, out var combat) // Goob edit
+            || !combat.IsInCombatMode && reflector.Comp.CombatModeRequired) // Goob edit
         {
             newDirection = null;
             return false;
@@ -313,6 +315,7 @@ public sealed class ReflectSystem : EntitySystem
     #region Examine
     private void OnExamine(Entity<ReflectComponent> ent, ref ExaminedEvent args)
     {
+        if (!ent.Comp.Examinable) return; // Goobstation
         // This isn't examine verb or something just because it looks too much bad.
         // Trust me, universal verb for the potential weapons, armor and walls looks awful.
         var value = MathF.Round(ent.Comp.ReflectProb * 100, 1);

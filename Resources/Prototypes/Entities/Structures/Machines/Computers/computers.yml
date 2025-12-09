@@ -369,6 +369,15 @@
   - type: GuideHelp
     guides:
     - ShuttleCraft
+  # Frontier edit start
+  - type: DeviceLinkSource
+    ports:
+    - SignalShuttleConsole1
+    - SignalShuttleConsole2
+    - SignalShuttleConsole3
+    - SignalShuttleConsole4
+    range: 90
+  # Frontier edit end
 
 - type: entity
   parent: BaseComputerShuttle
@@ -1119,7 +1128,7 @@
       - OrderSender
   - type: GuideHelp
     guides:
-    - Cargo
+    - CargoReserve # Reserve edit
 
 # Request console variants.
 - type: entity
@@ -1324,8 +1333,8 @@
     access: [["Quartermaster"]]
   - type: GuideHelp
     guides:
-    - CargoBounties
-    - Cargo
+    - CargoBountiesReserve # Reserve edit
+    - CargoReserve # Reserve edit
 
 - type: entity
   parent: BaseComputerAiAccess
@@ -1624,7 +1633,7 @@
     color: "#b89f25"
   - type: GuideHelp
     guides:
-    - Cargo
+    - CargoReserve # Reserve edit
 
 - type: entity
   parent: BaseComputerAiAccess

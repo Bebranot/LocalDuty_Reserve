@@ -49,13 +49,18 @@
   - NuclearOperatives
   - Zombies
   - Revolutionaries
+  - Conspirators # Harmony - Conspirators
   - MinorAntagonists
   - SpaceNinja
   - Thieves
   - Abductors # Shitmed - Abductors
   - Bingle # Goob content
   - Devil # Goob content
+  - Shadowlings # Einstein Engines - Shadowlings
   - SlaughterDemon # Goob content
+  - Xenomorphs # WD - Xenomorphs
+  - Wraith
+  - Slasher # Goob content
 
 - type: guideEntry
   id: Traitors
