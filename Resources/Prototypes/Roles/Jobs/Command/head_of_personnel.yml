@@ -160,6 +160,12 @@
       inverted: true
       species:
       - Felinid
+  guides: # goobstation
+  - Command
+  - Succession
+  - StandardProcedures SOP
+  - HeadOfPersonnel SOP
+  - Writing
   goobcoins: 40 #Goob content
   weight: 20
   startingGear: HoPGear
@@ -224,4 +230,3 @@
     mask: ClothingMaskNeckGaiterRed
     neck: ClothingNeckCloakHop
     outerClothing: ClothingOuterWinterHoP
-
