@@ -6,11 +6,7 @@ using Robust.Shared.GameStates;
 using Robust.Shared.Utility;
 using static Robust.Shared.Utility.SpriteSpecifier;
 
-namespace Content.Shared._Europa.Lighting.Shaders;
-
-//
-// License-Identifier: AGPL-3.0-or-later
-//
+namespace Content.Shared._Orion.Lighting.Shaders;
 
 /// <summary>
 /// This is used for LightOverlay
@@ -22,7 +18,7 @@ public sealed partial class LightingOverlayComponent : Component
     public bool? Enabled;
 
     [DataField]
-    public SpriteSpecifier Sprite = new Texture(new ResPath("_Europa/Effects/LightMasks/lightmask_lamp.png"));
+    public SpriteSpecifier Sprite = new Texture(new ResPath("_Orion/Effects/LightMasks/lightmask_lamp.png"));
 
     [DataField]
     public float OffsetX = -0.5f;
