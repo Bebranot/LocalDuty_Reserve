@@ -170,7 +170,7 @@ public sealed partial class RadioSystem : EntitySystem
         if (!_messages.Add(message))
             return;
 
-        var evt = new TransformSpeakerNameEvent(messageSource, MetaData(messageSource).EntityName);
+        var evt = new TransformSpeakerNameEvent(messageSource, MetaData(messageSource).EntityName, channel); // Reserve edit: Port from WD
         RaiseLocalEvent(messageSource, evt);
 
         // Goob - Job icons
@@ -204,7 +204,7 @@ public sealed partial class RadioSystem : EntitySystem
         //     ("channel", $"\\[{channel.LocalizedName}\\]"),
         //     ("name", name),
         //     ("message", content));
-        var wrappedMessage = WrapRadioMessage(messageSource, channel, name, content, language, jobIcon, jobName); // Einstein Engines - Language
+        var wrappedMessage = WrapRadioMessage(messageSource, channel, name, content, evt, language, jobIcon, jobName); // Reserve edit: Port from WD
 
         // most radios are relayed to chat, so lets parse the chat message beforehand
         // var chat = new ChatMessage(
@@ -223,7 +223,7 @@ public sealed partial class RadioSystem : EntitySystem
         var obfuscated = _language.ObfuscateSpeech(content, language);
         // Goobstation - Chat Pings
         // Added GetNetEntity(messageSource), to source
-        var obfuscatedWrapped = WrapRadioMessage(messageSource, channel, name, obfuscated, language, jobIcon, jobName);
+        var obfuscatedWrapped = WrapRadioMessage(messageSource, channel, name, obfuscated, evt, language, jobIcon, jobName); // Reserve edit: Port from WD
         var notUdsMsg = new ChatMessage(ChatChannel.Radio, obfuscated, obfuscatedWrapped, GetNetEntity(messageSource), null);
         var ev = new RadioReceiveEvent(messageSource, channel, msg, notUdsMsg, language, radioSource);
         // Einstein Engines - Language end
@@ -282,12 +282,17 @@ public sealed partial class RadioSystem : EntitySystem
         RadioChannelPrototype channel,
         string name,
         string message,
+        TransformSpeakerNameEvent transformSpeakerName, // Reserve edit: Port from WD
         LanguagePrototype language,
         ProtoId<JobIconPrototype>? jobIcon, // Goob edit
         string? jobName = null) // Gaby Radio icons
     {
         // TODO: code duplication with ChatSystem.WrapMessage
-        var speech = _chat.GetSpeechVerb(source, message);
+        SpeechVerbPrototype speech; // Reserve edit: Port from WD
+        if (transformSpeakerName.SpeechVerb != null && _prototype.TryIndex(transformSpeakerName.SpeechVerb, out var evntProto)) // Reserve edit: Port from WD
+            speech = evntProto; // Reserve edit: Port from WD
+        else // Reserve edit: Port from WD
+            speech = _chat.GetSpeechVerb(source, message); // Reserve edit: Port from WD
         var languageColor = channel.Color;
 
         // Goobstation - Bolded Language Overrides begin

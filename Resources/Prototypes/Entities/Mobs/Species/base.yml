@@ -399,6 +399,11 @@
   - type: Body
     prototype: Human
     requiredLegs: 2
+  - type: MobThresholdSounds # Reserve edit: Port from WD
+    deathSound:
+      collection: DeathSound
+    critSound:
+      collection: CritSound
   - type: Identity
   - type: IdExaminable
   - type: Hands
@@ -490,7 +495,7 @@
     - FootstepSound
     - DoorBumpOpener
     - AnomalyHost
-  - type: LayingDown # WD EDIT
+  - type: LayingDown # Reserve edit: Port from WD
   - type: Targeting # Shitmed Change
   - type: CanEscapeInventory # GoobStation - Escape being picked up by players
   - type: Consciousness
