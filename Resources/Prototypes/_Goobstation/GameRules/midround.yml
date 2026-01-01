@@ -61,7 +61,7 @@
   - type: StationEvent
     earliestStart: 20
     weight: 4
-    minimumPlayers: 15
+    minimumPlayers: 35 # Reserve edit 15 -> 35
     maxOccurrences: 1
     startAnnouncement: station-event-communication-interception
     startAudio:
