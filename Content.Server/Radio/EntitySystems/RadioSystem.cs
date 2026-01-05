@@ -1,7 +1,7 @@
-// SPDX-FileCopyrightText: 2020 Bright <nsmoak10@yahoo.com>
+﻿// SPDX-FileCopyrightText: 2020 Bright <nsmoak10@yahoo.com>
 // SPDX-FileCopyrightText: 2020 Bright0 <55061890+Bright0@users.noreply.github.com>
 // SPDX-FileCopyrightText: 2020 Swept <jamesurquhartwebb@gmail.com>
-// SPDX-FileCopyrightText: 2020 Víctor Aguilera Puerto <6766154+Zumorica@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2020 V├нctor Aguilera Puerto <6766154+Zumorica@users.noreply.github.com>
 // SPDX-FileCopyrightText: 2021 Acruid <shatter66@gmail.com>
 // SPDX-FileCopyrightText: 2021 Metal Gear Sloth <metalgearsloth@gmail.com>
 // SPDX-FileCopyrightText: 2021 Vera Aguilera Puerto <6766154+Zumorica@users.noreply.github.com>
@@ -170,7 +170,7 @@ public sealed partial class RadioSystem : EntitySystem
         if (!_messages.Add(message))
             return;
 
-        var evt = new TransformSpeakerNameEvent(messageSource, MetaData(messageSource).EntityName, channel); // Reserve edit: Port from WD
+        var evt = new TransformSpeakerNameEvent(messageSource, MetaData(messageSource).EntityName);
         RaiseLocalEvent(messageSource, evt);
 
         // Goob - Job icons
@@ -204,7 +204,7 @@ public sealed partial class RadioSystem : EntitySystem
         //     ("channel", $"\\[{channel.LocalizedName}\\]"),
         //     ("name", name),
         //     ("message", content));
-        var wrappedMessage = WrapRadioMessage(messageSource, channel, name, content, evt, language, jobIcon, jobName); // Reserve edit: Port from WD
+        var wrappedMessage = WrapRadioMessage(messageSource, channel, name, content, language, jobIcon, jobName); // Einstein Engines - Language
 
         // most radios are relayed to chat, so lets parse the chat message beforehand
         // var chat = new ChatMessage(
@@ -223,7 +223,7 @@ public sealed partial class RadioSystem : EntitySystem
         var obfuscated = _language.ObfuscateSpeech(content, language);
         // Goobstation - Chat Pings
         // Added GetNetEntity(messageSource), to source
-        var obfuscatedWrapped = WrapRadioMessage(messageSource, channel, name, obfuscated, evt, language, jobIcon, jobName); // Reserve edit: Port from WD
+        var obfuscatedWrapped = WrapRadioMessage(messageSource, channel, name, obfuscated, language, jobIcon, jobName);
         var notUdsMsg = new ChatMessage(ChatChannel.Radio, obfuscated, obfuscatedWrapped, GetNetEntity(messageSource), null);
         var ev = new RadioReceiveEvent(messageSource, channel, msg, notUdsMsg, language, radioSource);
         // Einstein Engines - Language end
@@ -282,17 +282,12 @@ public sealed partial class RadioSystem : EntitySystem
         RadioChannelPrototype channel,
         string name,
         string message,
-        TransformSpeakerNameEvent transformSpeakerName, // Reserve edit: Port from WD
         LanguagePrototype language,
         ProtoId<JobIconPrototype>? jobIcon, // Goob edit
         string? jobName = null) // Gaby Radio icons
     {
         // TODO: code duplication with ChatSystem.WrapMessage
-        SpeechVerbPrototype speech; // Reserve edit: Port from WD
-        if (transformSpeakerName.SpeechVerb != null && _prototype.TryIndex(transformSpeakerName.SpeechVerb, out var evntProto)) // Reserve edit: Port from WD
-            speech = evntProto; // Reserve edit: Port from WD
-        else // Reserve edit: Port from WD
-            speech = _chat.GetSpeechVerb(source, message); // Reserve edit: Port from WD
+        var speech = _chat.GetSpeechVerb(source, message);
         var languageColor = channel.Color;
 
         // Goobstation - Bolded Language Overrides begin

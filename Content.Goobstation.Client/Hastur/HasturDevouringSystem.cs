@@ -1,8 +1,4 @@
-// SPDX-FileCopyrightText: 2025 Goob Station Contributors
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
-using Content.Goobstation.Shared.Hastur.Components;
+﻿using Content.Goobstation.Shared.Hastur.Components;
 using Robust.Client.GameObjects;
 
 namespace Content.Goobstation.Client.Hastur;

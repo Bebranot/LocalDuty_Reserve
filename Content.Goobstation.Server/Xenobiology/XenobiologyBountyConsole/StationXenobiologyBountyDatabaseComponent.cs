@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
+﻿// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
 // SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
 // SPDX-FileCopyrightText: 2024 Killerqu00 <47712032+Killerqu00@users.noreply.github.com>
 // SPDX-FileCopyrightText: 2024 wafehling <wafehling@users.noreply.github.com>
@@ -73,7 +73,7 @@ public sealed partial class StationXenobiologyBountyDatabaseComponent : Componen
     /// The time between global bounty refreshes.
     /// </summary>
     [DataField]
-    public TimeSpan GlobalMarketRefreshDelay = TimeSpan.FromMinutes(20);
+    public TimeSpan GlobalMarketRefreshDelay = TimeSpan.FromMinutes(12);
 
     /// <summary>
     /// The time at which all bounties will refresh.

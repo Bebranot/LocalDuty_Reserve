@@ -1,4 +1,4 @@
-# used for disease spread
+﻿# used for disease spread
 - type: entity
   id: DiseaseBase
   components:
@@ -29,6 +29,7 @@
       DiseaseBehaviorFeelUnwell: 1
       DiseaseBehaviorHeadache: 0.8
       DiseaseBehaviorCough: 0.6
+      DiseaseBehaviorOwO: 1
 
 - type: entity
   id: DiseaseCancer

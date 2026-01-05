@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
+﻿// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
 // SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
 // SPDX-FileCopyrightText: 2025 Aineias1 <dmitri.s.kiselev@gmail.com>
 // SPDX-FileCopyrightText: 2025 FaDeOkno <143940725+FaDeOkno@users.noreply.github.com>
@@ -96,7 +96,7 @@ public sealed class DamageSquareSystem : EntitySystem
         var grid = xform.GridUid.Value;
         var tile = _map.GetTileRef(grid, Comp<MapGridComponent>(grid), xform.Coordinates);
 
-        var lookup = _lookup.GetLocalEntitiesIntersecting(tile, 0f, LookupFlags.Uncontained);
+        var lookup = _lookup.GetLocalEntitiesIntersecting(tile, 0f);
 
         foreach (var target in lookup)
         {

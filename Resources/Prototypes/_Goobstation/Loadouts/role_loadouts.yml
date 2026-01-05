@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2024 Alzore <140123969+Blackern5000@users.noreply.github.com>
+﻿# SPDX-FileCopyrightText: 2024 Alzore <140123969+Blackern5000@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2024 AstroDogeDX <48888500+AstroDogeDX@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2024 Aviu00 <93730715+Aviu00@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2024 BombasterDS <115770678+BombasterDS@users.noreply.github.com>
@@ -258,3 +258,6 @@
    - SurvivalMedical
    - Trinkets
    - GroupSpeciesBreathToolMedical
+   - VirologyEnvirohelm
+   - VirologyEnvirosuit
+   - VirologyEnvirogloves

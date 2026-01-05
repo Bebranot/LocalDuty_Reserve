@@ -1,4 +1,4 @@
-using System.Globalization;
+﻿using System.Globalization;
 using System.Numerics;
 using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.Manager;
@@ -19,7 +19,7 @@ public sealed class MegafaunaNumberSelectorTypeSerializer :
         ISerializationContext? context = null)
     {
         // ConstantMegafaunaNumberSelector validation
-        if (float.TryParse(node.Value, CultureInfo.InvariantCulture, out _))
+        if (float.TryParse(node.Value, out _))
             return new ValidatedValueNode(node);
 
         // RangeMegafaunaNumberSelector validation
