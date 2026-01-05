@@ -1,4 +1,4 @@
-﻿meta:
+meta:
   format: 7
   category: Map
   engineVersion: 264.0.0
@@ -158569,7 +158569,8 @@ entities:
       parent: 2
 - proto: SpawnPointVirologist
   entities:
-  - uid: 30021    components:
+  - uid: 30021
+    components:
     - type: Transform
       pos: -31.5,-19.5
       parent: 2
