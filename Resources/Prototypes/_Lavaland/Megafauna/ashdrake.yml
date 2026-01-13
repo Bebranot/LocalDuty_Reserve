@@ -61,7 +61,7 @@
     sprite: _Lavaland/Mobs/Bosses/ash_drake.rsi
     state: dragon
   - type: AshDrakeBoss
-     loot: LavalandCrusherAshDrakeDead
+    loot: LavalandCrusherAshDrakeDead
 #    loot: LavalandAshDrakeDead
 #    crusherLoot: LavalandCrusherAshDrakeDead
   - type: Damageable

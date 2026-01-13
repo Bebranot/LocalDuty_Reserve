@@ -114,11 +114,16 @@
   priority: 13
   patchToPlanet: false
 
+
+
 - type: lavalandGridRuin
   id: Graveyard
   name: lavaland-ruin-seed-graveyard
   path: /Maps/_Lavaland/Lavaland/ruin_graveyard.yml
-  priority: 14
+  priority: -1
+  patchToPlanet: false
+
+
 
 - type: lavalandGridRuin
   id: WaffleCo

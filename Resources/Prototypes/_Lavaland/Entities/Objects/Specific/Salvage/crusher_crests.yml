@@ -78,7 +78,7 @@
         range_upgrade: !type:ContainerSlot
         passive_upgrade: !type:ContainerSlot
         range_upgrade2: !type:ContainerSlot
-#    - type: CrusherCrestHunter
+    - type: CrusherCrestHunter
 
 
 

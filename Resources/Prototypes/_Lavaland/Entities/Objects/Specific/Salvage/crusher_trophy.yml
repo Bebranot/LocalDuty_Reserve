@@ -183,21 +183,21 @@
     - UpgradePassive
 
 
-#- type: entity
- # id: LavalandVigilanteCrusherUpgrade
- # parent: BaseItem
- # name: vigilante upgrade
- # description: upgrade
- # components:
- # - type: Sprite
- #   sprite: _Lavaland/Objects/Specific/Salvage/crusher_trophy.rsi
- #   state: vigilante
- # - type: Item
- #   size: Small
- # - type: CrusherUpgradeVigilante
-#
- # - type: StaticPrice
-  #  price: 10000
-  #- type: Tag
-   # tags:
-    #- UpgradeFight
+- type: entity
+  id: LavalandVigilanteCrusherUpgrade
+  parent: BaseItem
+  name: vigilante upgrade
+  description: upgrade
+  components:
+  - type: Sprite
+    sprite: _Lavaland/Objects/Specific/Salvage/crusher_trophy.rsi
+    state: vigilante
+  - type: Item
+    size: Small
+  - type: CrusherUpgradeVigilante
+
+  - type: StaticPrice
+    price: 10000
+  - type: Tag
+    tags:
+    - UpgradeFight
