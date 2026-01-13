@@ -187,6 +187,9 @@
     radius: 1.5
     energy: 0.5
     color: red
+  - type: Butcherable
+    spawned:
+    - id: LavalandWatcherCrusherUpgrade
 
 - type: entity
   id: MobWatcherIcewing
@@ -205,6 +208,11 @@
     radius: 1.5
     energy: 1
     color: deepskyblue
+
+  - type: Butcherable
+    spawned:
+    - id: LavalandIcyWatcherCrusherUpgrade
+
   - type: ProjectileBatteryAmmoProvider
     proto: WatcherBoltIcewing
     fireCost: 50
@@ -233,6 +241,11 @@
   - type: ProjectileBatteryAmmoProvider
     proto: WatcherBoltMagmawing
     fireCost: 50
+
+  - type: Butcherable
+    spawned:
+    - id: LavalandMagmaWatcherCrusherUpgrade
+
   - type: MobThresholds
     thresholds:
       0: Alive
