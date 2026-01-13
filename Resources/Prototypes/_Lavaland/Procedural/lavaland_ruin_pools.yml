@@ -27,6 +27,9 @@
 - type: lavalandRuinPool
   id: LavalandRuins
   gridRuins:
+#
+    AshDrakeArena: 1
+#
     SyndicateBase: 1
     HierophantArena: 1
     RougeAI: 1
