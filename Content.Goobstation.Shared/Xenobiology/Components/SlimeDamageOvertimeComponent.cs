@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
+﻿// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
 // SPDX-FileCopyrightText: 2025 SolsticeOfTheWinter <solsticeofthewinter@gmail.com>
 // SPDX-FileCopyrightText: 2025 TheBorzoiMustConsume <197824988+TheBorzoiMustConsume@users.noreply.github.com>
 //
@@ -7,7 +7,6 @@
 using Content.Goobstation.Maths.FixedPoint;
 using Content.Shared.Damage;
 using Robust.Shared.GameStates;
-using Robust.Shared.Serialization.TypeSerializers.Implementations;
 
 namespace Content.Goobstation.Shared.Xenobiology.Components;
 
@@ -31,7 +30,7 @@ public sealed partial class SlimeDamageOvertimeComponent : Component
     {
         DamageDict = new Dictionary<string, FixedPoint2>
         {
-            { "Blunt", 2.5},
+            { "Caustic", 2.5 },
         },
     };
 }

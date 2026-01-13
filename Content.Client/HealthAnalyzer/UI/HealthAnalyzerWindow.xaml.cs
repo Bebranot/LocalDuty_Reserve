@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2022 Fishfish458 <47410468+Fishfish458@users.noreply.github.com>
+﻿// SPDX-FileCopyrightText: 2022 Fishfish458 <47410468+Fishfish458@users.noreply.github.com>
 // SPDX-FileCopyrightText: 2022 Kara <lunarautomaton6@gmail.com>
 // SPDX-FileCopyrightText: 2022 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
 // SPDX-FileCopyrightText: 2022 Moony <moonheart08@users.noreply.github.com>
@@ -57,16 +57,13 @@
 // SPDX-FileCopyrightText: 2025 August Eymann <august.eymann@gmail.com>
 // SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
 // SPDX-FileCopyrightText: 2025 Kayzel <43700376+KayzelW@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 ReserveBot <211949879+ReserveBot@users.noreply.github.com>
 // SPDX-FileCopyrightText: 2025 Roudenn <romabond091@gmail.com>
 // SPDX-FileCopyrightText: 2025 Spatison <137375981+Spatison@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Svarshik <96281939+lexaSvarshik@users.noreply.github.com>
 // SPDX-FileCopyrightText: 2025 Trest <144359854+trest100@users.noreply.github.com>
 // SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
 // SPDX-FileCopyrightText: 2025 gluesniffler <linebarrelerenthusiast@gmail.com>
 // SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
 // SPDX-FileCopyrightText: 2025 kurokoTurbo <92106367+kurokoTurbo@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 nazrin <tikufaev@outlook.com>
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
@@ -103,6 +100,7 @@ using Content.Shared.Body.Part;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Reagent;
 using System.Globalization;
+using Content.Goobstation.Shared.Disease.Components;
 
 namespace Content.Client.HealthAnalyzer.UI
 {
@@ -243,7 +241,7 @@ namespace Content.Client.HealthAnalyzer.UI
             // Basic Diagnostic
 
             TemperatureLabel.Text = !float.IsNaN(msg.Temperature)
-                ? $"{msg.Temperature - Atmospherics.T0C:F1} °C ({msg.Temperature:F1} K)"
+                ? $"{msg.Temperature - Atmospherics.T0C:F1} ┬░C ({msg.Temperature:F1} K)"
                 : Loc.GetString("health-analyzer-window-entity-unknown-value-text");
 
             BloodLabel.Text = !float.IsNaN(msg.BloodLevel)
@@ -295,9 +293,9 @@ namespace Content.Client.HealthAnalyzer.UI
             DrawDiagnosticGroups(damageSortedGroups, damagePerType);
 
             // Goobstation
-            if (_entityManager.TryGetComponent<Goobstation.Shared.Disease.Components.DiseaseCarrierComponent>(_target, out var carrier))
+            if (_entityManager.TryGetComponent<DiseaseCarrierComponent>(_target, out var carrier))
             {
-                DrawDiseases(carrier.Diseases);
+                DrawDiseases(carrier.Diseases.ContainedEntities);
             }
 
             ConditionsListContainer.RemoveAllChildren();
@@ -532,7 +530,7 @@ namespace Content.Client.HealthAnalyzer.UI
                         ("amount", typeAmount)
                     );
 
-                    groupContainer.AddChild(CreateDiagnosticItemLabel(damageString.Insert(0, " · ")));
+                    groupContainer.AddChild(CreateDiagnosticItemLabel(damageString.Insert(0, " ┬╖ ")));
                 }
             }
         }
@@ -592,13 +590,13 @@ namespace Content.Client.HealthAnalyzer.UI
                         ("quantity", reagent.Quantity)
                     )}";
 
-                    groupContainer.AddChild(CreateDiagnosticItemLabel(reagentString.Insert(0, " · ")));
+                    groupContainer.AddChild(CreateDiagnosticItemLabel(reagentString.Insert(0, " ┬╖ ")));
                 }
             }
         }
 
         // Goobstation
-        private void DrawDiseases(List<EntityUid> diseases)
+        private void DrawDiseases(IReadOnlyList<EntityUid> diseases)
         {
             DiseasesContainer.RemoveAllChildren();
 
@@ -618,7 +616,7 @@ namespace Content.Client.HealthAnalyzer.UI
 
             foreach (var diseaseUid in diseases)
             {
-                if (!_entityManager.TryGetComponent<Goobstation.Shared.Disease.Components.DiseaseComponent>(diseaseUid, out var disease))
+                if (!_entityManager.TryGetComponent<DiseaseComponent>(diseaseUid, out var disease))
                     continue;
 
                 var diseaseInfoContainer = new BoxContainer
@@ -627,11 +625,11 @@ namespace Content.Client.HealthAnalyzer.UI
                     Orientation = BoxContainer.LayoutOrientation.Vertical,
                 };
                 diseaseInfoContainer.AddChild(CreateDiagnosticItemLabel(Loc.GetString("health-analyzer-window-disease-type-text", ("type", disease.Genotype))));
-                diseaseInfoContainer.AddChild(CreateDiagnosticItemLabel(" · " + Loc.GetString(
+                diseaseInfoContainer.AddChild(CreateDiagnosticItemLabel(" ┬╖ " + Loc.GetString(
                     "health-analyzer-window-disease-progress-text",
                     ("progress", disease.InfectionProgress)
                 )));
-                diseaseInfoContainer.AddChild(CreateDiagnosticItemLabel(" · " + Loc.GetString(
+                diseaseInfoContainer.AddChild(CreateDiagnosticItemLabel(" ┬╖ " + Loc.GetString(
                     "health-analyzer-window-immunity-progress-text",
                     ("progress", disease.ImmunityProgress)
                 )));

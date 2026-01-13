@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2025 August Eymann <august.eymann@gmail.com>
+﻿// SPDX-FileCopyrightText: 2025 August Eymann <august.eymann@gmail.com>
 // SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
 // SPDX-FileCopyrightText: 2025 SolsticeOfTheWinter <solsticeofthewinter@gmail.com>
 // SPDX-FileCopyrightText: 2025 TheBorzoiMustConsume <197824988+TheBorzoiMustConsume@users.noreply.github.com>
@@ -28,8 +28,17 @@ public partial class XenobiologySystem
         if (!_net.IsServer) return;
 
         // it sucks but it works and now y*ml warriors can add more slimes 500% faster
-        SpawnSlime(ent, ent.Comp.BasePrototype, ent.Comp.Breed);
-        //QueueDel(ent);
+        var slime = SpawnSlime(ent, ent.Comp.BasePrototype, ent.Comp.Breed);
+        if (!slime.HasValue)
+            return;
+
+        var s = slime.Value.Comp;
+        // every xenobio slime copy is personalized. feel free to tweak it as you like
+        // the rest of the shit such as inheritance is handled by SpawnSlime
+        s.MutationChance *= _random.NextFloat(.5f, 1.5f);
+        s.MaxOffspring += _random.Next(-1, 2);
+        s.ExtractsProduced += _random.Next(0, 2);
+        s.MitosisHunger *= _random.NextFloat(.75f, 1.2f);
     }
 
     private void OnSlimeMapInit(Entity<SlimeComponent> ent, ref MapInitEvent args)
@@ -95,10 +104,11 @@ public partial class XenobiologySystem
             if (sl.HasValue)
             {
                 // carries over generations. type shit.
-                sl.Value.Comp.Tamer = ent.Comp.Tamer;
-                sl.Value.Comp.MutationChance = ent.Comp.MutationChance;
-                sl.Value.Comp.MaxOffspring = ent.Comp.MaxOffspring;
-                sl.Value.Comp.ExtractsProduced = ent.Comp.ExtractsProduced;
+                var newSlime = sl.Value.Comp;
+                newSlime.Tamer = ent.Comp.Tamer;
+                newSlime.MutationChance = ent.Comp.MutationChance;
+                newSlime.MaxOffspring = ent.Comp.MaxOffspring;
+                newSlime.ExtractsProduced = ent.Comp.ExtractsProduced;
             }
         }
 
