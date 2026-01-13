@@ -7,8 +7,8 @@
 # SPDX-FileCopyrightText: 2020 Swept <jamesurquhartwebb@gmail.com>
 # SPDX-FileCopyrightText: 2020 Víctor Aguilera Puerto <6766154+Zumorica@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2020 Víctor Aguilera Puerto <zddm@outlook.es>
-# SPDX-FileCopyrightText: 2020 V�ctor Aguilera Puerto <6766154+Zumorica@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2020 V�ctor Aguilera Puerto <zddm@outlook.es>
+# SPDX-FileCopyrightText: 2020 V ctor Aguilera Puerto <6766154+Zumorica@users.noreply.github.com>
+# SPDX-FileCopyrightText: 2020 V ctor Aguilera Puerto <zddm@outlook.es>
 # SPDX-FileCopyrightText: 2021 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2021 Galactic Chimp <GalacticChimpanzee@gmail.com>
 # SPDX-FileCopyrightText: 2021 Kara D <lunarautomaton6@gmail.com>
@@ -681,7 +681,7 @@
       shader: unshaded
   - type: GatheringProjectile
   - type: DamageMarkerOnCollide
-    onlyWorkOnFauna: true # Lavaland Change
+    onlyWorkOnFauna: false # Lavaland Change
     whitelist:
       components:
       - MobState

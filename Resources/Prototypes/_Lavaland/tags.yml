@@ -58,3 +58,21 @@
 
 - type: Tag
   id: MarkerBeacon
+
+
+# крашер апдуте :call_me: ньехх
+- type: Tag
+  id: UpgradeMark
+
+- type: Tag
+  id: UpgradePassive
+
+- type: Tag
+  id: UpgradeFight
+
+#- type: Tag
+#  id: UpgradeBoom
+
+
+- type: Tag
+  id: CrusherCrest
