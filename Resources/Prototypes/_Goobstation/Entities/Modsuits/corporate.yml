@@ -129,6 +129,10 @@
         - state: equipped-HEAD-sealed-vox
         - state: equipped-HEAD-sealed-unshaded-vox
           shader: unshaded
+        head-vulpkanin: #TODO: add vulp sprites
+        - state: equipped-HEAD-sealed
+        - state: equipped-HEAD-sealed-unshaded
+          shader: unshaded
     - type: ActivatableUI
       inHandsOnly: false # Goobstation
       singleUser: true
@@ -153,6 +157,16 @@
           "Acoustic": {24: 0}
           "Flute": {73: 0}
           "Sax": {66: 0}
+      - type: BreathMask
+      - type: PressureProtection
+        highPressureMultiplier: 0.3
+        lowPressureMultiplier: 1000
+      - type: TemperatureProtection
+        heatingCoefficient: 0.01
+        coolingCoefficient: 0.01
+      - type: IdentityBlocker
+      - type: IngestionBlocker
+        blockSmokeIngestion: True
 
 - type: entity
   parent: [ClothingModsuitChestplateStandard, BaseCentcommContraband]
@@ -215,6 +229,12 @@
           Bicaridine: 10
           TranexamicAcid: 5
           Tramadol: 5
+      - type: PressureProtection
+        highPressureMultiplier: 0.3
+        lowPressureMultiplier: 1000
+      - type: TemperatureProtection
+        coolingCoefficient: 0.01
+        heatingCoefficient: 0.01
 
 - type: entity
   parent: [ClothingModsuitBootsStandard, BaseCentcommContraband]
