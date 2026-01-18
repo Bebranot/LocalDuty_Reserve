@@ -102,7 +102,11 @@
   - type: TileMovement
   - type: DamageSquareImmunity
   - type: SpawnLootOnDeath
-    loot: LavalandHierophantClub
+    loot: LavalandCrusherCrateNecropolisHierophant
+#   loot: LavalandHierophantClub
+
+#   crusherLoot: LavalandCrusherCrateNecropolisHierophant
+
     deleteOnDeath: true
   - type: MegafaunaAi
     actionDelay: 0.5
@@ -123,3 +127,16 @@
   - type: MegafaunaBlinkInactive
   - type: MegafaunaGodmode
   - type: MegafaunaRejuvenate
+
+
+
+- type: entity
+  name: сундук с наградой Иерофанта
+  id: LavalandCrusherCrateNecropolisHierophant
+  parent: LavalandCrateNecropolis
+  suffix: Hierophant
+  components:
+  - type: StorageFill
+    contents:
+    - id: LavalandHierophantClub
+    - id: LavalandHierophantCrusherUpgrade

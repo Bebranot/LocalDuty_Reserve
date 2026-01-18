@@ -272,3 +272,160 @@
         Piercing: 0.55
         Heat: 0.35
         Caustic: 0.35
+
+
+
+- type: entity
+  parent: LavalandEquipmentExplorerSuit
+  id: LavalandEquipmentDrakeExplorerSuitReinforced
+  suffix: Reinforced
+  name: усиленный костюм исследователя
+  description: Бронированный костюм для исследования суровых условий. Полностью укреплён пластинами Голиафа. Слегка укреплён костями дракона.
+  components:
+  - type: Sprite
+    sprite: _Lavaland/Equipment/drake_explorer_suit.rsi
+    state: reinforced-icon
+  - type: Clothing
+    sprite: _Lavaland/Equipment/drake_explorer_suit.rsi
+    equippedState: reinforced-equipped-OUTERCLOTHING
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.25
+        Slash: 0.25
+        Piercing: 0.25
+        Heat: 0.1
+        Caustic: 0.30
+  - type: ToggleableClothing
+    clothingPrototypes:
+      head: LavalandEquipmentDrakeExplorerHoodReinforced
+  - type: Construction
+    graph: ExplorerSuit
+    node: reinforcedDrake
+
+- type: entity
+  parent: LavalandEquipmentExplorerHood
+  id: LavalandEquipmentDrakeExplorerHoodReinforced
+  suffix: Reinforced
+  name: усиленный капюшон исследователя
+  description: Бронированный капюшон для работы в суровых условиях. Полностью усиленный пластинами Голиафа. Слегка укреплён костями дракона.
+  components:
+  - type: Sprite
+    sprite: _Lavaland/Equipment/drake_explorer_suit.rsi
+    state: reinforced-icon_head
+  - type: Clothing
+    sprite: _Lavaland/Equipment/drake_explorer_suit.rsi
+    equippedState: reinforced-equipped-HELMET
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.3
+        Slash: 0.3
+        Piercing: 0.3
+        Heat: 0.3
+        Caustic: 0.3
+
+
+
+- type: entity
+  parent: LavalandEquipmentExplorerSuit
+  id: LavalandEquipmentDrakeExplorerSuitReinforced2
+  suffix: Reinforced
+  name: усиленный костюм исследователя
+  description: Бронированный костюм для исследования суровых условий. Полностью укреплён пластинами Голиафа. Тело неплохо защищено костями дракона.
+  components:
+  - type: Sprite
+    sprite: _Lavaland/Equipment/drake_explorer_suit.rsi
+    state: reinforced2-icon
+  - type: Clothing
+    sprite: _Lavaland/Equipment/drake_explorer_suit.rsi
+    equippedState: reinforced2-equipped-OUTERCLOTHING
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.20
+        Slash: 0.20
+        Piercing: 0.20
+        Heat: 0.05
+        Caustic: 0.25
+  - type: ToggleableClothing
+    clothingPrototypes:
+      head: LavalandEquipmentDrakeExplorerHoodReinforced2
+  - type: Construction
+    graph: ExplorerSuit
+    node: reinforcedDrake2
+
+- type: entity
+  parent: LavalandEquipmentExplorerHood
+  id: LavalandEquipmentDrakeExplorerHoodReinforced2
+  suffix: Reinforced
+  name: усиленный капюшон исследователя
+  description: Бронированный капюшон для работы в суровых условиях. Полностью укреплён пластинами Голиафа. Неплохо защищён костями дракона.
+  components:
+  - type: Sprite
+    sprite: _Lavaland/Equipment/drake_explorer_suit.rsi
+    state: reinforced2-icon_head
+  - type: Clothing
+    sprite: _Lavaland/Equipment/drake_explorer_suit.rsi
+    equippedState: reinforced2-equipped-HELMET
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.25
+        Slash: 0.25
+        Piercing: 0.25
+        Heat: 0.2
+        Caustic: 0.2
+
+
+
+
+- type: entity
+  parent: LavalandEquipmentExplorerSuit
+  id: LavalandEquipmentDrakeExplorerSuitReinforced3
+  suffix: Reinforced
+  name: усиленный костюм исследователя
+  description: Бронированный костюм для исследования суровых условий. Полностью укреплён пластинами Голиафа. Полностью покрыт костями дракона.
+  components:
+  - type: Sprite
+    sprite: _Lavaland/Equipment/drake_explorer_suit.rsi
+    state: reinforced3-icon
+  - type: Clothing
+    sprite: _Lavaland/Equipment/drake_explorer_suit.rsi
+    equippedState: reinforced3-equipped-OUTERCLOTHING
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.15
+        Slash: 0.15
+        Piercing: 0.15
+        Heat: 0.01
+        Caustic: 0.05
+  - type: ToggleableClothing
+    clothingPrototypes:
+      head: LavalandEquipmentDrakeExplorerHoodReinforced3
+  - type: Construction
+    graph: ExplorerSuit
+    node: reinforcedDrake3
+
+- type: entity
+  parent: LavalandEquipmentExplorerHood
+  id: LavalandEquipmentDrakeExplorerHoodReinforced3
+  suffix: Reinforced
+  name: усиленный капюшон исследователя
+  description: Бронированный капюшон для работы в суровых условиях. Полностью укреплён пластинами Голиафа. Полностью покрыт костями дракона.
+  components:
+  - type: Sprite
+    sprite: _Lavaland/Equipment/drake_explorer_suit.rsi
+    state: reinforced3-icon_head
+  - type: Clothing
+    sprite: _Lavaland/Equipment/drake_explorer_suit.rsi
+    equippedState: reinforced3-equipped-HELMET
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.20
+        Slash: 0.20
+        Piercing: 0.20
+        Heat: 0.15
+        Caustic: 0.15

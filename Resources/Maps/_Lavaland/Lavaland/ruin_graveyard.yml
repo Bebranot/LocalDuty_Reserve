@@ -1,11 +1,11 @@
 meta:
   format: 7
   category: Grid
-  engineVersion: 262.0.0
+  engineVersion: 264.0.0
   forkId: ""
   forkVersion: ""
-  time: 08/14/2025 10:56:49
-  entityCount: 16
+  time: 01/13/2026 10:39:56
+  entityCount: 17
 maps: []
 grids:
 - 1
@@ -49,6 +49,11 @@ entities:
     - type: OccluderTree
     - type: SpreaderGrid
     - type: Shuttle
+      dampingModifiers:
+        Cruise: 0.0075
+        Dampen: 0.25
+        Anchor: 2
+        None: 0.25
       dampingModifier: 0.25
     - type: GridPathfinding
     - type: Gravity
@@ -393,6 +398,7 @@ entities:
         chunkSize: 4
     - type: GasTileOverlay
     - type: ImplicitRoof
+    - type: FTLDrive
 - proto: CrateStoneGrave
   entities:
   - uid: 2
@@ -454,6 +460,13 @@ entities:
     components:
     - type: Transform
       pos: 1.5,9.5
+      parent: 1
+- proto: LavalandBossVigilante
+  entities:
+  - uid: 17
+    components:
+    - type: Transform
+      pos: -2.534378,6.5936227
       parent: 1
 - proto: LightPostSmall
   entities:

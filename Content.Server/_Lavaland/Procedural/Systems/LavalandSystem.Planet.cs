@@ -77,9 +77,9 @@ public sealed partial class LavalandSystem
         {
             var flag = IFFFlags.HideLabel;
 
-            /*#if DEBUG || TOOLS Uncomment me when GPS is done.
+            //#if DEBUG || TOOLS Uncomment me when GPS is done.
             flag = IFFFlags.HideLabel;
-            #endif*/
+            //#endif*/
 
             _shuttle.AddIFFFlag(grid, flag);
         }

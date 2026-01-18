@@ -16,6 +16,15 @@
   componentsToGrant:
   - type: HierophantBeat
 
+#
+- type: lavalandGridRuin
+  id: AshDrakeArena
+  name: lavaland-ruin-ash-drake
+  path: /Maps/_Lavaland/Lavaland/ruin_ash_drake_arena.yml
+  priority: -1 # highest priority
+  patchToPlanet: false
+#
+
 - type: lavalandGridRuin
   id: SyndicateBase
   name: lavaland-ruin-syndicate
@@ -105,11 +114,16 @@
   priority: 13
   patchToPlanet: false
 
+
+
 - type: lavalandGridRuin
   id: Graveyard
   name: lavaland-ruin-seed-graveyard
   path: /Maps/_Lavaland/Lavaland/ruin_graveyard.yml
-  priority: 14
+  priority: -1
+  patchToPlanet: false
+
+
 
 - type: lavalandGridRuin
   id: WaffleCo
