@@ -1,4 +1,8 @@
-﻿using Content.Goobstation.Server.StationEvents.Components;
+// SPDX-FileCopyrightText: 2026 Goob Station Contributors
+//
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Goobstation.Server.StationEvents.Components;
 using Content.Goobstation.Server.StationEvents.Metric;
 
 namespace Content.Goobstation.Server.StationEvents.GameDirector;
