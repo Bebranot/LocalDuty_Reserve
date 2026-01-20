@@ -1,0 +1,28 @@
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformProtectiveSuitDUTY
+  name: Самодельная Одежда
+  description: Одежда, сделанная из подручных материалов, с улучшением в виде бронепластин. Легкая по весу, поэтому совсем не мешает передвигатся.
+  components:
+  - type: Sprite
+    sprite: _DeadSpace/Sponsor/0black_cat0/jumpsuit.rsi  # Укажите правильный путь к спрайту
+  - type: Clothing
+    sprite: _DeadSpace/Sponsor/0black_cat0/jumpsuit.rsi  # Укажите правильный путь к спрайту
+  - type: Armor
+    coverage:
+    - Chest
+    - Groin
+    - Arm
+    - Hand
+    - Leg
+    - Foot
+    modifiers:
+      coefficients:
+        Blunt: 0.8
+        Slash: 0.8
+        Pierce: 0.8
+        Heat: 0.8
+        Cold: 0.8
+        Shock: 0.8
+        Acid: 0.8
+        Radiation: 0.8

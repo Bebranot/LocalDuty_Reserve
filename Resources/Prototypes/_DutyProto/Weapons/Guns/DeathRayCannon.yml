@@ -1,0 +1,30 @@
+- type: entity
+  name: DeathRay Cannon
+  suffix: "аномалия"
+  parent: [BaseWeaponBattery, BaseGunWieldable]
+  id: DeathRayCannon
+  description: Laser of dead
+  components:
+  - type: Item
+    size: Large
+    shape:
+    - 0,0,2,2
+  - type: Sprite
+    sprite: _Duty/Weapons/DRC.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Duty/Weapons/DRC.rsi
+  - type: HitscanBatteryAmmoProvider
+    proto: DeathRay
+    fireCost: 10
+  - type: Appearance
+  - type: StaticPrice
+    price: 3000
+  - type: Gun
+    fireRate: 15
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
+    soundGunshot:
+      path: /Audio/_Duty/Gunshot_DeadRay_Sound.ogg
+  - type: GunRequiresWield

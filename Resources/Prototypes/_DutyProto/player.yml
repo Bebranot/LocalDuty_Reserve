@@ -1,0 +1,308 @@
+- type: entity
+  id: PocketPlayer
+  name: Pocket player
+  parent: BaseItem
+  description: some music!
+  components:
+  - type: Sprite
+    sprite: _Duty/PocketPlayer.rsi
+    layers:
+    - state: "off"
+      map: ["enum.JukeboxVisualLayers.Base"]
+  - type: Jukebox
+    onState: on
+    offState: off
+    selectState: select
+  - type: Appearance
+  - type: ActivatableUI
+    key: enum.JukeboxUiKey.Key
+  - type: UserInterface
+    interfaces:
+        enum.JukeboxUiKey.Key:
+          type: JukeboxBoundUserInterface
+  - type: Item
+    size: Small
+
+
+### nuh uh
+#- type: jukebox
+#  id: Du_hast
+#  name: Du hash - Rammstein
+#  path:
+#    path: /Audio/Jukebox/RammsteinDuhast.ogg
+
+- type: jukebox
+  id: buckshot_roulette_02
+  name: Buckshot Roulette 02
+  path:
+    path: /Audio/_Duty/PlayerDK/buckshot_roulette_02. General Release.ogg
+
+- type: jukebox
+  id: buckshot_roulette_04
+  name: Buckshot Roulette 04
+  path:
+    path: /Audio/_Duty/PlayerDK/buckshot_roulette_04. Socket Calibration.ogg
+
+- type: jukebox
+  id: calm_night_decaying_winter
+  name: Calm Night Decaying Winter
+  path:
+    path: /Audio/_Duty/PlayerDK/Calm Night Decaying Winter.ogg
+
+- type: jukebox
+  id: celldweller_good_luck
+  name: Celldweller - Good Luck You're Fucked
+  path:
+    path: /Audio/_Duty/PlayerDK/Celldweller - Good Luck You're Fucked.ogg
+
+- type: jukebox
+  id: countdownTarkov
+  name: Countdown
+  path:
+    path: /Audio/_Duty/PlayerDK/Countdown.ogg
+
+- type: jukebox
+  id: deepcore
+  name: DeepCore
+  path:
+    path: /Audio/_Duty/PlayerDK/DeepCore.ogg
+
+- type: jukebox
+  id: ein_heller_und_ein_batzen
+  name: Ein Heller Und Ein Batzen
+  path:
+    path: /Audio/_Duty/PlayerDK/Ein Heller und ein Batzen.ogg
+
+- type: jukebox
+  id: gsn_russian_specnaz
+  name: GSN - Russian Specnaz
+  path:
+    path: /Audio/_Duty/PlayerDK/GSN-Russian_Specnaz.ogg
+
+- type: jukebox
+  id: feel_the_fury_sonic
+  name: Feel The Fury (Ft. MrGoodbarz, Martin T.) - SONIC.exe OUTCOME MEMORIES OST
+  path:
+    path: /Audio/_Duty/PlayerDK/Feel The Fury (Ft. MrGoodbarz, Martin T.) - SONIC.exe OUTCOME MEMORIES OST.ogg
+
+- type: jukebox
+  id: storm_is_approaching
+  name: I Am The Storm Is Approaching
+  path:
+    path: /Audio/_Duty/PlayerDK/i am the storm is approaching (online-audio-converter.com).ogg
+
+- type: jukebox
+  id: kavinsky_nightcall
+  name: Kavinsky - Nightcall
+  path:
+    path: /Audio/_Duty/PlayerDK/Kavinsky Nightcall.ogg
+
+- type: jukebox
+  id: korol_pisatel_gudvin
+  name: Korol I Shut - Pisatel Gudvin
+  path:
+    path: /Audio/_Duty/PlayerDK/Korol_i_SHut_-_Pisatel_Gudvin_48646407.ogg
+
+- type: jukebox
+  id: korol_rogatyy
+  name: Korol I Shut - Rogatyy
+  path:
+    path: /Audio/_Duty/PlayerDK/Korol_i_SHut_-_Rogatyjj_62571745.ogg
+
+- type: jukebox
+  id: lucas_pope_soldiers_sea
+  name: Lucas Pope - 06 Soldiers Of The Sea A
+  path:
+    path: /Audio/_Duty/PlayerDK/Lucas_Pope_-_06_Soldiers_of_the_Sea_A.ogg
+
+- type: jukebox
+  id: lucas_pope_death_papers
+  name: Lucas Pope - Death Papers Please OST Xaleon Sound HD
+  path:
+    path: /Audio/_Duty/PlayerDK/Lucas_Pope_-_Death_Papers_Please_OST_Xaleon_Sound_HD.ogg
+
+- type: jukebox
+  id: lucas_pope_theme
+  name: Lucas Pope - Papers Please Theme Song Papers Please OST
+  path:
+    path: /Audio/_Duty/PlayerDK/Lucas_Pope_-_Papers_Please_Theme_Song_Papers_Please_OST.ogg
+
+- type: jukebox
+  id: moon_hydrogen
+  name: M.O.O.N - Hydrogen
+  path:
+    path: /Audio/_Duty/PlayerDK/M.O.O.N_Hydrogen.ogg
+
+- type: jukebox
+  id: nuclear_operations_ss13
+  name: Nuclear Operations (Remake) SS13 Fan Track
+  path:
+    path: /Audio/_Duty/PlayerDK/Nuclear Operations (Remake) SS13 Fan Track [TubeRipper.cc].ogg
+
+- type: jukebox
+  id: nutakoe_anarchist
+  name: Nutakoe - Anarchist
+  path:
+    path: /Audio/_Duty/PlayerDK/Nutakoe - Анархист.ogg
+
+- type: jukebox
+  id: papers_please_title
+  name: Papers Please OST - Title
+  path:
+    path: /Audio/_Duty/PlayerDK/Papers_please_OST_-_Title.ogg
+
+- type: jukebox
+  id: unmistakable_forsaken
+  name: Unmistakable FORSAKEN
+  path:
+    path: /Audio/_Duty/PlayerDK/UnmistakableFORSAKEN.ogg
+
+- type: jukebox
+  id: void_in_blue
+  name: Void In Blue
+  path:
+    path: /Audio/_Duty/PlayerDK/Void in Blue.ogg
+
+- type: jukebox
+  id: lore_lore_lore
+  name: Nemetskie Voennye Marshy - Lore, Lore, Lore
+  path:
+    path: /Audio/_Duty/PlayerDK/Немецкие военные марши - Lore, Lore, Lore.ogg
+
+- type: jukebox
+  id: was_wollen_wir_trinken
+  name: Nemetskie Voennye Marshy - Was Wollen Wir Trinken
+  path:
+    path: /Audio/_Duty/PlayerDK/Немецкие военные марши - Was wollen wir trinken.ogg
+
+- type: jukebox
+  id: schwarzbraun_haselnuss
+  name: Nemetskiy Voennyy Marsh - Schwarzbraun Ist Die Haselnuss
+  path:
+    path: /Audio/_Duty/PlayerDK/Немецкий военный марш - Schwarzbraun ist die haselnuss.ogg
+
+- type: jukebox
+  id: aphix
+  name: Aphix
+  path:
+    path: //Audio/_Duty/PlayerDK/Stalker/Boombox/Aphix.ogg
+
+- type: jukebox
+  id: ataman
+  name: Ataman
+  path:
+    path: /Audio/_Duty/PlayerDK/Stalker/Boombox/Ataman.ogg
+
+- type: jukebox
+  id: bear
+  name: Bear
+  path:
+    path: /Audio/_Duty/PlayerDK/Stalker/Boombox/Bear.ogg
+
+- type: jukebox
+  id: deathhacker
+  name: DeathHacker
+  path:
+    path: /Audio/_Duty/PlayerDK/Stalker/Boombox/DeathHacker.ogg
+
+- type: jukebox
+  id: deathseenfootage
+  name: DeathSeenFootage
+  path:
+    path: /Audio/_Duty/PlayerDK/Stalker/Boombox/DeathSeenFootage.ogg
+
+- type: jukebox
+  id: gambit
+  name: Gambit
+  path:
+    path: /Audio/_Duty/PlayerDK/Stalker/Boombox/Gambit.ogg
+
+- type: jukebox
+  id: gulay
+  name: Gulay
+  path:
+    path: /Audio/_Duty/PlayerDK/Stalker/Boombox/Gulay.ogg
+
+- type: jukebox
+  id: lyrics
+  name: Lyrics
+  path:
+    path: /Audio/_Duty/PlayerDK/Stalker/Boombox/Lyrics.ogg
+
+- type: jukebox
+  id: suffocation
+  name: Suffocation
+  path:
+    path: /Audio/_Duty/PlayerDK/Stalker/Boombox/Suffocation.ogg
+
+- type: jukebox
+  id: witch
+  name: Witch
+  path:
+    path: /Audio/_Duty/PlayerDK/Stalker/Boombox/Witch.ogg
+
+- type: jukebox
+  id: army_radio3
+  name: Army Radio3
+  path:
+    path: /Audio/_Duty/PlayerDK/Stalker/Radio/army_radio3.ogg
+
+- type: jukebox
+  id: bandit_radio
+  name: Bandit Radio
+  path:
+    path: /Audio/_Duty/PlayerDK/Stalker/Radio/bandit_radio.ogg
+
+- type: jukebox
+  id: bar_100_rentgen
+  name: Bar 100 Rentgen
+  path:
+    path: /Audio/_Duty/PlayerDK/Stalker/Radio/bar_100_rentgen.ogg
+
+- type: jukebox
+  id: bar_chistoe_nebo
+  name: Bar Chistoe Nebo
+  path:
+    path: /Audio/_Duty/PlayerDK/Stalker/Radio/bar_chistoe_nebo.ogg
+
+- type: jukebox
+  id: belaya_noch
+  name: Belaya Noch
+  path:
+    path: /Audio/_Duty/PlayerDK/Stalker/Radio/belaya_noch.ogg
+
+- type: jukebox
+  id: bomj
+  name: Bomj
+  path:
+    path: /Audio/_Duty/PlayerDK/Stalker/Radio/bomj.ogg
+
+- type: jukebox
+  id: cherniy_stalker
+  name: Cherniy Stalker
+  path:
+    path: /Audio/_Duty/PlayerDK/Stalker/Radio/cherniy_stalker.ogg
+
+- type: jukebox
+  id: esttolkomig
+  name: Est Tolko Mig
+  path:
+    path: /Audio/_Duty/PlayerDK/Stalker/Radio/esttolkomig.ogg
+
+- type: jukebox
+  id: faina
+  name: Faina
+  path:
+    path: /Audio/_Duty/PlayerDK/Stalker/Radio/faina.ogg
+
+- type: jukebox
+  id: rus_radio
+  name: Rus Radio
+  path:
+    path: /Audio/_Duty/PlayerDK/Stalker/Radio/rus_radio.ogg
+
+- type: jukebox
+  id: stalker_clear_sky_theme
+  name: Stalker Clear Sky Theme
+  path:
+    path: /Audio/_Duty/PlayerDK/Stalker/Radio/stalker_clear_sky_theme.ogg
