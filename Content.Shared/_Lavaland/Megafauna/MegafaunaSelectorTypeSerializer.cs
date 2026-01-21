@@ -27,8 +27,8 @@ public sealed class MegafaunaSelectorTypeSerializer :
         if (node.Tag?.StartsWith("!type:") == true)
         {
             var typeString = node.Tag.Substring(6);
-            var type = dependencies.Resolve<IReflectionManager>().GetType(typeString);
-            if (type != null && typeof(MegafaunaSelector).IsAssignableFrom(type))
+            var type = dependencies.Resolve<IReflectionManager>().YamlTypeTagLookup(typeof(MegafaunaSelector), typeString);
+            if (type != null)
                 return serializationManager.ValidateNode(type, node, context);
         }
 
