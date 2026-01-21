@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Content.Shared._Lavaland.Megafauna.Selectors;
+using Robust.Shared.Reflection;
 using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.Manager;
 using Robust.Shared.Serialization.Markdown.Mapping;
@@ -18,11 +19,11 @@ public sealed class MegafaunaSelectorTypeSerializer :
         IDependencyCollection dependencies,
         ISerializationContext? context = null)
     {
-        // Reserve station
+        // Reserve edit - If the type is explicitly specified via !type: tag, validate that specific type
         if (node.Tag?.StartsWith("!type:") == true)
         {
             var typeString = node.Tag.Substring(6);
-            var type = serializationManager.GetType(typeString);
+            var type = dependencies.Resolve<IReflectionManager>().GetType(typeString);
             if (type != null && typeof(MegafaunaSelector).IsAssignableFrom(type))
                 return serializationManager.ValidateNode(type, node, context);
         }
