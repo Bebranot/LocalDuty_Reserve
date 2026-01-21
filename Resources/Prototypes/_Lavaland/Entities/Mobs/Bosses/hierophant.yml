@@ -106,14 +106,14 @@
     deleteOnDeath: true
   - type: MegafaunaAi
     actionDelay: 0.5
-    selector:
+    selector: !type:NestedMegafaunaSelector
       id: Hierophant
   - type: AngerPlayerScaling
     angerScale: 1.1
     hpScale: 1.2
   - type: MegafaunaFieldGenerator
     wallId: WallHierophantArenaTemporary
-    wallShape:
+    wallShape: !type:NestedEntityShape
       id: BoxHollow
       size: 11 # Radius of the arena
   - type: MegafaunaAnchor

@@ -1,4 +1,5 @@
-﻿using Content.Shared._Lavaland.Megafauna.Selectors;
+﻿using System.Diagnostics.CodeAnalysis;
+using Content.Shared._Lavaland.Megafauna.Selectors;
 using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.Manager;
 using Robust.Shared.Serialization.Markdown.Mapping;
@@ -17,6 +18,15 @@ public sealed class MegafaunaSelectorTypeSerializer :
         IDependencyCollection dependencies,
         ISerializationContext? context = null)
     {
+        // Reserve station
+        if (node.Tag?.StartsWith("!type:") == true)
+        {
+            var typeString = node.Tag.Substring(6);
+            var type = serializationManager.GetType(typeString);
+            if (type != null && typeof(MegafaunaSelector).IsAssignableFrom(type))
+                return serializationManager.ValidateNode(type, node, context);
+        }
+
         if (node.Has(ProtoIdMegafaunaSelector.IdDataFieldTag))
             return serializationManager.ValidateNode<ProtoIdMegafaunaSelector>(node, context);
 
