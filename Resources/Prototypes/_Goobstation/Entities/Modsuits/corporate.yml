@@ -86,9 +86,6 @@
   components:
     - type: Sprite
       sprite: _Goobstation/Clothing/OuterClothing/Modsuits/corporate.rsi
-    - type: PressureProtection
-      highPressureMultiplier: 0.08
-      lowPressureMultiplier: 1000
     - type: Armor
       traumaDeductions: # prevents traumas at all (kinda)
         Dismemberment: 1
@@ -206,9 +203,6 @@
         - state: equipped-OUTERCLOTHING-sealed-vox
     - type: StaminaResistance
       damageCoefficient: 0 # 100%
-    - type: PressureProtection
-      highPressureMultiplier: 0.02
-      lowPressureMultiplier: 1000
     - type: ExplosionResistance
       damageCoefficient: 0.2
     - type: FireProtection
