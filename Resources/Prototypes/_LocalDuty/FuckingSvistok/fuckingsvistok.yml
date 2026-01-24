@@ -1,0 +1,25 @@
+# сделано Bad Content (я изменел лишь описание, имя и айди, добавлены некоторые компоненты(FuckingSvistok, TriggerOnUse))
+# (спрайт тоже им)
+
+- type: entity
+  parent: BaseItem
+  id: FuckingSvistok
+  name: Факинг свисток
+  description: Очень опасное оружие
+  components:
+  - type: FuckingSvistok
+  - type: TriggerOnUse
+
+  - type: Sprite
+    sprite: /Textures/_LocalDuty/slurwhistle.rsi
+    state: icon
+  - type: Item
+    sprite: /Textures/_LocalDuty/slurwhistle.rsi
+    size: Tiny
+  - type: UseDelay
+    delay: 120
+#  - type: EmitSoundOnUse
+#    sound:
+#      collection:  # тут нужно подключить коллекцию звуков
+#      params:
+#        variation: 0.125
