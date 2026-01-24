@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+<p align="center"> <img alt="Space Station 14" width="1280" height="300" src="https://i.imgur.com/yagb8UO.png" /></p>
+>>>>>>> upstream/master
 
 ВАЗАААААААААААП
 
