@@ -11,7 +11,6 @@ namespace Content.Shared._Lavaland.EntityShapes.Shapes;
 /// Works like NestedEntityShape, but also has serialization,
 /// so you can just type id: in prototypes and it will work.
 /// </summary>
-[DataDefinition]
 public sealed partial class ProtoIdEntityShape : EntityShape
 {
     public const string IdDataFieldTag = "id";

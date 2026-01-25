@@ -12,7 +12,6 @@ using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared._Shitcode.Heretic.Systems;
 using Content.Shared._Shitmed.Damage;
 using Content.Shared._Shitmed.Targeting;
-using Content.Shared.Body.Systems;
 using Content.Shared.Damage;
 using Content.Shared.Heretic;
 using Content.Shared.Mobs.Components;
@@ -86,7 +85,7 @@ public sealed class FireBlastSystem : SharedFireBlastSystem
                 continue;
 
             Dmg.TryChangeDamage(uid,
-                origin.Comp.FireBlastBonusDamage * Body.GetVitalBodyPartRatio(uid),
+                origin.Comp.FireBlastBonusDamage,
                 false,
                 false,
                 dmg,
@@ -174,7 +173,7 @@ public sealed class FireBlastSystem : SharedFireBlastSystem
         _flammable.AdjustFireStacks(target, origin.Comp.FireStacks, flam, true, origin.Comp.FireProtectionPenetration);
 
         Dmg.TryChangeDamage(target,
-            origin.Comp.FireBlastDamage * Body.GetVitalBodyPartRatio(target),
+            origin.Comp.FireBlastDamage,
             origin: origin,
             targetPart: TargetBodyPart.All,
             splitDamage: SplitDamageBehavior.SplitEnsureAll,
@@ -222,7 +221,7 @@ public sealed class FireBlastSystem : SharedFireBlastSystem
                 continue;
 
             Dmg.TryChangeDamage(ent.HitEntity,
-                origin.Comp.FireBlastBeamCollideDamage * Body.GetVitalBodyPartRatio(ent.HitEntity),
+                origin.Comp.FireBlastBeamCollideDamage,
                 false,
                 false,
                 dmg,
