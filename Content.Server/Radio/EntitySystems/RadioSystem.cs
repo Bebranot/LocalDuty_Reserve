@@ -1,7 +1,7 @@
-// SPDX-FileCopyrightText: 2020 Bright <nsmoak10@yahoo.com>
+﻿// SPDX-FileCopyrightText: 2020 Bright <nsmoak10@yahoo.com>
 // SPDX-FileCopyrightText: 2020 Bright0 <55061890+Bright0@users.noreply.github.com>
 // SPDX-FileCopyrightText: 2020 Swept <jamesurquhartwebb@gmail.com>
-// SPDX-FileCopyrightText: 2020 Víctor Aguilera Puerto <6766154+Zumorica@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2020 V├нctor Aguilera Puerto <6766154+Zumorica@users.noreply.github.com>
 // SPDX-FileCopyrightText: 2021 Acruid <shatter66@gmail.com>
 // SPDX-FileCopyrightText: 2021 Metal Gear Sloth <metalgearsloth@gmail.com>
 // SPDX-FileCopyrightText: 2021 Vera Aguilera Puerto <6766154+Zumorica@users.noreply.github.com>
