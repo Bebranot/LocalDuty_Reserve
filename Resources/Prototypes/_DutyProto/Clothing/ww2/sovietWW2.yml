@@ -1,0 +1,117 @@
+# ===============================
+# СОВЕТСКАЯ АРМИЯ — WWII EVENT
+# ===============================
+
+- type: entity
+  parent: ClothingOuterArmorBasic
+  id: ClothingOuterArmorSoviet
+  name: советская броня
+  components:
+  - type: Sprite
+    sprite: # Вставь своё
+  - type: Clothing
+    sprite: # Вставь своё
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.8
+        Slash: 0.7
+        Piercing: 0.65
+        Heat: 0.9
+        Caustic: 0.95
+
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformSoviet
+  name: советская униформа
+  components:
+  - type: Sprite
+    sprite: # Вставь своё
+  - type: Clothing
+    sprite: # Вставь своё
+    slots:
+    - uniform
+    - knife
+
+
+- type: entity
+  parent: ClothingHandsBase
+  id: ClothingHandsSoviet
+  name: советские перчатки
+  components:
+  - type: Sprite
+    sprite: # Вставь своё
+  - type: Clothing
+    sprite: # Вставь своё
+
+- type: entity
+  parent: ClothingShoesBase
+  id: ClothingShoesSoviet
+  name: советские ботинки
+  components:
+  - type: Sprite
+    sprite: # Вставь своё
+  - type: Clothing
+    sprite: # Вставь своё
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadSoviet
+  name: советский шлем
+  components:
+  - type: Sprite
+    sprite: # Вставь своё
+  - type: Clothing
+    sprite: # Вставь своё
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckSovietTag
+  name: советский медальон
+  components:
+  - type: Sprite
+    sprite: # Вставь своё
+  - type: Clothing
+    sprite: # Вставь своё
+
+- type: entity
+  parent: ClothingBackpack
+  id: ClothingBackpackSoviet
+  name: советский рюкзак
+  components:
+  - type: Sprite
+    sprite: # Вставь своё
+
+- type: entity
+  parent: ClothingBeltStorageBase
+  id: ClothingBeltSoviet
+  name: Советский тактичный пояс
+  components:
+  - type: Sprite
+    sprite: # Вставь своё
+
+- type: entity
+  parent: BaseItem
+  id: SovietFieldMedkit
+  name: советская полевая аптечка
+  description: Полевая аптечка Красной армии.
+  components:
+  - type: Sprite
+    sprite: # Вставь своё
+  - type: Item
+    size: Small
+  - type: LimitedCharges
+    maxCharges: 1
+  - type: UseDelay
+    delay: 8
+  - type: Healing
+    damageContainers:
+    - Biological
+    damage:
+      Brute: -30
+      Burn: -10
+      Airloss: -10
+      Toxin: -10
+      Radiation: -10
+    bloodlossModifier: -100

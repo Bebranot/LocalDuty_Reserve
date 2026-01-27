@@ -1,0 +1,104 @@
+# ===============================
+# НЕМЕЦКАЯ АРМИЯ — WWII EVENT
+# ===============================
+
+- type: entity
+  parent: ClothingOuterArmorBasic
+  id: ClothingOuterArmorGermany
+  name: немецкая броня
+  components:
+  - type: Sprite
+    sprite: # Вставь своё
+  - type: Clothing
+    sprite: # Вставь своё
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformGermany
+  name: немецкая униформа
+  components:
+  - type: Sprite
+    sprite: # Вставь своё
+  - type: Clothing
+    sprite: # Вставь своё
+
+- type: entity
+  parent: ClothingHandsBase
+  id: ClothingHandsGermany
+  name: немецкие перчатки
+  components:
+  - type: Sprite
+    sprite: # Вставь своё
+  - type: Clothing
+    sprite: # Вставь своё
+    slots:
+    - uniform
+    - knife
+
+- type: entity
+  parent: ClothingShoesBase
+  id: ClothingShoesGermany
+  name: немецкие ботинки
+  components:
+  - type: Sprite
+    sprite: # Вставь своё
+  - type: Clothing
+    sprite: # Вставь своё
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadGermany
+  name: немецкий шлем
+  components:
+  - type: Sprite
+    sprite: # Вставь своё
+  - type: Clothing
+    sprite: # Вставь своё
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckGermanyTag
+  name: немецкий жетон
+  components:
+  - type: Sprite
+    sprite: # Вставь своё
+  - type: Clothing
+    sprite: # Вставь своё
+
+- type: entity
+  parent: ClothingBackpack
+  id: ClothingBackpackGermany
+  name: немецкий рюкзак
+  components:
+  - type: Sprite
+    sprite: # Вставь своё
+
+- type: entity
+  parent: ClothingBeltStorageBase
+  id: ClothingBeltGermany
+  name: немецкая поясная сумка
+  components:
+  - type: Sprite
+    sprite: # Вставь своё
+
+- type: entity
+  parent: BaseItem
+  id: GermanyFieldMedkit
+  name: немецкая полевая аптечка
+  description: Стандартная полевая аптечка Вермахта.
+  components:
+  - type: Sprite
+    sprite: # Вставь своё
+  - type: Item
+  - type: UseDelay
+    delay: 8
+  - type: Healing
+    damageContainers:
+    - Biological
+    damage:
+      Brute: -30
+      Burn: -10
+      Airloss: -10
+      Toxin: -10
+      Radiation: -10
+    bloodlossModifier: -100
