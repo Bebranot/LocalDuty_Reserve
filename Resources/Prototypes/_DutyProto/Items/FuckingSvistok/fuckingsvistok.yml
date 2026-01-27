@@ -4,8 +4,8 @@
 - type: entity
   parent: BaseItem
   id: FuckingSvistok
-  name: Факинг свисток
-  description: Очень опасное оружие
+  name: Окопный свисток
+  description: Последняя, и яркая надежда на жизнь бойцов... Вперёд, офицер!
   components:
   - type: FuckingSvistok
   - type: TriggerOnUse
@@ -18,8 +18,8 @@
     size: Tiny
   - type: UseDelay
     delay: 120
-#  - type: EmitSoundOnUse
-#    sound:
-#      collection:  # тут нужно подключить коллекцию звуков
-#      params:
-#        variation: 0.125
+  - type: EmitSoundOnUse
+    sound:
+      collection: TrenchWhistle # тут нужно подключить коллекцию звуков
+      params:
+        variation: 0.125

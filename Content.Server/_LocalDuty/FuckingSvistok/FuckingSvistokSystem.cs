@@ -59,16 +59,16 @@ public sealed class FuckingSvistokSystem : EntitySystem
                 randomMessage = "FUCK U MAMA";
                 break;
             case 4:
-                randomMessage = "KYS CHEPUSHNYA";
+                randomMessage = "ВПЕРЁД, БРАТЬЯ, ВПЕРЁЁЁЁЁД!!";
                 break;
             case 5:
-                randomMessage = "idk";
+                randomMessage = "ВПЕРЁЁЁД, В ААТААКУУУ!!";
                 break;
             case 6:
-                randomMessage = "SHAHTI ZHDUT";
+                randomMessage = "АТАКУЕМ, АТАКУУУЕМ!!";
                 break;
             default:
-                randomMessage = "вставь тут че-нибудь. Если с рандомом что-то пойдёт не так, то будет использовано это";
+                randomMessage = "ВПЕРЁЁЁЁЁД, В АТААКУ!!";
                 break;
         }
 
