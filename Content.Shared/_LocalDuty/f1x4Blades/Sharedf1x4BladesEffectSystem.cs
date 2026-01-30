@@ -39,63 +39,27 @@ public sealed class Sharedf1x4BladesEffectSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        //SubscribeLocalEvent<f1x4BladesEffectComponent, StartCollideEvent>(OnCollide);
         SubscribeLocalEvent<f1x4BladesEffectComponent, ProjectileHitEvent>(OnProjectileHit);
     }
 
-    private void OnCollide(EntityUid uid, f1x4BladesEffectComponent component, ref StartCollideEvent args)
-    {
-        Logger.GetSawmill("fuckk").Info($"her ");
-        if (//!args.OtherFixture.Hard ||
-            //args.OurFixtureId != SharedProjectileSystem.ProjectileFixture ||
-            //_whitelistSystem.IsWhitelistFail(component.Whitelist, args.OtherEntity) ||
-            !TryComp<ProjectileComponent>(uid, out var projectile)) //||
-            //projectile.Weapon == null)
-        {
-            return;
-        }
-
-        var ent = args.OtherEntity;
-        Logger.GetSawmill("fuck").Info($"her ");
-        if (!TryComp<MovementSpeedModifierComponent>(ent, out var speed))
-            return;
-
-        Logger.GetSawmill("fuck2").Info($"her");
-
-        var originalWalk = speed.BaseWalkSpeed;
-        var originalSprint = speed.BaseSprintSpeed;
-        var originalAcceleration = speed.Acceleration;
-
-        _movement.ChangeBaseSpeed(ent, originalWalk-1.5f, originalSprint-1.5f, originalAcceleration-1.5f);
-
-        Timer.Spawn(component.Duration, () =>
-        {
-            _movement.ChangeBaseSpeed(ent, originalWalk, originalSprint, originalAcceleration);
-        });
-    }
-
-
     private void OnProjectileHit(
-    EntityUid uid,
-    f1x4BladesEffectComponent component,
-    ref ProjectileHitEvent args)
+        EntityUid uid,
+        f1x4BladesEffectComponent component,
+        ref ProjectileHitEvent args)
     {
-        Logger.GetSawmill("f1x4").Info("Projectile hit triggered");
+       // Logger.GetSawmill("f1x4").Info("Projectile hit triggered");
 
         var target = args.Target;
 
         if (!TryComp<MovementSpeedModifierComponent>(target, out var speed))
             return;
 
-        var originalWalk = speed.BaseWalkSpeed;
-        var originalSprint = speed.BaseSprintSpeed;
-        var originalAcceleration = speed.Acceleration;
 
         _movement.ChangeBaseSpeed(
             target,
-            originalWalk - 1.5f,
-            originalSprint - 1.5f,
-            originalAcceleration - 1.5f
+            speed.BaseWalkSpeed - 1.5f,
+            speed.BaseSprintSpeed - 1.5f,
+            speed.Acceleration - 1.5f
         );
 
         Timer.Spawn(component.Duration, () =>
@@ -104,9 +68,9 @@ public sealed class Sharedf1x4BladesEffectSystem : EntitySystem
             {
                 _movement.ChangeBaseSpeed(
                     target,
-                    originalWalk,
-                    originalSprint,
-                    originalAcceleration
+                    speed.BaseWalkSpeed + 1.5f,
+                    speed.BaseSprintSpeed + 1.5f,
+                    speed.Acceleration + 1.5f
                 );
             }
         });
