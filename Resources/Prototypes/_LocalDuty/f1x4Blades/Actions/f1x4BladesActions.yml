@@ -1,7 +1,7 @@
 - type: entity
   id: ActionEntanglement
-  name: Вкид 
-  description: Буээ
+  name: запутывание
+  description: Выкиньте свои мечи на короткую дистанцию!
   components:
   - type: Action
     priority: 2
