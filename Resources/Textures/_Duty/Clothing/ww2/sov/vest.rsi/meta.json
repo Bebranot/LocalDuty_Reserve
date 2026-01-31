@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from tgstation at commit https://github.com/tgstation/tgstation/commit/d90c7e5de6f6d94596c164da78dbc8d3cd35bb99 and modified by Flareguy for SS14, vulp version by YERO",
+  "copyright": "Taken from tgstation at commit https://github.com/tgstation/tgstation/commit/2fea0a59470c476cf3f927833d3918d89cbe6af8. Vox state made by Flareguy for Space Station 14. - Resomi sprite by Salem, taken from starlight",
   "size": {
     "x": 32,
     "y": 32
@@ -11,11 +11,11 @@
       "name": "icon"
     },
     {
-      "name": "equipped-HELMET",
+      "name": "equipped-OUTERCLOTHING",
       "directions": 4
     },
     {
-      "name": "equipped-HELMET-vox",
+      "name": "equipped-OUTERCLOTHING-vox",
       "directions": 4
     },
     {
@@ -27,7 +27,7 @@
       "directions": 4
     },
     {
-      "name": "equipped-HELMET-vulpkanin",
+      "name": "equipped-OUTERCLOTHING-resomi",
       "directions": 4
     }
   ]

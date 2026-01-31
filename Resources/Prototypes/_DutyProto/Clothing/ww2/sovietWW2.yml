@@ -8,9 +8,9 @@
   name: советская броня
   components:
   - type: Sprite
-    sprite: # Вставь своё
+    sprite: _Duty/Clothing/ww2/sov/vest.rsi
   - type: Clothing
-    sprite: # Вставь своё
+    sprite: _Duty/Clothing/ww2/sov/vest.rsi
   - type: Armor
     modifiers:
       coefficients:
@@ -27,13 +27,12 @@
   name: советская униформа
   components:
   - type: Sprite
-    sprite: # Вставь своё
+    sprite: _Duty/Clothing/ww2/sov/uniform.rsi
   - type: Clothing
-    sprite: # Вставь своё
-    slots:
-    - uniform
-    - knife
-
+    sprite: _Duty/Clothing/ww2/sov/uniform.rsi
+    itemslots:
+    - CombatKnife
+    - Gauze1
 
 - type: entity
   parent: ClothingHandsBase
@@ -51,9 +50,9 @@
   name: советские ботинки
   components:
   - type: Sprite
-    sprite: # Вставь своё
+    sprite: _Duty/Clothing/ww2/sov/combatboots.rsi
   - type: Clothing
-    sprite: # Вставь своё
+    sprite: _Duty/Clothing/ww2/sov/combatboots.rsi
 
 - type: entity
   parent: ClothingHeadBase
@@ -61,19 +60,20 @@
   name: советский шлем
   components:
   - type: Sprite
-    sprite: # Вставь своё
+    sprite: _Duty/Clothing/ww2/sov/helmet.rsi
   - type: Clothing
-    sprite: # Вставь своё
+    sprite: _Duty/Clothing/ww2/sov/helmet.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.85        # Удары
+        Slash: 0.85        # Режущий
+        Piercing: 0.9      # Колющий / пули
+        Heat: 0.95         # Огонь
+        Shock: 0.95        # Электричество
+        Caustic: 0.98      # Кислота
+        Radiation: 0.98    # Радиация, зачем этот бро подписывает? надеюсь это никто не увидит.
 
-- type: entity
-  parent: ClothingNeckBase
-  id: ClothingNeckSovietTag
-  name: советский медальон
-  components:
-  - type: Sprite
-    sprite: # Вставь своё
-  - type: Clothing
-    sprite: # Вставь своё
 
 - type: entity
   parent: ClothingBackpack
@@ -89,7 +89,7 @@
   name: Советский тактичный пояс
   components:
   - type: Sprite
-    sprite: # Вставь своё
+    sprite: _Duty/Clothing/ww2/sov/bananka.rsi
 
 - type: entity
   parent: BaseItem

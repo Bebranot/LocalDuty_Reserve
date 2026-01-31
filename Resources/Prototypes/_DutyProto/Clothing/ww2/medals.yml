@@ -11,27 +11,27 @@
   id: ClothingNeckSovietRedStar
   components:
   - type: Sprite
-    sprite: # Вставь своё
+    sprite: _Duty/Clothing/ww2/sov/order_zvezda.rsi
   - type: Clothing
-    sprite: # Вставь своё
+    sprite: _Duty/Clothing/ww2/sov/order_zvezda.rsi
 
 - type: entity
   parent: ClothingNeckBase
   id: ClothingNeckSovietForCourage
   components:
   - type: Sprite
-    sprite: # Вставь своё
+    sprite: _Duty/Clothing/ww2/sov/za_otvagu.rsi
   - type: Clothing
-    sprite: # Вставь своё
+    sprite: _Duty/Clothing/ww2/sov/za_otvagu.rsi
 
 - type: entity
   parent: ClothingNeckBase
   id: ClothingNeckSovietCommander
   components:
   - type: Sprite
-    sprite: # Вставь своё
+    sprite: _Duty/Clothing/ww2/sov/commander.rsi
   - type: Clothing
-    sprite: # Вставь своё
+    sprite: _Duty/Clothing/ww2/sov/commander.rsi
 
 # -------------------------------
 # GERMAN ARMY
