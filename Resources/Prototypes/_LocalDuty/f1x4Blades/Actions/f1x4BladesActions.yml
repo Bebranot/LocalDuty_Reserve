@@ -1,0 +1,123 @@
+- type: entity
+  id: ActionEntanglement
+  name: запутывание
+  description: Выкиньте свои мечи на короткую дистанцию!
+  components:
+  - type: Action
+    priority: 2
+    useDelay: 18
+    icon:
+      sprite: _LocalDuty/1x4_blades/1x4_blades.rsi
+      state: icon
+  - type: WorldTargetAction
+    event: !type:f1x4BladesEntanglementEvent
+  - type: TargetAction
+    range: 10
+
+
+
+- type: entity
+  id: ActionMassInfection
+  name: массовое заражение
+  description: Снесите лицо своим врагам!
+  components:
+  - type: Action
+    priority: 1
+    useDelay: 14
+    icon:
+      sprite: _LocalDuty/1x4_blades/1x4_blades.rsi
+      state: icon
+  - type: WorldTargetAction
+    event: !type:f1x4BladesMassInfectionEvent
+  - type: TargetAction
+    range: 100
+
+
+
+- type: entity
+  id: F1x4Blade
+  parent: BaseItem
+  name: мечи 1x1x1x1
+  description: Ват а хе-
+  components:
+  - type: Sprite
+    sprite: _LocalDuty/1x4_blades/1x4_blades.rsi
+    state: icon
+  - type: Item
+    size: Normal
+#    sprite: _LocalDuty/1x4_blades/1x4_blades-inhands.rsi
+  - type: Clothing
+    sprite: _LocalDuty/1x4_blades/1x4_blades.rsi
+    slots:
+    - Back
+  - type: MeleeWeapon
+    damage:
+      types:
+        Heat: 15
+        Blunt: 10
+  - type: MultiHandedItem
+    handsNeeded: 2
+  - type: ActionGrant
+    actions:
+    - ActionMassInfection
+    - ActionEntanglement
+  - type: ItemActionGrant
+    actions:
+    - ActionMassInfection
+    - ActionEntanglement
+
+
+
+- type: entity
+  id: f1x4MassInfectionProjectile
+  name: mass infection
+  parent: BaseBullet
+  components:
+  - type: Reflective
+    reflective:
+    - NonEnergy
+#  - type: Sprite
+#    noRot: false
+#    sprite: Objects/Weapons/Guns/Projectiles/magic.rsi
+#    layers:
+#    - state: magicm_yellow
+#      shader: unshaded
+  - type: Sprite
+    sprite: _LocalDuty/1x4_blades/1x4_blades_mass_infection.rsi
+    noRot: false
+  - type: GatheringProjectile
+  - type: Projectile
+    damage:
+      types:
+        Heat: 25
+  - type: TimedDespawn
+    lifetime: 200
+  - type: f1x4BladesEffect
+    whitelist:
+      components:
+      - MobState
+
+
+- type: entity
+  id: f1x4EntanglementProjectile
+  name: entanglement
+  parent: BaseBullet
+  components:
+  - type: Reflective
+    reflective:
+    - NonEnergy
+  - type: Sprite
+    sprite: _LocalDuty/1x4_blades/1x4_blades_entanglement.rsi
+    noRot: false
+  - type: GatheringProjectile
+  - type: Projectile
+    damage:
+      types:
+        Heat: 20
+  - type: TimedDespawn
+    lifetime: 0.4
+
+  - type: f1x4BladesEffect
+    whitelist:
+      components:
+      - MobState
