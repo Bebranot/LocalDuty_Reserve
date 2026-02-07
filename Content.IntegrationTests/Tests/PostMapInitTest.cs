@@ -283,9 +283,9 @@ namespace Content.IntegrationTests.Tests
             //"Train",          //Not in pool
               "Packed",
               "Reach",
+              "ReserveSillyIsland", // Reserve Station
               "Saltern",
-              "Serpentcrest",
-              "Submarine"
+              "Serpentcrest"
         };
         // Goobstation edit end
 
