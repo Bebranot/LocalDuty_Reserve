@@ -111,6 +111,10 @@
       - HolofanProjector
   - type: StaticPrice
     price: 80
+  - type: ReverseEngineering # reserve: nyano port
+    difficulty: 3
+    recipes:
+    - HolofanProjector
   - type: PhysicalComposition #Goobstation - Recycle update
     materialComposition:
       Steel: 75
@@ -150,6 +154,10 @@
         - HolofanProjector
     - type: StaticPrice
       price: 130
+    - type: ReverseEngineering # reserve: nyano port
+      difficulty: 3
+      recipes:
+      - HoloprojectorField
 
 - type: entity
   parent: HoloprojectorField
