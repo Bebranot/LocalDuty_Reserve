@@ -305,3 +305,9 @@ Entries:
       message: Апстрим с Goob Station на 07.02!
   id: 44
   time: '2026-02-07T15:21:17.0000000+00:00'
+- author: kekoven1
+  changes:
+    - type: Add
+      message: обратная инженерия
+  id: 45
+  time: '2026-02-08T11:21:18.0000000+00:00'
