@@ -187,6 +187,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Runtime.InteropServices;
 using Content.Server._Orion.ServerProtection.Chat;
+using Content.Server._Reserve.LenaApi;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.Administration.Systems;
@@ -236,6 +237,7 @@ internal sealed partial class ChatManager : IChatManager
     [Dependency] private readonly LinkAccountManager _linkAccount = default!; // RMC - Patreon
     [Dependency] private readonly DiscordWebhook _discord = default!; //Reserve edit
     [Dependency] private readonly ChatProtectionSystem _chatProtection = default!; // Orion
+    [Dependency] private readonly LenaApiManager _lena = default!; //Reserve
 
     /// <summary>
     /// The maximum length a player-sent message can be sent
@@ -453,26 +455,19 @@ internal sealed partial class ChatManager : IChatManager
             var prefs = _preferencesManager.GetPreferences(player.UserId);
             colorOverride = prefs.AdminOOCColor;
         }
+
+        var user = _lena.GetUser(player.UserId);
+        // Reserve-LenaApi-Start
         // RMC - Heavily modified for patreon.
-        if (_netConfigManager.GetClientCVar(player.Channel, CCVars.ShowOocPatronColor) &&
-            _linkAccount.GetPatron(player)?.Tier is { } tier)
+        if (!_adminManager.IsAdmin(player) &&
+            user is { UserRead: { CurrentSubTier: > 0, UsernameColor: not null } })
         {
-            if (tier.Icon != null)
-            {
-                wrappedMessage = Loc.GetString("chat-manager-send-ooc-patron-wrap-message",
-                    ("tierIcon", tier.Icon),
-                    ("patronColor", "#aa00ff"),
-                    ("playerName", player.Name),
-                    ("message", FormattedMessage.EscapeText(message)));
-            }
-            else
-            {
-                wrappedMessage = Loc.GetString("chat-manager-send-ooc-patron-wrap-message-no-icon",
-                    ("patronColor", "#aa00ff"),
-                    ("playerName", player.Name),
-                    ("message", FormattedMessage.EscapeText(message)));
-            }
+            wrappedMessage = Loc.GetString("chat-manager-send-ooc-patron-wrap-message-no-icon",
+                ("patronColor", user.UserRead.UsernameColor),
+                ("playerName", player.Name),
+                ("message", FormattedMessage.EscapeText(message)));
         }
+        // Reserve-LenaApi-End
 
         //TODO: player.Name color, this will need to change the structure of the MsgChatMessage
         ChatMessageToAll(ChatChannel.OOC, message, wrappedMessage, EntityUid.Invalid, hideChat: false, recordReplay: true, colorOverride: colorOverride, author: player.UserId);
