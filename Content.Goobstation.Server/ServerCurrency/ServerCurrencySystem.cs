@@ -12,6 +12,7 @@
 
 using Content.Goobstation.Common.CCVar;
 using Content.Goobstation.Common.ServerCurrency;
+using Content.Server._Reserve.LenaApi; //Reserve
 using Content.Server._RMC14.LinkAccount;
 using Content.Server.GameTicking;
 using Content.Server.Popups;
@@ -23,6 +24,7 @@ using Content.Shared.Roles.Jobs;
 using Content.Shared.Silicons.Borgs.Components;
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
+using Robust.Shared.Player;
 
 namespace Content.Goobstation.Server.ServerCurrency
 {
@@ -39,6 +41,7 @@ namespace Content.Goobstation.Server.ServerCurrency
         [Dependency] private readonly IConfigurationManager _cfg = default!;
         [Dependency] private readonly LinkAccountManager _linkAccount = default!;
         [Dependency] private readonly GameTicker _gameTicker = default!;
+        [Dependency] private readonly LenaApiManager _lenaApiManager = default!; //Reserve
 
         private int _goobcoinsPerPlayer = 10;
         private int _goobcoinsNonAntagMultiplier = 1;
@@ -119,7 +122,24 @@ namespace Content.Goobstation.Server.ServerCurrency
                             money = (int) (money * Math.Min(1, roundMinutesActual / _goobcoinsShortRoundPenaltyTargetMinutes));
                         }
 
-                        _currencyMan.AddCurrency(mind.OriginalOwnerUserId.Value, money);
+                        // Reserve-LenaApi-Start
+                        if (_lenaApiManager.IsIntegrationEnabled)
+                        {
+                            var user = _lenaApiManager.GetUser(mind.OriginalOwnerUserId.Value);
+                            if (user != null &&
+                                _lenaApiManager.Wrapper != null &&
+                                _players.TryGetSessionById(mind.OriginalOwnerUserId, out var originalSession))
+                            {
+                                var balance = user.ReserveCoins;
+                                ShowPopup(originalSession, balance, balance + money);
+                                _ = user.ModifyBalance(_lenaApiManager.Wrapper, money, 0);
+                            }
+                        }
+                        else
+                        {
+                            _currencyMan.AddCurrency(mind.OriginalOwnerUserId.Value, money);
+                        }
+                        // Reserve-LenaApi-End
                     }
                 }
             }
@@ -143,13 +163,26 @@ namespace Content.Goobstation.Server.ServerCurrency
 
             if (ev.UserSes.AttachedEntity.HasValue)
             {
-                var userEnt = ev.UserSes.AttachedEntity.Value;
-                if (ev.NewBalance > ev.OldBalance)
-                    _popupSystem.PopupEntity("+" + _currencyMan.Stringify(ev.NewBalance - ev.OldBalance), userEnt, userEnt, PopupType.Medium);
-                else if (ev.NewBalance < ev.OldBalance)
-                    _popupSystem.PopupEntity("-" + _currencyMan.Stringify(ev.OldBalance - ev.NewBalance), userEnt, userEnt, PopupType.MediumCaution);
+                // Reserve-LenaApi-Start
+                // Code moved to ShowPopup()
+                ShowPopup(ev.UserSes, ev.OldBalance, ev.NewBalance);
+                // Reserve-LenaApi-End
+            }
+        }
+
+        // Reserve-LenaApi-Start
+        private void ShowPopup(ICommonSession session, int oldBalance, int newBalance)
+        {
+            if (session.AttachedEntity.HasValue)
+            {
+                var userEnt = session.AttachedEntity.Value;
+                if (newBalance > oldBalance)
+                    _popupSystem.PopupEntity("+" + _currencyMan.Stringify(newBalance - oldBalance), userEnt, userEnt, PopupType.Medium);
+                else if (newBalance < oldBalance)
+                    _popupSystem.PopupEntity("-" + _currencyMan.Stringify(oldBalance - newBalance), userEnt, userEnt, PopupType.MediumCaution);
                 // I really wanted to do some fancy shit where we also display a little sprite next to the pop-up, but that gets pretty complex for such a simple interaction, so, you get this.
             }
         }
+        // Reserve-LenaApi-End
     }
 }
