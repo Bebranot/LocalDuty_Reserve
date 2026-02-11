@@ -30,7 +30,7 @@ public sealed record User
         ReserveCoins = userRead.ReserveCoins;
         CurrentSubTier = userRead.CurrentSubTier;
         CurrentSubTier = userRead.CurrentSubTier;
-        UsernameColor = Color.FromHex(userRead.UsernameColor);
+        UsernameColor = Color.TryFromHex(userRead.UsernameColor);
     }
 
     public void UpdateFromUserRead(ApiWrapper.UserRead userRead)
