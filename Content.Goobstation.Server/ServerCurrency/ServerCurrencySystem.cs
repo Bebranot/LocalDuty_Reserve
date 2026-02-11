@@ -113,8 +113,11 @@ namespace Content.Goobstation.Server.ServerCurrency
                         if (_goobcoinsServerMultiplier != 1)
                             money *= _goobcoinsServerMultiplier;
 
-                        if (session != null && _linkAccount.GetPatron(session)?.Tier != null)
+                        // Reserve-LenaApi-Start
+                        var user = _lenaApiManager.GetUser(mind.OriginalOwnerUserId.Value);
+                        if (user != null && user.HasActiveSub(out _))
                             money *= 2;
+                        // Reserve-LenaApi-End
 
                         if (_goobcoinsUseShortRoundPenalty)
                         {
@@ -125,7 +128,6 @@ namespace Content.Goobstation.Server.ServerCurrency
                         // Reserve-LenaApi-Start
                         if (_lenaApiManager.IsIntegrationEnabled)
                         {
-                            var user = _lenaApiManager.GetUser(mind.OriginalOwnerUserId.Value);
                             if (user != null &&
                                 _lenaApiManager.Wrapper != null &&
                                 _players.TryGetSessionById(mind.OriginalOwnerUserId, out var originalSession))
