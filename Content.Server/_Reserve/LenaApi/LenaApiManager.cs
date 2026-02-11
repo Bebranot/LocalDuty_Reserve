@@ -7,20 +7,56 @@ namespace Content.Server._Reserve.LenaApi;
 public sealed class LenaApiManager
 {
     [Dependency] private readonly IConfigurationManager _configurationManager = default!;
-    //[Dependency] private readonly IPlayerManager _playerManager = default!;
     private ISawmill _sawmill = default!;
 
     private ApiWrapper? _wrapper;
+    public ApiWrapper? Wrapper => _wrapper;
+    [ViewVariables] private readonly Dictionary<string, User> _users = new();
+    [ViewVariables] private Dictionary<int, ApiWrapper.ItemRarityList.Entry> _rarityNames = new();
+    [ViewVariables] private Dictionary<int, ApiWrapper.SubTierList.Entry> _subLevelNames = new();
+
     private string ApiToken => _configurationManager.GetCVar(LenaApiCVars.ApiKey);
     public bool IsIntegrationEnabled => _configurationManager.GetCVar(LenaApiCVars.ApiIntegration);
+    public bool IsAuthRequired => _configurationManager.GetCVar(LenaApiCVars.RequireAuth);
     public string BaseUri => _configurationManager.GetCVar(LenaApiCVars.BaseUri);
-    public ApiWrapper? Wrapper => _wrapper;
-    private readonly Dictionary<string, User> _users = new();
 
     public void Initialize()
     {
         _wrapper = new ApiWrapper(BaseUri, () => ApiToken);
         _configurationManager.OnValueChanged(LenaApiCVars.BaseUri, newUri => _wrapper.SetBaseUri(newUri), true);
+        _configurationManager.OnValueChanged(LenaApiCVars.ApiIntegration, newUri => _ = UpdateData(), true);
+
+        _ = UpdateData();
+    }
+
+    public async Task UpdateData()
+    {
+        if (_wrapper == null)
+            return;
+
+        var subLevelNames = await _wrapper.GetDonorsTiers();
+        if (subLevelNames is { IsSuccess: true, Value: not null })
+        {
+            _subLevelNames = subLevelNames.Value.AsDictionary();
+        }
+
+        var rarityNames = await _wrapper.GetInventoryRarities();
+        if (rarityNames is { IsSuccess: true, Value: not null })
+        {
+            _rarityNames = rarityNames.Value.AsDictionary();
+        }
+    }
+
+    public string? GetSubLevelName(int subLevel)
+    {
+        _subLevelNames.TryGetValue(subLevel, out var entry);
+        return entry?.Label;
+    }
+
+    public string? GetRarityName(int rarity)
+    {
+        _rarityNames.TryGetValue(rarity, out var entry);
+        return entry?.Label;
     }
 
     public async Task UpdateUserData(NetUserId netUserId)
@@ -54,7 +90,7 @@ public sealed class LenaApiManager
 
     public async Task<string?> ShouldDenyConnection(NetUserId netUserId)
     {
-        if (IsIntegrationEnabled)
+        if (IsIntegrationEnabled && IsAuthRequired)
         {
             var response = await GetUserFromApi(netUserId.ToString());
             if (!response.IsSuccess)
@@ -71,56 +107,24 @@ public sealed class LenaApiManager
         return null;
     }
 
+    private async Task<ApiWrapper.Result<T>> Send<T>(Func<ApiWrapper, Task<ApiWrapper.Result<T>>> func)
+    {
+        if (!IsIntegrationEnabled)
+            return ApiWrapper.Result<T>.Failure(new IntegrationDisabledError());
+
+        if (_wrapper == null)
+            return ApiWrapper.Result<T>.Failure(new WrapperNotInitializedError());
+
+        return await func(_wrapper);
+    }
+
     #region api methods
 
-    public async Task<ApiWrapper.Result<ApiWrapper.UserRead>> GetUserFromApi(string ss14Id)
-    {
-        if (!IsIntegrationEnabled)
-            return ApiWrapper.Result<ApiWrapper.UserRead>.Failure(new IntegrationDisabledError());
+    public async Task<ApiWrapper.Result<ApiWrapper.UserRead>> GetUserFromApi(string ss14Id) =>
+        await Send<ApiWrapper.UserRead>(wrapper => wrapper.GetUser(ss14Id));
 
-        if (_wrapper == null)
-            throw new Exception("ApiWrapper not initialized");
-
-        return await _wrapper.GetUser(ss14Id);
-    }
-
-    public async Task<ApiWrapper.Result<ApiWrapper.Inventory>> GetInventoryFromApi(int id)
-    {
-        if (!IsIntegrationEnabled)
-            return ApiWrapper.Result<ApiWrapper.Inventory>.Failure(new IntegrationDisabledError());
-
-        if (_wrapper == null)
-            throw new Exception("ApiWrapper is not initialized");
-
-        return await _wrapper.GetInventory(id);
-    }
-
-    public async Task<ApiWrapper.Result<ApiWrapper.BalanceModify>> ModifyBalanceInApi(int id, int? reserveCoins = null, int? donateCoins = null)
-    {
-        if (!IsIntegrationEnabled)
-            return ApiWrapper.Result<ApiWrapper.BalanceModify>.Failure(new IntegrationDisabledError());
-
-        if (_wrapper == null)
-            return ApiWrapper.Result<ApiWrapper.BalanceModify>.Failure(new WrapperNotInitializedError());
-
-        return await _wrapper.PostEditBalance(id,
-            new ApiWrapper.BalanceModify
-            {
-            ReserveCoins = reserveCoins,
-            DonateCoins = donateCoins
-        });
-    }
-
-    public async Task<ApiWrapper.Result<ApiWrapper.UserRead>> ModifyUser(int id, ApiWrapper.UserAdminModify userAdminModify)
-    {
-        if (!IsIntegrationEnabled)
-            return ApiWrapper.Result<ApiWrapper.UserRead>.Failure(new IntegrationDisabledError());
-
-        if (_wrapper == null)
-            return ApiWrapper.Result<ApiWrapper.UserRead>.Failure(new WrapperNotInitializedError());
-
-        return await _wrapper.PatchUser(id, userAdminModify);
-    }
+    public async Task<ApiWrapper.Result<ApiWrapper.InventoryRead>> GetInventoryFromApi(int id) =>
+        await Send<ApiWrapper.InventoryRead>(wrapper => wrapper.GetInventory(id));
 
     #endregion
 

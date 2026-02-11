@@ -15,6 +15,9 @@ public sealed class LenaApiCVars : CVars
     public static readonly CVarDef<bool> ApiIntegration =
         CVarDef.Create("lena.api_integration", false, CVar.SERVERONLY);
 
+    public static readonly CVarDef<bool> RequireAuth =
+        CVarDef.Create("lena.require_auth", true, CVar.SERVERONLY);
+
     public static readonly CVarDef<string> AuthUri =
         CVarDef.Create("lena.auth_uri", "https://lena.reserve-station.space/v1/auth/login", CVar.SERVERONLY);
 

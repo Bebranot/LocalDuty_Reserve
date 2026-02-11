@@ -237,7 +237,7 @@ internal sealed partial class ChatManager : IChatManager
     [Dependency] private readonly LinkAccountManager _linkAccount = default!; // RMC - Patreon
     [Dependency] private readonly DiscordWebhook _discord = default!; //Reserve edit
     [Dependency] private readonly ChatProtectionSystem _chatProtection = default!; // Orion
-    [Dependency] private readonly LenaApiManager _lena = default!; //Reserve
+    [Dependency] private readonly LenaApiManager _lenaApiManager = default!; //Reserve
 
     /// <summary>
     /// The maximum length a player-sent message can be sent
@@ -456,16 +456,28 @@ internal sealed partial class ChatManager : IChatManager
             colorOverride = prefs.AdminOOCColor;
         }
 
-        var user = _lena.GetUser(player.UserId);
+        var user = _lenaApiManager.GetUser(player.UserId);
         // Reserve-LenaApi-Start
-        // RMC - Heavily modified for patreon.
         if (!_adminManager.IsAdmin(player) &&
-            user is { UserRead: { CurrentSubTier: > 0, UsernameColor: not null } })
+            user is { CurrentSubTier: > 0, UsernameColor: not null } &&
+            user.HasActiveSub(out _))
         {
-            wrappedMessage = Loc.GetString("chat-manager-send-ooc-patron-wrap-message-no-icon",
-                ("patronColor", user.UserRead.UsernameColor),
-                ("playerName", player.Name),
-                ("message", FormattedMessage.EscapeText(message)));
+            var subName = _lenaApiManager.GetSubLevelName(user.CurrentSubTier);
+            if (subName != null)
+            {
+                wrappedMessage = Loc.GetString("reserve-chat-manager-send-ooc-with-sub",
+                    ("subName", subName),
+                    ("patronColor", user.UsernameColor.Value.ToHex()),
+                    ("playerName", player.Name),
+                    ("message", FormattedMessage.EscapeText(message)));
+            }
+            else
+            {
+                wrappedMessage = Loc.GetString("reserve-chat-manager-send-ooc-with-sub-unknown",
+                    ("patronColor", user.UsernameColor.Value.ToHex()),
+                    ("playerName", player.Name),
+                    ("message", FormattedMessage.EscapeText(message)));
+            }
         }
         // Reserve-LenaApi-End
 

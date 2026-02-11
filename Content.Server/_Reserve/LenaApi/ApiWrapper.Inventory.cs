@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 
@@ -5,9 +6,9 @@ namespace Content.Server._Reserve.LenaApi;
 
 public sealed partial class ApiWrapper
 {
-    public Task<Result<Inventory>> GetInventory(int id)
+    public Task<Result<InventoryRead>> GetInventory(int id)
     {
-        return Send<Inventory>(() => _httpClient.GetAsync("v1/inventory/get/" + id));
+        return Send<InventoryRead>(() => _httpClient.GetAsync("v1/inventory/get/" + id));
     }
 
     public Task<Result<BalanceModify>> PostEditBalance(int id, BalanceModify balanceModify)
@@ -15,39 +16,43 @@ public sealed partial class ApiWrapper
         return Send<BalanceModify>(() => _httpClient.PostAsJsonAsync($"v1/inventory/editBalance/{id}", balanceModify, _jsonSerializerOptions));
     }
 
-    public record Inventory(
+    public Task<Result<ItemRarityList>> GetInventoryRarities()
+    {
+        return Send<ItemRarityList>(() => _httpClient.GetAsync("v1/inventory/rarities"));
+    }
+
+    public record InventoryRead(
         int UserId,
-        List<Item> Items,
+        List<ItemRead> Items,
         int TotalItems
     );
 
-    public record Item(
+    public record ItemRead(
         int Id,
         string ItemId,
         string ItemName,
-        string ItemImageUrl,
-        Rarity Rarity,
+        string? ItemImageUrl,
+        int Rarity,
         string? Description,
         bool AvailableForPurchase,
         int? Price,
         string? Currency,
-        bool CanBeUsed
+        bool CanBeUsedIngame
     );
-
-    // TODO: Needs actual naming
-    public enum Rarity
-    {
-        Common = 1,
-        Uncommon = 2,
-        Rare = 3,
-        Epic = 4,
-        Legendary = 5,
-        Unique = 6
-    }
 
     public record BalanceModify
     {
         public int? ReserveCoins { get; init; }
         public int? DonateCoins { get; init; }
+    }
+
+    public record ItemRarityList(List<ItemRarityList.Entry> Rarities)
+    {
+        public record Entry(int Id, string Value, string Label);
+
+        public Dictionary<int, Entry> AsDictionary()
+        {
+            return Rarities.ToDictionary(entry => entry.Id);
+        }
     }
 }

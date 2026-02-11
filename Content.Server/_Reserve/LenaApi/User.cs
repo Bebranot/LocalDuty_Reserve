@@ -1,13 +1,83 @@
+using System.Threading.Tasks;
+
 namespace Content.Server._Reserve.LenaApi;
 
 public sealed record User
 {
-    public ApiWrapper.UserRead UserRead;
-    public List<ApiWrapper.Item> Items;
+    public int Id;
+    public string Ss14Id;
+    public int DonateCoins;
+    public int ReserveCoins;
+    public int CurrentSubTier;
+    public List<ApiWrapper.ItemRead> UsableItems;
+    public Color? UsernameColor;
+    public DateTime? SubExpiresAt;
 
-    public User(ApiWrapper.UserRead userRead, ApiWrapper.Inventory inventory)
+    public User(ApiWrapper.UserRead userRead, ApiWrapper.InventoryRead inventory)
     {
-        UserRead = userRead;
-        Items = inventory.Items.FindAll(item => item.CanBeUsed);
+        UsableItems = inventory.Items.FindAll(item => item.CanBeUsedIngame);
+
+        if (userRead.SubExpiresAt != null)
+            SubExpiresAt = DateTime.Parse(userRead.SubExpiresAt);
+
+        Id = userRead.Id;
+        Ss14Id = userRead.Ss14Id;
+        DonateCoins = userRead.DonateCoins;
+        ReserveCoins = userRead.ReserveCoins;
+        CurrentSubTier = userRead.CurrentSubTier;
+        CurrentSubTier = userRead.CurrentSubTier;
+        UsernameColor = Color.FromHex(userRead.UsernameColor);
+    }
+
+    public void UpdateFromUserRead(ApiWrapper.UserRead userRead)
+    {
+        Id = userRead.Id;
+        Ss14Id = userRead.Ss14Id;
+        DonateCoins = userRead.DonateCoins;
+        ReserveCoins = userRead.ReserveCoins;
+        CurrentSubTier = userRead.CurrentSubTier;
+        CurrentSubTier = userRead.CurrentSubTier;
+        UsernameColor = Color.FromHex(userRead.UsernameColor);
+    }
+
+    public bool HasActiveSub(out int subLevel)
+    {
+        if (SubExpiresAt == null || SubExpiresAt > DateTime.Now)
+        {
+            subLevel = CurrentSubTier;
+            return true;
+        }
+        subLevel = 0;
+        return false;
+    }
+
+    public async Task<bool> ModifyBalance(ApiWrapper wrapper, int? reserveCoins = null, int? donateCoins = null)
+    {
+        var response = await wrapper.PostEditBalance(Id,
+            new()
+        {
+            ReserveCoins = reserveCoins,
+            DonateCoins = donateCoins,
+        });
+
+        if (response.Value != null)
+        {
+            DonateCoins = response.Value.DonateCoins ?? DonateCoins;
+            ReserveCoins = response.Value.ReserveCoins ?? ReserveCoins;
+        }
+
+        return response.IsSuccess;
+    }
+
+    public async Task<bool> ModifyUser(ApiWrapper wrapper, ApiWrapper.UserAdminModify userModify)
+    {
+        var response = await wrapper.PatchUser(Id, userModify);
+
+        if (response.Value != null)
+        {
+            UpdateFromUserRead(response.Value);
+        }
+
+        return response.IsSuccess;
     }
 }

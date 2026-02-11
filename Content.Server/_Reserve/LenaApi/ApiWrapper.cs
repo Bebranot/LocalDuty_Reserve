@@ -85,7 +85,7 @@ public sealed partial class ApiWrapper
         public static implicit operator Optional<T>(T? value) => new(value);
     }
 
-    private class OptionalJsonConverter<T> : JsonConverter<Optional<T>>
+    private sealed class OptionalJsonConverter<T> : JsonConverter<Optional<T>>
     {
         public override Optional<T> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
@@ -132,8 +132,8 @@ public sealed partial class ApiWrapper
     }
 
     public abstract record ApiError;
-    public record UnknownError(int StatusCode, string body) : ApiError;
-    public record ValidationError(string body) : ApiError;
+    public record UnknownError(int StatusCode, string Body) : ApiError;
+    public record ValidationError(string Body) : ApiError;
     public record NetworkError(string Message) : ApiError;
     public record UnauthorizedError : ApiError;
     public record ForbiddenError : ApiError;
