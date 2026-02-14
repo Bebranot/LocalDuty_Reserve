@@ -41,7 +41,7 @@ public sealed record User
         ReserveCoins = userRead.ReserveCoins;
         CurrentSubTier = userRead.CurrentSubTier;
         CurrentSubTier = userRead.CurrentSubTier;
-        UsernameColor = Color.FromHex(userRead.UsernameColor);
+        UsernameColor = Color.TryFromHex(userRead.UsernameColor);
     }
 
     public bool HasActiveSub(out int subLevel)
@@ -55,13 +55,14 @@ public sealed record User
         return false;
     }
 
-    public async Task<bool> ModifyBalance(ApiWrapper wrapper, int? reserveCoins = null, int? donateCoins = null)
+    public async Task<bool> ModifyBalance(ApiWrapper wrapper, int? reserveCoins = null, int? donateCoins = null, string? comment = null)
     {
         var response = await wrapper.PostEditBalance(Id,
             new()
         {
             ReserveCoins = reserveCoins,
             DonateCoins = donateCoins,
+            Comment = comment
         });
 
         if (response.Value != null)
