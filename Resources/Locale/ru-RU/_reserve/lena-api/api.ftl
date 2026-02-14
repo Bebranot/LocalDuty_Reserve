@@ -4,3 +4,5 @@ reserve-auth-button = Авторизоваться
 
 reserve-chat-manager-send-ooc-with-sub = OOC: [bold][color={$patronColor}]\[{$subName}\] {$playerName}[/color]:[/bold] {$message}
 reserve-chat-manager-send-ooc-with-sub-unknown = OOC: [bold][color={$patronColor}]{$playerName}[/color]:[/bold] {$message}
+
+reserve-command-disabled-due-integration-enabled = Эта команда отключена из-за включенной интеграции с API Reserve.
