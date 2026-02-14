@@ -48,6 +48,7 @@ public sealed partial class ApiWrapper
     {
         public int? ReserveCoins { get; init; }
         public int? DonateCoins { get; init; }
+        public string? Comment { get; init; }
     }
 
     public record ItemRarityList(List<ItemRarityList.Entry> Rarities)

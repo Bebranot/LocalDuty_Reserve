@@ -82,6 +82,7 @@ namespace Content.Goobstation.Server.ServerCurrency
             var lowPopMultiplier = 1.0 - (_players.PlayerCount / (double)_players.MaxPlayers);
 
             var query = EntityQueryEnumerator<MindContainerComponent>();
+            var roundId = _gameTicker.RoundId; // Reserve-LenaApi 
 
             while (query.MoveNext(out var uid, out var mindContainer))
             {
@@ -134,7 +135,7 @@ namespace Content.Goobstation.Server.ServerCurrency
                             {
                                 var balance = user.ReserveCoins;
                                 ShowPopup(originalSession, balance, balance + money);
-                                _ = user.ModifyBalance(_lenaApiManager.Wrapper, money, 0);
+                                _ = user.ModifyBalance(_lenaApiManager.Wrapper, money, 0, comment: $"Конец раунда #{roundId}");
                             }
                         }
                         else
