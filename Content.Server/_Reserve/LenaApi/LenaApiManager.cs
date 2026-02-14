@@ -5,6 +5,7 @@
 using System.Threading.Tasks;
 using Robust.Shared.Configuration;
 using Robust.Shared.Network;
+using Content.Shared._Reserve.LenaApi;
 
 namespace Content.Server._Reserve.LenaApi;
 
