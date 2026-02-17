@@ -822,8 +822,7 @@ public sealed partial class ServerApi : IPostInjectInit
 
         await RunOnMainThread(async () =>
         {
-            var wrappedMessage = Loc.GetString("reserve-chat-manager-send-ooc-with-sub",
-                ("subName", body.SubName),
+            var wrappedMessage = Loc.GetString("reserve-chat-manager-send-ooc-with-sub-unknown",
                 ("patronColor", body.Color),
                 ("playerName", body.Name),
                 ("message", FormattedMessage.EscapeText(body.Message)));
