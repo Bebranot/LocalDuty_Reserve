@@ -186,6 +186,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using Content.Server._Orion.ServerProtection.Chat;
 using Content.Server._Reserve.LenaApi;
 using Content.Server.Administration.Logs;
@@ -246,6 +247,7 @@ internal sealed partial class ChatManager : IChatManager
 
     private bool _oocEnabled = true;
     private bool _adminOocEnabled = true;
+    private WebhookIdentifier? _webhookIdentifier; // Reserve ooc-discord
 
     private readonly Dictionary<NetUserId, ChatUser> _players = new();
 
@@ -485,6 +487,27 @@ internal sealed partial class ChatManager : IChatManager
         ChatMessageToAll(ChatChannel.OOC, message, wrappedMessage, EntityUid.Invalid, hideChat: false, recordReplay: true, colorOverride: colorOverride, author: player.UserId);
         _mommiLink.SendOOCMessage(player.Name, message.Replace("@", "\\@").Replace("<", "\\<").Replace("/", "\\/")); // @ and < are both problematic for discord due to pinging. / is sanitized solely to kneecap links to murder embeds via blunt force
         _adminLogger.Add(LogType.Chat, LogImpact.Low, $"OOC from {player:Player}: {message}");
+
+        // Reserve ooc-discord start
+        if (!string.IsNullOrEmpty(_configurationManager.GetCVar(CCVars.DiscordOOCChatWebhook)))
+        {
+            var webhookUrl = _configurationManager.GetCVar(CCVars.DiscordOOCChatWebhook);
+
+            _ = Task.Run(async () =>
+            {
+                if (await _discord.GetWebhook(webhookUrl) is not { } webhookData)
+                    return;
+
+                var payload = new WebhookPayload
+                {
+                    Content = $"`{player.Name}`: {message}"
+                };
+
+                var identifier = webhookData.ToIdentifier();
+                await _discord.CreateMessage(identifier, payload);
+            });
+        }
+        // Reserve ooc-discord end
     }
 
     private async void SendAdminChat(ICommonSession player, string message)
