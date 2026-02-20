@@ -1,0 +1,123 @@
+- type: entity
+  parent: [ClothingOuterBaseMedium, AllowSuitStorageClothing]
+  id: ClothingGA
+  name: Graytide armor
+  description: A standard Type I armored vest that provides decent protection against most types of damage.
+  components:
+  - type: Sprite
+    sprite: _Duty/Clothing/GreytideArmor/armor.rsi
+  - type: Clothing
+    sprite: _Duty/Clothing/GreytideArmor/armor.rsi
+    equipSound: /Audio/Effects/metal_scrape2.ogg
+    unequipSound: /Audio/Effects/metal_scrape1.ogg
+    equipDelay: 3
+    unequipDelay: 3  
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.50
+        Slash: 0.65
+        Piercing: 0.80
+        Heat: 0.90
+  - type: ExplosionResistance
+    damageCoefficient: 0.60
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 1200
+      Plastic: 300
+  - type: ClothingSpeedModifier
+    walkModifier: 1
+    sprintModifier: 0.95
+  - type: Construction
+    graph: GraytideArmorRecipe
+    node: done
+
+- type: entity
+  parent: [ClothingHeadHelmetBase]
+  id: ClothingHeadGA
+  name: Graytide helmet
+  description: An super cool helmet. it can help you with those security guys. maybe.
+  components:
+  - type: Sprite
+    sprite: _Duty/Clothing/GreytideArmor/helmet.rsi
+  - type: Item
+    size: Normal
+  - type: Clothing
+    sprite: _Duty/Clothing/GreytideArmor/helmet.rsi
+    equipSound: /Audio/Effects/metal_scrape2.ogg
+    unequipSound: /Audio/Effects/metal_scrape1.ogg
+    equipDelay: 3
+    unequipDelay: 3
+  - type: IngestionBlocker
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.8
+        Slash: 0.75
+        Piercing: 0.95
+        Heat: 0.70
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - Snout
+    - HeadTop
+    - HeadSide
+  - type: Construction
+    graph: GraytideArmorHelmetRecipe
+    node: done
+
+- type: construction
+  id: GraytideArmorHelmetCraft
+  graph: GraytideArmorHelmetRecipe
+  startNode: start
+  targetNode: done
+  category: construction-category-misc
+  objectType: Item
+
+- type: constructionGraph
+  id: GraytideArmorHelmetRecipe
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: done
+      steps:
+      - material: Steel
+        amount: 10
+      - material: MetalRod
+        amount: 5
+      - material: Cable
+        amout: 10
+      - material: ReinforcedGlass
+        amount: 4
+        doAfter: 2
+  - node: done
+    entity: ClothingHeadGA
+
+- type: construction
+  id: GraytideArmorCraft
+  graph: GraytideArmorRecipe
+  startNode: start
+  targetNode: done
+  category: construction-category-misc
+  objectType: Item
+
+- type: constructionGraph
+  id: GraytideArmorRecipe
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: done
+      steps:
+      - material: Steel
+        amount: 30
+      - material: MetalRod
+        amount: 15
+      - material: Cable
+        amout: 10
+      - material: Cloth
+        amout: 10
+        doAfter: 10
+  - node: done
+    entity: ClothingGA

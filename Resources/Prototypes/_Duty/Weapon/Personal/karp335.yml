@@ -1,0 +1,44 @@
+- type: entity
+  name: Штурмовой топор "Рыбаёж"
+  parent: BaseItem
+  id: SturmAxeKarp335
+  description: жеси паслушай ти риба  йош
+  components:
+  - type: Sprite
+    sprite: _Duty/Weapons/axe.rsi
+    state: icon
+  - type: Item
+    size: Ginormous
+  - type: MeleeRequiresWield
+  - type: MeleeWeapon
+    attackRate: 0.67
+    range: 1.0
+    damage:
+      types:
+        Blunt: 6
+        Piercing: 1
+        Structural: 15
+    hitsound: /Audio/Effects/metal_break5.ogg
+  - type: Wieldable
+    HeavyStaminaCost: 35
+  - type: IncreaseDamageOnWield
+    damage:
+      types:
+        Blunt: 8
+        Piercing: 4
+        Structural: 35
+  - type: Tool
+    qualities:
+      - Prying
+    useSound: /Audio/Items/jaws_pry.ogg
+  - type: Prying
+    speedModifier: 1
+    pryPowered: true
+    useSound: /Audio/Items/jaws_pry.ogg
+  - type: Clothing
+    sprite: _Duty/Weapons/axe.rsi
+    quickEquip: false
+    slots:
+    - back
+    - suitStorage
+

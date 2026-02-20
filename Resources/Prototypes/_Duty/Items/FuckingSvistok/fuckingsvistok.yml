@@ -1,0 +1,25 @@
+# сделано Bad Content (я изменел лишь описание, имя и айди, добавлены некоторые компоненты(FuckingSvistok, TriggerOnUse))
+# (спрайт тоже им)
+
+- type: entity
+  parent: BaseItem
+  id: FuckingSvistok
+  name: Окопный свисток
+  description: Последняя, и яркая надежда на жизнь бойцов... Вперёд, офицер!
+  components:
+  - type: FuckingSvistok
+  - type: TriggerOnUse
+
+  - type: Sprite
+    sprite: /Textures/_LocalDuty/slurwhistle.rsi
+    state: icon
+  - type: Item
+    sprite: /Textures/_LocalDuty/slurwhistle.rsi
+    size: Tiny
+  - type: UseDelay
+    delay: 120
+  - type: EmitSoundOnUse
+    sound:
+      collection: TrenchWhistle # тут нужно подключить коллекцию звуков
+      params:
+        variation: 0.125
