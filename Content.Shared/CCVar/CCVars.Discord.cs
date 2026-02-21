@@ -37,43 +37,43 @@ public sealed partial class CCVars
     ///     Valid values are specified at https://discord.com/developers/docs/resources/channel#embed-object-embed-footer-structure.
     /// </summary>
     public static readonly CVarDef<string> DiscordAHelpFooterIcon =
-        CVarDef.Create("discord.ahelp_footer_icon", string.Empty, CVar.SERVERONLY);
+        CVarDef.Create("1471156360120107078 ", string.Empty, CVar.SERVERONLY);
 
     /// <summary>
     ///     The avatar to use for the webhook. Should be an URL.
     /// </summary>
     public static readonly CVarDef<string> DiscordAHelpAvatar =
-        CVarDef.Create("discord.ahelp_avatar", string.Empty, CVar.SERVERONLY);
+        CVarDef.Create("1474461621249118331", string.Empty, CVar.SERVERONLY);
 
     /// <summary>
     ///     URL of the Discord webhook which will relay all custom votes. If left empty, disables the webhook.
     /// </summary>
     public static readonly CVarDef<string> DiscordVoteWebhook =
-        CVarDef.Create("discord.vote_webhook", string.Empty, CVar.SERVERONLY);
+        CVarDef.Create("https://discord.com/api/webhooks/1474462067011621040/Mwj-BClQRNslxyFIBMmjTmnYrTrsKdiJUpUV6hCLaeJyWQWfJqVch8Dqr8i1dIwfWbG3", string.Empty, CVar.SERVERONLY);
 
     /// <summary>
     ///     URL of the Discord webhook which will relay all votekick votes. If left empty, disables the webhook.
     /// </summary>
     public static readonly CVarDef<string> DiscordVotekickWebhook =
-        CVarDef.Create("discord.votekick_webhook", string.Empty, CVar.SERVERONLY);
+        CVarDef.Create("https://discord.com/api/webhooks/1474462067011621040/Mwj-BClQRNslxyFIBMmjTmnYrTrsKdiJUpUV6hCLaeJyWQWfJqVch8Dqr8i1dIwfWbG3", string.Empty, CVar.SERVERONLY);
 
     /// <summary>
     ///     URL of the Discord webhook which will relay round restart messages.
     /// </summary>
     public static readonly CVarDef<string> DiscordRoundUpdateWebhook =
-        CVarDef.Create("discord.round_update_webhook", string.Empty, CVar.SERVERONLY | CVar.CONFIDENTIAL);
+        CVarDef.Create("https://discord.com/api/webhooks/1474458461017477160/9VbWfJSxIiXvHeCSj9kiop8JUuWTcG2XMh0pCFnhiWipeWQQ6X_hfoxbrQyD5jdpHziQ", string.Empty, CVar.SERVERONLY | CVar.CONFIDENTIAL);
 
     /// <summary>
     ///     Role id for the Discord webhook to ping when the round ends.
     /// </summary>
     public static readonly CVarDef<string> DiscordRoundEndRoleWebhook =
-        CVarDef.Create("discord.round_end_role", string.Empty, CVar.SERVERONLY);
+        CVarDef.Create("https://discord.com/api/webhooks/1474458461017477160/9VbWfJSxIiXvHeCSj9kiop8JUuWTcG2XMh0pCFnhiWipeWQQ6X_hfoxbrQyD5jdpHziQ", string.Empty, CVar.SERVERONLY);
 
     /// <summary>
     ///     URL of the Discord webhook which will relay watchlist connection notifications. If left empty, disables the webhook.
     /// </summary>
     public static readonly CVarDef<string> DiscordWatchlistConnectionWebhook =
-        CVarDef.Create("discord.watchlist_connection_webhook", string.Empty, CVar.SERVERONLY | CVar.CONFIDENTIAL);
+        CVarDef.Create("https://discord.com/api/webhooks/1474462067011621040/Mwj-BClQRNslxyFIBMmjTmnYrTrsKdiJUpUV6hCLaeJyWQWfJqVch8Dqr8i1dIwfWbG3", string.Empty, CVar.SERVERONLY | CVar.CONFIDENTIAL);
 
     /// <summary>
     ///     How long to buffer watchlist connections for, in seconds.
@@ -87,7 +87,7 @@ public sealed partial class CCVars
     /// URL of the Discord webhook which will relay bans info to the channel.
     /// </summary>
     public static readonly CVarDef<string> DiscordBansWebhook =
-        CVarDef.Create("discord.bans_webhook", string.Empty, CVar.SERVERONLY | CVar.CONFIDENTIAL);
+        CVarDef.Create("https://discord.com/api/webhooks/1474461918671671418/7M-C1zsM-lIm2SYuuNjpFx7WCEDQkNqf6sSPJHlg7V3zdBeKRKzQSsJTu_os3K2yOZEZ", string.Empty, CVar.SERVERONLY | CVar.CONFIDENTIAL);
 
     /// <summary>
     ///     Reserve - ADT port

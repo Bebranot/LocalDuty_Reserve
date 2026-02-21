@@ -116,7 +116,7 @@ public sealed partial class CCVars
     ///     If roles should be restricted based on time.
     /// </summary>
     public static readonly CVarDef<bool>
-        GameRoleTimers = CVarDef.Create("game.role_timers", true, CVar.SERVER | CVar.REPLICATED);
+        GameRoleTimers = CVarDef.Create("game.role_timers", false, CVar.SERVER | CVar.REPLICATED);
 
     /// <summary>
     ///     Override default role requirements using a <see cref="JobRequirementOverridePrototype"/>
@@ -128,7 +128,7 @@ public sealed partial class CCVars
     ///     If roles should be restricted based on whether or not they are whitelisted.
     /// </summary>
     public static readonly CVarDef<bool>
-        GameRoleWhitelist = CVarDef.Create("game.role_whitelist", true, CVar.SERVER | CVar.REPLICATED);
+        GameRoleWhitelist = CVarDef.Create("game.role_whitelist", false, CVar.SERVER | CVar.REPLICATED);
 
     /// <summary>
     ///     Whether or not disconnecting inside of a cryopod should remove the character or just store them until they reconnect.
@@ -350,14 +350,14 @@ public sealed partial class CCVars
     ///     Delay between station alert level changes.
     /// </summary>
     public static readonly CVarDef<int> GameAlertLevelChangeDelay =
-        CVarDef.Create("game.alert_level_change_delay", 30, CVar.SERVERONLY);
+        CVarDef.Create("game.alert_level_change_delay", 5, CVar.SERVERONLY);
 
     /// <summary>
     ///     The time in seconds that the server should wait before restarting the round.
     ///     Defaults to 2 minutes.
     /// </summary>
     public static readonly CVarDef<float> RoundRestartTime =
-        CVarDef.Create("game.round_restart_time", 120f, CVar.SERVERONLY);
+        CVarDef.Create("game.round_restart_time", 240f, CVar.SERVERONLY);
 
     /// <summary>
     ///     The prototype to use for secret weights.

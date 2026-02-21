@@ -21,7 +21,7 @@ public sealed partial class CCVars
         ///     How large of a range to sample for ambience.
         /// </summary>
         public static readonly CVarDef<float> AmbientRange =
-            CVarDef.Create("ambience.range", 8f, CVar.REPLICATED | CVar.SERVER);
+            CVarDef.Create("ambience.range",10f, CVar.REPLICATED | CVar.SERVER);
 
         /// <summary>
         ///     Maximum simultaneous ambient sounds.
@@ -57,13 +57,13 @@ public sealed partial class CCVars
         ///     Lobby / round end music volume.
         /// </summary>
         public static readonly CVarDef<float> LobbyMusicVolume =
-            CVarDef.Create("ambience.lobby_music_volume", 0.50f, CVar.ARCHIVE | CVar.CLIENTONLY);
+            CVarDef.Create("ambience.lobby_music_volume", 0.35f, CVar.ARCHIVE | CVar.CLIENTONLY);
 
         /// <summary>
         ///     UI volume.
         /// </summary>
         public static readonly CVarDef<float> InterfaceVolume =
-            CVarDef.Create("audio.interface_volume", 0.50f, CVar.ARCHIVE | CVar.CLIENTONLY);
+            CVarDef.Create("audio.interface_volume", 0.35f, CVar.ARCHIVE | CVar.CLIENTONLY);
 
     /// <summary>
     ///     Lobby music collection string
