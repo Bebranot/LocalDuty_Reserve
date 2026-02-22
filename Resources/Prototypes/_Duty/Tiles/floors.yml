@@ -1,5 +1,5 @@
 - type: tile
-  id: FloorStalker
+  id: FloorStalkerDuty
   name: FloorStalker
   sprite: /Textures/_Stalker/Tiles/plates.rsi/floor_stalker.png
   baseTurf: Plating
@@ -11,7 +11,7 @@
   indestructible: true
 
 - type: tile
-  id: FloorStalker1
+  id: FloorStalker1Duty
   name: FloorStalker1
   sprite: /Textures/_Stalker/Tiles/plates.rsi/floor_stalker1.png
   baseTurf: Plating
@@ -23,7 +23,7 @@
   indestructible: true
 
 - type: tile
-  id: FloorStalker2
+  id: FloorStalker2Duty
   name: FloorStalker2
   sprite: /Textures/_Stalker/Tiles/plates.rsi/floor_stalker2.png
   baseTurf: Plating
@@ -35,7 +35,7 @@
   indestructible: true
 
 - type: tile
-  id: FloorStalker3
+  id: FloorStalker3Duty
   name: FloorStalker3
   sprite: /Textures/_Stalker/Tiles/plates.rsi/floor_stalker3.png
   baseTurf: Plating
@@ -47,7 +47,7 @@
   indestructible: true
 
 - type: tile
-  id: FloorStalker4
+  id: FloorStalker4Duty
   name: FloorStalker4
   sprite: /Textures/_Stalker/Tiles/plates.rsi/floor_stalker4.png
   baseTurf: Plating
@@ -59,7 +59,7 @@
   indestructible: true
 
 - type: tile
-  id: FloorStalker5
+  id: FloorStalker5Duty
   name: FloorStalker5
   sprite: /Textures/_Stalker/Tiles/plates.rsi/floor_stalker5.png
   baseTurf: Plating
@@ -71,7 +71,7 @@
   indestructible: true
 
 - type: tile
-  id: FloorStalker6
+  id: FloorStalker6Duty
   name: FloorStalker6
   sprite: /Textures/_Stalker/Tiles/plates.rsi/floor_stalker6.png
   baseTurf: Plating
@@ -83,7 +83,7 @@
   indestructible: true
 
 - type: tile
-  id: FloorStalker7
+  id: FloorStalker7Duty
   name: FloorStalker7
   sprite: /Textures/_Stalker/Tiles/plates.rsi/floor_stalker7.png
   baseTurf: Plating
@@ -95,7 +95,7 @@
   indestructible: true
 
 - type: tile
-  id: BirchWoodenFloor
+  id: BirchWoodenFloorDuty
   name: BirchWoodenFloor
   sprite: /Textures/_Stalker/Tiles/Wood/birch.png
   baseTurf: Plating
@@ -108,7 +108,7 @@
 
   # moved to _Stalker
 - type: tile
-  id: STFloorCaveDrought
+  id: STFloorCaveDroughtDuty
   name: tiles-cave-drought
   parent: FloorCaveDrought
   sprite: /Textures/_Stalker/Tiles/cavedrought.png
@@ -116,11 +116,11 @@
     collection: STFootstepRock
   heatCapacity: 10000
   weather: true
-  baseTurf: STFloorPlanetDirt
+  baseTurf: STFloorPlanetDirtDuty
   indestructible: true
 
 - type: tile
-  id: STFloorDirt
+  id: STFloorDirtDuty
   parent: FloorDirt
   name: tiles-dirt-floor
   sprite: /Textures/_Stalker/Tiles/dirt.png
@@ -128,15 +128,15 @@
     collection: STFootstepDirt
   heatCapacity: 10000
   weather: true
-  baseTurf: STFloorPlanetDirt
+  baseTurf: STFloorPlanetDirtDuty
   indestructible: true
 
 - type: tile
-  id: STFloorBrokenWood
+  id: STFloorBrokenWoodDuty
   parent: FloorBrokenWood
   name: tiles-wood3
   sprite: /Textures/_Stalker/Tiles/wood_broken.png
-  baseTurf: STFloorPlanetDirt
+  baseTurf: STFloorPlanetDirtDuty
   isSubfloor: false
   weather: false
   footstepSounds:
@@ -145,7 +145,7 @@
   indestructible: true
 
 - type: tile
-  id: STFloorWood
+  id: STFloorWoodDuty
   parent: FloorWood
   name: tiles-wood
   sprite: /Textures/_Stalker/Tiles/wood.png
@@ -155,7 +155,7 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: STFloorPlanetDirt
+  baseTurf: STFloorPlanetDirtDuty
   isSubfloor: false
   footstepSounds:
     collection: STFootstepWood
@@ -165,7 +165,7 @@
   indestructible: true
 
 - type: tile
-  id: STFloorAsphalt
+  id: STFloorAsphaltDuty
   parent: FloorAsphalt
   name: tiles-asphalt
   sprite: /Textures/_Stalker/Tiles/Planet/Concrete/asphalt.png
@@ -181,7 +181,7 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: STFloorPlanetDirt
+  baseTurf: STFloorPlanetDirtDuty
   isSubfloor: false
   footstepSounds:
     collection: STFootstepRock
@@ -190,7 +190,7 @@
   indestructible: true
 
 - type: tile
-  id: STFloorConcrete
+  id: STFloorConcreteDuty
   parent: FloorConcrete
   name: tiles-concrete-tile
   sprite: /Textures/_Stalker/Tiles/Planet/Concrete/concrete.png
@@ -200,7 +200,7 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: STFloorPlanetDirt
+  baseTurf: STFloorPlanetDirtDuty
   isSubfloor: false
   footstepSounds:
     collection: STFootstepRock
@@ -209,7 +209,7 @@
   indestructible: true
 
 - type: tile
-  id: STFloorConcreteMono
+  id: STFloorConcreteMonoDuty
   parent: FloorConcreteMono
   name: tiles-concrete-slab
   sprite: /Textures/_Stalker/Tiles/Planet/Concrete/concrete_mono.png
@@ -219,7 +219,7 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: STFloorPlanetDirt
+  baseTurf: STFloorPlanetDirtDuty
   isSubfloor: false
   footstepSounds:
     collection: STFootstepRock
@@ -228,7 +228,7 @@
   indestructible: true
 
 - type: tile
-  id: STFloorConcreteSmooth
+  id: STFloorConcreteSmoothDuty
   parent: FloorConcreteSmooth
   name: tiles-concrete-smooth
   sprite: /Textures/_Stalker/Tiles/Planet/Concrete/concrete_smooth.png
@@ -238,7 +238,7 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: STFloorPlanetDirt
+  baseTurf: STFloorPlanetDirtDuty
   isSubfloor: false
   footstepSounds:
     collection: STFootstepRock
@@ -247,7 +247,7 @@
   indestructible: true
 
 - type: tile
-  id: STFloorGrayConcrete
+  id: STFloorGrayConcreteDuty
   parent: FloorGrayConcrete
   name: tiles-gray-concrete-tile
   sprite: /Textures/_Stalker/Tiles/Planet/Concrete/grayconcrete.png
@@ -257,7 +257,7 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: STFloorPlanetDirt
+  baseTurf: STFloorPlanetDirtDuty
   isSubfloor: false
   footstepSounds:
     collection: STFootstepRock
@@ -266,7 +266,7 @@
   indestructible: true
 
 - type: tile
-  id: STFloorGrayConcreteMono
+  id: STFloorGrayConcreteMonoDuty
   parent: FloorGrayConcreteMono
   name: tiles-gray-concrete-slab
   sprite: /Textures/_Stalker/Tiles/Planet/Concrete/grayconcrete_mono.png
@@ -276,7 +276,7 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: STFloorPlanetDirt
+  baseTurf: STFloorPlanetDirtDuty
   isSubfloor: false
   footstepSounds:
     collection: STFootstepRock
@@ -285,7 +285,7 @@
   indestructible: true
 
 - type: tile
-  id: STFloorGrayConcreteSmooth
+  id: STFloorGrayConcreteSmoothDuty
   parent: FloorGrayConcreteSmooth
   name: tiles-gray-concrete-smooth
   sprite: /Textures/_Stalker/Tiles/Planet/Concrete/grayconcrete_smooth.png
@@ -295,7 +295,7 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: STFloorPlanetDirt
+  baseTurf: STFloorPlanetDirtDuty
   isSubfloor: false
   footstepSounds:
     collection: STFootstepRock
@@ -304,7 +304,7 @@
   indestructible: true
 
 - type: tile
-  id: STFloorOldConcrete
+  id: STFloorOldConcreteDuty
   parent: FloorOldConcrete
   name: tiles-old-concrete-tile
   sprite: /Textures/_Stalker/Tiles/Planet/Concrete/oldconcrete.png
@@ -314,7 +314,7 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: STFloorPlanetDirt
+  baseTurf: STFloorPlanetDirtDuty
   isSubfloor: false
   footstepSounds:
     collection: STFootstepRock
@@ -323,7 +323,7 @@
   indestructible: true
 
 - type: tile
-  id: STFloorOldConcreteMono
+  id: STFloorOldConcreteMonoDuty
   parent: FloorOldConcreteMono
   name: tiles-old-concrete-slab
   sprite: /Textures/_Stalker/Tiles/Planet/Concrete/oldconcrete_mono.png
@@ -333,7 +333,7 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: STFloorPlanetDirt
+  baseTurf: STFloorPlanetDirtDuty
   isSubfloor: false
   footstepSounds:
     collection: STFootstepRock
@@ -342,7 +342,7 @@
   indestructible: true
 
 - type: tile
-  id: STFloorOldConcreteSmooth
+  id: STFloorOldConcreteSmoothDuty
   parent: FloorOldConcreteSmooth
   name: tiles-old-concrete-smooth
   sprite: /Textures/_Stalker/Tiles/Planet/Concrete/oldconcrete_smooth.png
@@ -352,7 +352,7 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: STFloorPlanetDirt
+  baseTurf: STFloorPlanetDirtDuty
   isSubfloor: false
   footstepSounds:
     collection: STFootstepRock
