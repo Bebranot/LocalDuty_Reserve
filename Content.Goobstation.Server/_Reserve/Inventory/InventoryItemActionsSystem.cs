@@ -46,7 +46,7 @@ public sealed class InventoryItemActionsSystem : EntitySystem
 
         _lenaApi.RegisterItemAction("mid_tier_token", (session, item) => OpenAntagSelection(session, item.ItemId));
         _lenaApi.RegisterItemIcon("mid_tier_token",
-            "/Textures/Objects/Weapons/Melee/e-sword.rsi/icon.png");
+            "/Textures/Objects/Weapons/Melee/e_sword.rsi/icon.png");
         _lenaApi.RegisterAntagRule("mid_tier_token",
             "Thief",
             "Вор",
