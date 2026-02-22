@@ -30,4 +30,9 @@ public sealed class LenaApiCVars : CVars
 
     public static readonly CVarDef<string> BaseUri =
         CVarDef.Create("lena.base_uri", "https://lena.reserve-station.space/v1", CVar.SERVERONLY);
+
+    public static readonly CVarDef<bool> IgnoreSubName =
+        CVarDef.Create("lena.ignore_sub_name", true, CVar.SERVERONLY);
+
+
 }
