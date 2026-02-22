@@ -2,9 +2,11 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using System.Linq;
 using System.Threading.Tasks;
 using Robust.Shared.Configuration;
 using Robust.Shared.Network;
+using Robust.Shared.Player;
 using Content.Shared._Reserve.LenaApi;
 
 namespace Content.Server._Reserve.LenaApi;
@@ -20,6 +22,13 @@ public sealed class LenaApiManager
     [ViewVariables] private Dictionary<int, ApiWrapper.ItemRarityList.Entry> _rarityNames = new();
     [ViewVariables] private Dictionary<int, ApiWrapper.SubTierList.Entry> _subLevelNames = new();
 
+    private readonly Dictionary<string, Action<ICommonSession, ApiWrapper.ItemRead>> _itemActions = new();
+    private readonly Dictionary<string, string> _itemIcons = new();
+    private readonly Dictionary<string, Dictionary<string, AntagRuleConfig>> _antagRules = new();
+    private readonly Dictionary<string, TokenConditions> _tokenConditions = new();
+    private readonly Dictionary<NetUserId, HashSet<string>> _lockedOutTokens = new();
+    private readonly Dictionary<NetUserId, Action<string>> _inventoryRemoveCallbacks = new();
+
     private string ApiToken => _configurationManager.GetCVar(LenaApiCVars.ApiKey);
     public bool IsIntegrationEnabled => _configurationManager.GetCVar(LenaApiCVars.ApiIntegration);
     public bool IsAuthRequired => _configurationManager.GetCVar(LenaApiCVars.RequireAuth);
@@ -27,6 +36,7 @@ public sealed class LenaApiManager
 
     public void Initialize()
     {
+        _sawmill = Logger.GetSawmill("lena-api");
         _wrapper = new ApiWrapper(BaseUri, () => ApiToken);
         _configurationManager.OnValueChanged(LenaApiCVars.BaseUri, newUri => _wrapper.SetBaseUri(newUri), true);
         _configurationManager.OnValueChanged(LenaApiCVars.ApiIntegration, newUri => _ = UpdateData(), true);
@@ -80,7 +90,8 @@ public sealed class LenaApiManager
 
         if (!inventoryRequest.IsSuccess || inventoryRequest.Value == null)
         {
-            _sawmill.Error($"Could not read inventory from API for user {userReadData.Id}, Error = {inventoryRequest.Error}");
+            _sawmill.Error(
+                $"Could not read inventory from API for user {userReadData.Id}, Error = {inventoryRequest.Error}");
             return;
         }
 
@@ -106,9 +117,11 @@ public sealed class LenaApiManager
                 _sawmill.Error($"Got unhandled response while denying user {netUserId}:\n{response.Error}");
                 return Loc.GetString("reserve-auth-error");
             }
+
             if (response.Value != null)
                 await UpdateUserData(new NetUserId(netUserId), response.Value);
         }
+
         return null;
     }
 
@@ -131,8 +144,135 @@ public sealed class LenaApiManager
     public async Task<ApiWrapper.Result<ApiWrapper.InventoryRead>> GetInventoryFromApi(int id) =>
         await Send<ApiWrapper.InventoryRead>(wrapper => wrapper.GetInventory(id));
 
+    public async Task<ApiWrapper.Result<ApiWrapper.InventoryModify>> TakeItemFromApi(int userId, int itemId, string? comment = null) =>
+        await Send<ApiWrapper.InventoryModify>(wrapper => wrapper.PostInventoryModify(userId,
+            new ApiWrapper.InventoryModify { ItemId = itemId, Amount = 1, Comment = comment }));
+
     #endregion
 
+    #region item icons
+
+    public void RegisterItemIcon(string itemId, string iconPath)
+        => _itemIcons[itemId] = iconPath;
+
+    public string? GetItemIcon(string itemId)
+    {
+        _itemIcons.TryGetValue(itemId, out var path);
+        return path;
+    }
+
+    #endregion
+
+    #region item actions
+
+    public void RegisterItemAction(string itemId, Action<ICommonSession, ApiWrapper.ItemRead> action)
+    {
+        _itemActions[itemId] = action;
+    }
+
+
+    public bool TryUseItem(ICommonSession session, string itemId)
+    {
+        var user = GetUser(session.UserId);
+        if (user == null)
+            return false;
+
+        var item = user.UsableItems.FirstOrDefault(i => i.ItemId == itemId);
+        if (item == null)
+            return false;
+
+        if (!_itemActions.TryGetValue(itemId, out var action))
+        {
+            _sawmill.Warning($"К айтему '{itemId}' не привязан каллбек");
+            return false;
+        }
+
+        action(session, item);
+        return true;
+    }
+
+    #endregion
+
+    #region antag rules
+
+    public void RegisterAntagRule(string itemId,
+        string ruleId,
+        string displayName,
+        bool forAlive = false,
+        Action<ICommonSession>? forAliveAction = null)
+    {
+        if (!_antagRules.TryGetValue(itemId, out var rules))
+            _antagRules[itemId] = rules = new Dictionary<string, AntagRuleConfig>();
+        rules[ruleId] = new AntagRuleConfig(displayName, forAlive, forAliveAction);
+    }
+
+    public IReadOnlyDictionary<string, AntagRuleConfig> GetAntagRules(string itemId)
+    {
+        _antagRules.TryGetValue(itemId, out var rules);
+        return rules ?? new Dictionary<string, AntagRuleConfig>();
+    }
+
+    #endregion
+
+    #region token conditions
+
+    public void RegisterTokenConditions(string itemId, TokenConditions conditions)
+        => _tokenConditions[itemId] = conditions;
+
+    public TokenConditions? GetTokenConditions(string itemId)
+    {
+        _tokenConditions.TryGetValue(itemId, out var conditions);
+        return conditions;
+    }
+
+    #endregion
+
+    #region lockout
+
+    public bool IsTokenLockedOut(NetUserId userId, string itemId)
+        => _lockedOutTokens.TryGetValue(userId, out var tokens) && tokens.Contains(itemId);
+
+    public void LockOutToken(NetUserId userId, string itemId)
+    {
+        if (!_lockedOutTokens.TryGetValue(userId, out var tokens))
+            _lockedOutTokens[userId] = tokens = new HashSet<string>();
+        tokens.Add(itemId);
+    }
+
+    public void ClearAllLockouts() => _lockedOutTokens.Clear();
+
+    #endregion
+
+    #region inventory callbacks
+
+    public void RegisterInventoryRemoveCallback(NetUserId userId, Action<string> callback)
+        => _inventoryRemoveCallbacks[userId] = callback;
+
+    public void UnregisterInventoryRemoveCallback(NetUserId userId)
+        => _inventoryRemoveCallbacks.Remove(userId);
+
+    public void NotifyItemRemoved(NetUserId userId, string itemId)
+    {
+        if (_inventoryRemoveCallbacks.TryGetValue(userId, out var callback))
+            callback(itemId);
+    }
+
+    #endregion
+
+    public sealed record AntagRuleConfig(
+        string DisplayName,
+        bool ForAlive,
+        Action<ICommonSession>? ForAliveAction = null);
+
+    public sealed record TokenConditions(
+        CVarDef<int> MinAlive,
+        CVarDef<int> MaxAntags,
+        CVarDef<float> Chance,
+        CVarDef<int>? MinSec = null,
+        IReadOnlyList<string>? BlockingRules = null
+    );
+
     public record IntegrationDisabledError : ApiWrapper.ApiError;
+
     public record WrapperNotInitializedError : ApiWrapper.ApiError;
 }

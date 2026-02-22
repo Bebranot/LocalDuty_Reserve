@@ -15,9 +15,16 @@ public sealed partial class ApiWrapper
         return Send<InventoryRead>(() => _httpClient.GetAsync("v1/inventory/get/" + id));
     }
 
+    public Task<Result<InventoryModify>> PostInventoryModify(int userId, InventoryModify inventoryModify)
+    {
+        return Send<InventoryModify>(() =>
+            _httpClient.PostAsJsonAsync($"v1/inventory/take/{userId}", inventoryModify, _jsonSerializerOptions));
+    }
+
     public Task<Result<BalanceModify>> PostEditBalance(int id, BalanceModify balanceModify)
     {
-        return Send<BalanceModify>(() => _httpClient.PostAsJsonAsync($"v1/inventory/editBalance/{id}", balanceModify, _jsonSerializerOptions));
+        return Send<BalanceModify>(() =>
+            _httpClient.PostAsJsonAsync($"v1/inventory/editBalance/{id}", balanceModify, _jsonSerializerOptions));
     }
 
     public Task<Result<ItemRarityList>> GetInventoryRarities()
@@ -27,8 +34,16 @@ public sealed partial class ApiWrapper
 
     public record InventoryRead(
         int UserId,
-        List<ItemRead> Items,
+        List<InventoryEntry> Items,
         int TotalItems
+    );
+
+    public record InventoryEntry(
+        int Id,
+        int Amount,
+        string CreatedAt,
+        string UpdatedAt,
+        ItemRead Item
     );
 
     public record ItemRead(
@@ -48,6 +63,13 @@ public sealed partial class ApiWrapper
     {
         public int? ReserveCoins { get; init; }
         public int? DonateCoins { get; init; }
+        public string? Comment { get; init; }
+    }
+
+    public record InventoryModify
+    {
+        public int ItemId { get; init; }
+        public int Amount { get; init; }
         public string? Comment { get; init; }
     }
 

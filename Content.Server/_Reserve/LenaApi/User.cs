@@ -19,7 +19,7 @@ public sealed record User
 
     public User(ApiWrapper.UserRead userRead, ApiWrapper.InventoryRead inventory)
     {
-        UsableItems = inventory.Items.FindAll(item => item.CanBeUsedIngame);
+        UsableItems = inventory.Items.ConvertAll(e => e.Item).FindAll(item => item.CanBeUsedIngame);
 
         if (userRead.SubExpiresAt != null)
             SubExpiresAt = DateTime.Parse(userRead.SubExpiresAt);
