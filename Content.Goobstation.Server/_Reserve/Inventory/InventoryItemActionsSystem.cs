@@ -46,6 +46,9 @@ public sealed class InventoryItemActionsSystem : EntitySystem
             "/Textures/Effects/crayondecals.rsi/ghost.png");
         _lenaApi.RegisterAntagRule("ghost_tier_token", "ClosetSkeleton", "Скелет из шкафа", forAlive: false);
         _lenaApi.RegisterAntagRule("ghost_tier_token", "LoneAbductorSpawn", "Одинокий абдуктор", forAlive: false);
+        _lenaApi.RegisterAntagRule("ghost_tier_token", "GreyTideAntagMidround", "Грейтайд", forAlive: false);
+        _lenaApi.RegisterAntagRule("ghost_tier_token", "MimeAssassinMidround", "Мим-ассасин", forAlive: false);
+        _lenaApi.RegisterAntagRule("ghost_tier_token", "TunnelClownMidround", "Клоун-гоблин", forAlive: false);
 
 
         _lenaApi.RegisterItemAction("mid_tier_token", (session, item) => OpenAntagSelection(session, item.ItemId));
@@ -74,6 +77,10 @@ public sealed class InventoryItemActionsSystem : EntitySystem
             forAlive: true,
             forAliveAction: session => _antagSelection.ForceMakeAntag<DevilRuleComponent>(session, "Devil"));
         _lenaApi.RegisterAntagRule("mid_tier_token", "NinjaSpawn", "Ниндзя", forAlive: false);
+        _lenaApi.RegisterAntagRule("mid_tier_token", "GreyTideAntagMidround", "Грейтайд", forAlive: false);
+        _lenaApi.RegisterAntagRule("mid_tier_token", "MimeAssassinMidround", "Мим-ассасин", forAlive: false);
+        _lenaApi.RegisterAntagRule("mid_tier_token", "TunnelClownMidround", "Клоун-гоблин", forAlive: false);
+
 
 
         _lenaApi.RegisterItemAction("high_tier_token", (session, item) => OpenAntagSelection(session, item.ItemId));
@@ -83,6 +90,11 @@ public sealed class InventoryItemActionsSystem : EntitySystem
         _lenaApi.RegisterAntagRule("high_tier_token", "NinjaSpawn", "Ниндзя", forAlive: false);
         _lenaApi.RegisterAntagRule("high_tier_token", "LoneOpsSpawn", "Ядерный оперативник", forAlive: false);
         _lenaApi.RegisterAntagRule("high_tier_token", "Wizard", "Маг", forAlive: false);
+        _lenaApi.RegisterAntagRule("high_tier_token", "BlobRule", "Блоб", forAlive: false);
+        _lenaApi.RegisterAntagRule("high_tier_token", "GreyTideAntagMidround", "Грейтайд", forAlive: false);
+        _lenaApi.RegisterAntagRule("high_tier_token", "MimeAssassinMidround", "Мим-ассасин", forAlive: false);
+        _lenaApi.RegisterAntagRule("high_tier_token", "TunnelClownMidround", "Клоун-гоблин", forAlive: false);
+
         _lenaApi.RegisterAntagRule("high_tier_token",
             "Thief",
             "Вор",
@@ -134,7 +146,7 @@ public sealed class InventoryItemActionsSystem : EntitySystem
                 BlockingRules:
                 [
                     "Revolutionary", "Heretic", "CosmicCult", "Zombie", "LoneOpsSpawn", "NinjaSpawn", "Honkops",
-                    "NukeopsRule", "PiratesRule", "LoneAbductorSpawn", "DuoAbductorSpawn",
+                    "NukeopsRule", "PiratesRule", "LoneAbductorSpawn", "DuoAbductorSpawn", "BlobRule",
                 ]
             ));
 
@@ -147,7 +159,7 @@ public sealed class InventoryItemActionsSystem : EntitySystem
                 BlockingRules:
                 [
                     "Revolutionary", "Heretic", "CosmicCult", "Zombie", "LoneOpsSpawn", "NinjaSpawn", "Honkops",
-                    "NukeopsRule", "PiratesRule", "LoneAbductorSpawn", "DuoAbductorSpawn",
+                    "NukeopsRule", "PiratesRule", "LoneAbductorSpawn", "DuoAbductorSpawn", "BlobRule",
                 ]
             ));
 
@@ -160,7 +172,7 @@ public sealed class InventoryItemActionsSystem : EntitySystem
                 BlockingRules:
                 [
                     "Revolutionary", "Heretic", "CosmicCult", "Zombie", "LoneOpsSpawn", "NinjaSpawn", "Honkops",
-                    "NukeopsRule", "PiratesRule", "LoneAbductorSpawn", "DuoAbductorSpawn",
+                    "NukeopsRule", "PiratesRule", "LoneAbductorSpawn", "DuoAbductorSpawn", "BlobRule",
                 ]
             ));
 
@@ -173,7 +185,7 @@ public sealed class InventoryItemActionsSystem : EntitySystem
                 BlockingRules:
                 [
                     "Revolutionary", "Heretic", "CosmicCult", "Zombie", "LoneOpsSpawn", "NinjaSpawn", "Honkops",
-                    "NukeopsRule", "PiratesRule", "LoneAbductorSpawn", "DuoAbductorSpawn",
+                    "NukeopsRule", "PiratesRule", "LoneAbductorSpawn", "DuoAbductorSpawn", "BlobRule",
                 ]
             ));
     }
