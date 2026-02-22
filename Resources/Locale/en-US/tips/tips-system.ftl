@@ -3,4 +3,12 @@
 #
 # SPDX-License-Identifier: MIT
 
-tips-system-chat-message-wrap = Tip: {$tip}
+# Same variant count as ru-RU (0..17); default and a few variants for English
+tips-system-chat-message-wrap = { $variant ->
+   [0] Tip: { $tip }
+   [1] Read this: { $tip }
+   [2] Simon says: { $tip }
+   [11] Achtung! { $tip }
+   [12] Did you know... { $tip }
+  *[default] Tip: { $tip }
+}
