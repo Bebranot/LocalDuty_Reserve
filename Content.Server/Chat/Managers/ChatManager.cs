@@ -208,6 +208,7 @@ using Robust.Shared.Replays;
 using Robust.Shared.Utility;
 using Content.Server._RMC14.LinkAccount; // RMC - Patreon
 using Content.Server.Discord; //Reserve edit
+using Content.Shared._Reserve.LenaApi; // Reserve edit - naplak kutosa
 
 namespace Content.Server.Chat.Managers;
 
@@ -464,28 +465,23 @@ internal sealed partial class ChatManager : IChatManager
             user is { CurrentSubTier: > 0, UsernameColor: not null } &&
             user.HasActiveSub(out _))
         {
-            // var subName = _lenaApiManager.GetSubLevelName(user.CurrentSubTier);
-            // if (subName != null)
-            // {
-            //     wrappedMessage = Loc.GetString("reserve-chat-manager-send-ooc-with-sub",
-            //         ("subName", subName),
-            //         ("patronColor", user.UsernameColor.Value.ToHex()),
-            //         ("playerName", player.Name),
-            //         ("message", FormattedMessage.EscapeText(message)));
-            // }
-            // else
-            // {
-            //     wrappedMessage = Loc.GetString("reserve-chat-manager-send-ooc-with-sub-unknown",
-            //         ("patronColor", user.UsernameColor.Value.ToHex()),
-            //         ("playerName", player.Name),
-            //         ("message", FormattedMessage.EscapeText(message)));
-            // }
+            var subName = _lenaApiManager.GetSubLevelName(user.CurrentSubTier);
 
-            // да, это не ошибка, так и должно быть
-            wrappedMessage = Loc.GetString("reserve-chat-manager-send-ooc-with-sub-unknown",
-                ("patronColor", user.UsernameColor.Value.ToHex()),
-                ("playerName", player.Name),
-                ("message", FormattedMessage.EscapeText(message)));
+            if (_configurationManager.GetCVar(LenaApiCVars.IgnoreSubName) && !string.IsNullOrEmpty(subName))
+            {
+                wrappedMessage = Loc.GetString("reserve-chat-manager-send-ooc-with-sub-unknown",
+                    ("patronColor", user.UsernameColor.Value.ToHex()),
+                    ("playerName", player.Name),
+                    ("message", FormattedMessage.EscapeText(message)));
+            }
+            else
+            {
+                wrappedMessage = Loc.GetString("reserve-chat-manager-send-ooc-with-sub",
+                    ("subName", subName ?? string.Empty),
+                    ("patronColor", user.UsernameColor.Value.ToHex()),
+                    ("playerName", player.Name),
+                    ("message", FormattedMessage.EscapeText(message)));
+            }
         }
         // Reserve-LenaApi-End
 
