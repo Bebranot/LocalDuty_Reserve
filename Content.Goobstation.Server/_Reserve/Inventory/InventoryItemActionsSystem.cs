@@ -153,9 +153,9 @@ public sealed class InventoryItemActionsSystem : EntitySystem
 
         _lenaApi.RegisterTokenConditions("mid_tier_token",
             new LenaApiManager.TokenConditions(
-                TokenCvars.LowTierTokenMinAlive,
-                TokenCvars.LowTierTokenMaxAntagAlive,
-                TokenCvars.LowTierTokenChance,
+                TokenCvars.MidTierTokenMinAlive,
+                TokenCvars.MidTierTokenMaxAntagAlive,
+                TokenCvars.MidTierTokenChance,
                 TokenCvars.MidTierTokenMinSecAlive,
                 BlockingRules:
                 [
