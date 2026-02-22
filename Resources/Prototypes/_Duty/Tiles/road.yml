@@ -1,5 +1,5 @@
 - type: tile
-  id: StalkerFloorRoad
+  id: StalkerFloorRoadDuty
   name: Stalker road
   sprite: /Textures/_Stalker/Tiles/road_gray/gray.png
   variants: 4

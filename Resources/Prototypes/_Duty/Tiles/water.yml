@@ -1,5 +1,5 @@
 - type: entity
-  id: STFloorWaterEntity
+  id: STFloorWaterEntityDuty
   name: water
   abstract: true
   description: A real thirst quencher.
@@ -69,14 +69,12 @@
       tags:
         - Catwalk
   - type: TileEntityEffect
-    effects:
-    - !type:Extinguish
 
 - type: entity
-  parent: STFloorWaterEntity
+  parent: STFloorWaterEntityDuty
   name: вода
   description: Мутная вода Зоны.
-  id: FloorWaterEntityStalker1
+  id: FloorWaterEntityStalker1Duty
   suffix: Stalker
   placement:
     mode: SnapgridCenter
@@ -96,8 +94,8 @@
     fishTimerVariety: 15.0
   # Goobstation - fishing
 - type: entity
-  parent: FloorWaterEntityStalker1
-  id: FloorWaterEntityStalker2
+  parent: FloorWaterEntityStalker1Duty
+  id: FloorWaterEntityStalker2Duty
   placement:
     mode: SnapgridCenter
     snap:
@@ -116,8 +114,8 @@
     fishTimerVariety: 15.0
   # Goobstation - fishing
 - type: entity
-  parent: FloorWaterEntityStalker1
-  id: FloorWaterEntityStalker3
+  parent: FloorWaterEntityStalker1Duty
+  id: FloorWaterEntityStalker3Duty
   placement:
     mode: SnapgridCenter
     snap:
@@ -136,8 +134,8 @@
     fishTimerVariety: 15.0
   # Goobstation - fishing
 - type: entity
-  parent: FloorWaterEntityStalker1
-  id: FloorWaterEntityStalker4
+  parent: FloorWaterEntityStalker1Duty
+  id: FloorWaterEntityStalker4Duty
   placement:
     mode: SnapgridCenter
     snap:
@@ -164,10 +162,10 @@
     fishTimerVariety: 15.0
   # Goobstation - fishing
 - type: entity
-  parent: FloorWaterEntityStalker1
+  parent: FloorWaterEntityStalker1Duty
   name: химические отходы
   description: Яркие химические отходы Зоны.
-  id: FloorWaterEntityStalker5
+  id: FloorWaterEntityStalker5Duty
   placement:
     mode: SnapgridCenter
     snap:
