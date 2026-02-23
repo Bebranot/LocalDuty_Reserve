@@ -3,7 +3,7 @@
     xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     Title="{Loc reserve-inventory-title}"
-    SetSize="700 700"
+    SetSize="700 350"
     Resizable="False">
     <BoxContainer Orientation="Vertical" VerticalExpand="True" HorizontalExpand="True">
 

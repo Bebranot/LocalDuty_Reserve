@@ -11,3 +11,7 @@ reserve-inventory-use-button = Использовать
 reserve-antag-selection-title = Выбор антагониста
 reserve-antag-selection-desc = Выберите роль антагониста:
 reserve-antag-selection-empty = Нет доступных ролей антагониста.
+
+reserve-cosmetic-selection-title = Выбор предмета
+reserve-cosmetic-selection-search = Поиск...
+reserve-cosmetic-token-used = Игрок { $playerName } использовал токен { $tokenType }, получив предмет { $chosenItem }

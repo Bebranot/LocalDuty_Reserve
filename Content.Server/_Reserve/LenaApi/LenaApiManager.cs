@@ -27,7 +27,9 @@ public sealed class LenaApiManager
     private readonly Dictionary<string, Dictionary<string, AntagRuleConfig>> _antagRules = new();
     private readonly Dictionary<string, TokenConditions> _tokenConditions = new();
     private readonly Dictionary<NetUserId, HashSet<string>> _lockedOutTokens = new();
+    private readonly Dictionary<NetUserId, HashSet<string>> _processingTokens = new();
     private readonly Dictionary<NetUserId, Action<string>> _inventoryRemoveCallbacks = new();
+    private readonly Dictionary<string, List<string>> _cosmeticItems = new();
 
     private string ApiToken => _configurationManager.GetCVar(LenaApiCVars.ApiKey);
     public bool IsIntegrationEnabled => _configurationManager.GetCVar(LenaApiCVars.ApiIntegration);
@@ -240,6 +242,37 @@ public sealed class LenaApiManager
     }
 
     public void ClearAllLockouts() => _lockedOutTokens.Clear();
+
+    public bool TryBeginTokenUse(NetUserId userId, string itemId)
+    {
+        if (!_processingTokens.TryGetValue(userId, out var set))
+            _processingTokens[userId] = set = new HashSet<string>();
+        return set.Add(itemId);
+    }
+
+    public void EndTokenUse(NetUserId userId, string itemId)
+    {
+        if (_processingTokens.TryGetValue(userId, out var set))
+            set.Remove(itemId);
+    }
+
+    #endregion
+
+    #region cosmetic items
+
+    public void RegisterCosmeticItem(string tokenId, string protoId)
+    {
+        if (!_cosmeticItems.TryGetValue(tokenId, out var list))
+            _cosmeticItems[tokenId] = list = new List<string>();
+        list.Add(protoId);
+    }
+
+    public IReadOnlyList<string> GetCosmeticItems(string tokenId)
+    {
+        if (_cosmeticItems.TryGetValue(tokenId, out var list))
+            return list;
+        return Array.Empty<string>();
+    }
 
     #endregion
 

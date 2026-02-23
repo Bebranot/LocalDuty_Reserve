@@ -3,6 +3,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
+using System.Threading.Tasks;
 using Content.Server.Antag;
 using Content.Server.Antag.Components;
 using Content.Server.Chat.Managers;
@@ -105,6 +106,21 @@ public sealed class AntagSelectionEui : BaseEui
     }
 
     private async void TrySelectRule(string ruleId)
+    {
+        if (!_lenaApi.TryBeginTokenUse(Player.UserId, _itemId))
+            return;
+
+        try
+        {
+            await TrySelectRuleInternal(ruleId);
+        }
+        finally
+        {
+            _lenaApi.EndTokenUse(Player.UserId, _itemId);
+        }
+    }
+
+    private async Task TrySelectRuleInternal(string ruleId)
     {
         if (_lenaApi.IsTokenLockedOut(Player.UserId, _itemId))
         {

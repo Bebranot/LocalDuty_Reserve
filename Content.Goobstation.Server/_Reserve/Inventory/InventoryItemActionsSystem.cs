@@ -13,6 +13,8 @@ using Content.Server.GameTicking.Rules.Components;
 using Content.Server.Popups;
 using Content.Shared._Reserve.TokenCvars;
 using Content.Shared.GameTicking;
+using Content.Shared.Ghost;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Robust.Shared.Player;
 
@@ -24,6 +26,8 @@ public sealed class InventoryItemActionsSystem : EntitySystem
     [Dependency] private readonly EuiManager _euiManager = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly AntagSelectionSystem _antagSelection = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly IEntityManager _entMan = default!;
 
     public override void Initialize()
     {
@@ -82,7 +86,6 @@ public sealed class InventoryItemActionsSystem : EntitySystem
         _lenaApi.RegisterAntagRule("mid_tier_token", "TunnelClownMidround", "Клоун-гоблин", forAlive: false);
 
 
-
         _lenaApi.RegisterItemAction("high_tier_token", (session, item) => OpenAntagSelection(session, item.ItemId));
         _lenaApi.RegisterItemIcon("high_tier_token", "/Textures/Clothing/Mask/gassyndicate.rsi/icon.png");
         _lenaApi.RegisterAntagRule("high_tier_token", "ClosetSkeleton", "Скелет из шкафа", forAlive: false);
@@ -136,6 +139,20 @@ public sealed class InventoryItemActionsSystem : EntitySystem
             forAlive: true,
             forAliveAction: session =>
                 _antagSelection.ForceMakeAntag<RevolutionaryRuleComponent>(session, "Revolutionary"));
+
+        _lenaApi.RegisterItemAction("admin_abuse_tier_token",
+            (session, item) => OpenCosmeticSelection(session, item.ItemId));
+        _lenaApi.RegisterItemIcon("admin_abuse_tier_token",
+            "/Textures/Clothing/OuterClothing/Coats/syndicate/coatsyndiecap.rsi/icon.png");
+
+        List<string> adminAbuseItems =
+        [
+            "ClothingNeckCloakGay",
+        ];
+        foreach (var protoId in adminAbuseItems)
+        {
+            _lenaApi.RegisterCosmeticItem("admin_abuse_tier_token", protoId);
+        }
 
         _lenaApi.RegisterTokenConditions("ghost_tier_token",
             new LenaApiManager.TokenConditions(
@@ -201,5 +218,23 @@ public sealed class InventoryItemActionsSystem : EntitySystem
         }
 
         _euiManager.OpenEui(new AntagSelectionEui(itemId), session);
+    }
+
+    private void OpenCosmeticSelection(ICommonSession session, string itemId)
+    {
+        if (_lenaApi.IsTokenLockedOut(session.UserId, itemId))
+        {
+            _popup.PopupCursor(Loc.GetString("reserve-token-use-failed"), session, PopupType.Medium);
+            return;
+        }
+
+        var ent = session.AttachedEntity;
+        if (ent == null || _entMan.HasComponent<GhostComponent>(ent.Value) || !_mobState.IsAlive(ent.Value))
+        {
+            _popup.PopupCursor(Loc.GetString("reserve-token-alive-only"), session, PopupType.Medium);
+            return;
+        }
+
+        _euiManager.OpenEui(new CosmeticSelectionEui(itemId), session);
     }
 }
