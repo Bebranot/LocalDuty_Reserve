@@ -93,6 +93,7 @@ public sealed class AntagSelectionEui : BaseEui
             if (config.ForAlive == isAlive)
                 entries.Add(new AntagRuleEntry(ruleId, config.DisplayName, config.ForAlive));
         }
+
         return new AntagSelectionEuiState { Rules = entries };
     }
 
@@ -107,7 +108,6 @@ public sealed class AntagSelectionEui : BaseEui
             case AntagSelectionEuiMsg.SelectRule selectRule:
                 TrySelectRule(selectRule.RuleId);
                 break;
-
         }
     }
 
@@ -238,7 +238,8 @@ public sealed class AntagSelectionEui : BaseEui
         }
 
         var displayName = rules.TryGetValue(ruleId, out var selectedRule) ? selectedRule.DisplayName : ruleId;
-        _sawmill.Info($"[Token] {Player.Name} ({Player.UserId}) использовал токен '{_itemId}', выбрав правило '{ruleId}'.");
+        _sawmill.Info(
+            $"[Token] {Player.Name} ({Player.UserId}) использовал токен '{_itemId}', выбрав правило '{ruleId}'.");
         _chat.SendAdminAnnouncement(Loc.GetString("reserve-token-used",
             ("playerName", Player.Name),
             ("tokenType", _itemId),
@@ -262,8 +263,33 @@ public sealed class AntagSelectionEui : BaseEui
         {
             antagComp.AssignmentComplete = true;
             _gameTicker.StartGameRule(ruleEnt);
+
             if (antagComp.Definitions.Count > 0)
-                _antagSelection.MakeAntag((ruleEnt, antagComp), Player, antagComp.Definitions[0]);
+            {
+                var def = antagComp.Definitions[0];
+                if (def.PickPlayer)
+                {
+                    _antagSelection.MakeAntag((ruleEnt, antagComp), Player, def);
+                }
+                else
+                {
+                    var existingRoles = new HashSet<EntityUid>();
+                    foreach (var r in _ghostRoles.GhostRoles)
+                    {
+                        existingRoles.Add(r.Owner);
+                    }
+
+                    _antagSelection.MakeAntag((ruleEnt, antagComp), null, def);
+
+                    foreach (var role in _ghostRoles.GhostRoles)
+                    {
+                        if (existingRoles.Contains(role.Owner))
+                            continue;
+                        _ghostRoles.Takeover(Player, role.Comp.Identifier);
+                        return;
+                    }
+                }
+            }
         }
         else if (_entMan.TryGetComponent<RandomEntityStorageSpawnRuleComponent>(ruleEnt, out var spawnComp))
         {

@@ -4,6 +4,7 @@
 
 using Content.Goobstation.Server.Changeling.GameTicking.Rules;
 using Content.Goobstation.Server.Devil.GameTicking.Rules;
+using Content.Goobstation.Server.Shadowling.Rules;
 using Content.Server._DV.CosmicCult.Components;
 using Content.Server._Reserve.Inventory.UI;
 using Content.Server._Reserve.LenaApi;
@@ -63,7 +64,7 @@ public sealed class InventoryItemActionsSystem : EntitySystem
             "Вор",
             forAlive: true,
             forAliveAction: session => _antagSelection.ForceMakeAntag<ThiefRuleComponent>(session, "Thief"));
-        _lenaApi.RegisterAntagRule("mid_tier_token", "ClosetSkeleton", "Скелет из шкафа", forAlive: false);
+        _lenaApi.RegisterAntagRule("mid_tier_token", "SkeletonMidround", "Скелет из шкафа", forAlive: false);
         _lenaApi.RegisterAntagRule("mid_tier_token", "LoneAbductorSpawn", "Одинокий абдуктор", forAlive: false);
         _lenaApi.RegisterAntagRule("mid_tier_token",
             "Traitor",
@@ -123,22 +124,29 @@ public sealed class InventoryItemActionsSystem : EntitySystem
             "Нулевой зараженный",
             forAlive: true,
             forAliveAction: session => _antagSelection.ForceMakeAntag<ZombieRuleComponent>(session, "Zombie"));
-        _lenaApi.RegisterAntagRule("high_tier_token",
-            "CosmicCult",
-            "Космический культист",
-            forAlive: true,
-            forAliveAction: session => _antagSelection.ForceMakeAntag<CosmicCultRuleComponent>(session, "CosmicCult"));
+        // наверное перенесу позже в новый токен
+        // _lenaApi.RegisterAntagRule("high_tier_token",
+        //     "CosmicCult",
+        //     "Космический культист",
+        //     forAlive: true,
+        //     forAliveAction: session => _antagSelection.ForceMakeAntag<CosmicCultRuleComponent>(session, "CosmicCult"));
         _lenaApi.RegisterAntagRule("high_tier_token",
             "Heretic",
             "Еретик",
             forAlive: true,
             forAliveAction: session => _antagSelection.ForceMakeAntag<HereticRuleComponent>(session, "Heretic"));
         _lenaApi.RegisterAntagRule("high_tier_token",
-            "Heretic",
+            "Revolutionary",
             "Глава революции",
             forAlive: true,
             forAliveAction: session =>
                 _antagSelection.ForceMakeAntag<RevolutionaryRuleComponent>(session, "Revolutionary"));
+        _lenaApi.RegisterAntagRule("high_tier_token",
+            "Shadowling",
+            "Тенеморф",
+            forAlive: true,
+            forAliveAction: session =>
+                _antagSelection.ForceMakeAntag<ShadowlingRuleComponent>(session, "Shadowling"));
 
         _lenaApi.RegisterItemAction("admin_abuse_tier_token",
             (session, item) => OpenCosmeticSelection(session, item.ItemId));
