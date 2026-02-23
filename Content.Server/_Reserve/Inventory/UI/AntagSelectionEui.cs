@@ -3,18 +3,23 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
+using System.Threading.Tasks;
 using Content.Server.Antag;
 using Content.Server.Antag.Components;
 using Content.Server.Chat.Managers;
 using Content.Server.EUI;
 using Content.Server.GameTicking;
+using Content.Server.Ghost.Roles;
 using Content.Server._Reserve.LenaApi;
 using Content.Server.GameTicking.Rules.Components;
+using Content.Server.Ghost.Roles.Components;
 using Content.Server.Popups;
+using Content.Server.StationEvents.Components;
 using Content.Shared._Reserve.Inventory.UI;
 using Content.Shared.Eui;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Ghost;
+using Content.Shared.Ghost.Roles.Components;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mindshield.Components;
 using Content.Shared.Mobs.Components;
@@ -32,6 +37,7 @@ public sealed class AntagSelectionEui : BaseEui
     private readonly LenaApiManager _lenaApi;
     private readonly AntagSelectionSystem _antagSelection;
     private readonly GameTicker _gameTicker;
+    private readonly GhostRoleSystem _ghostRoles;
     private readonly IEntityManager _entMan;
     private readonly MobStateSystem _mobState;
     private readonly SharedRoleSystem _roles;
@@ -56,6 +62,7 @@ public sealed class AntagSelectionEui : BaseEui
         _mobState = sysMan.GetEntitySystem<MobStateSystem>();
         _roles = sysMan.GetEntitySystem<SharedRoleSystem>();
         _popup = sysMan.GetEntitySystem<PopupSystem>();
+        _ghostRoles = sysMan.GetEntitySystem<GhostRoleSystem>();
         _sawmill = Logger.GetSawmill("lena-api");
     }
 
@@ -86,6 +93,7 @@ public sealed class AntagSelectionEui : BaseEui
             if (config.ForAlive == isAlive)
                 entries.Add(new AntagRuleEntry(ruleId, config.DisplayName, config.ForAlive));
         }
+
         return new AntagSelectionEuiState { Rules = entries };
     }
 
@@ -100,11 +108,25 @@ public sealed class AntagSelectionEui : BaseEui
             case AntagSelectionEuiMsg.SelectRule selectRule:
                 TrySelectRule(selectRule.RuleId);
                 break;
-
         }
     }
 
     private async void TrySelectRule(string ruleId)
+    {
+        if (!_lenaApi.TryBeginTokenUse(Player.UserId, _itemId))
+            return;
+
+        try
+        {
+            await TrySelectRuleInternal(ruleId);
+        }
+        finally
+        {
+            _lenaApi.EndTokenUse(Player.UserId, _itemId);
+        }
+    }
+
+    private async Task TrySelectRuleInternal(string ruleId)
     {
         if (_lenaApi.IsTokenLockedOut(Player.UserId, _itemId))
         {
@@ -216,7 +238,8 @@ public sealed class AntagSelectionEui : BaseEui
         }
 
         var displayName = rules.TryGetValue(ruleId, out var selectedRule) ? selectedRule.DisplayName : ruleId;
-        _sawmill.Info($"[Token] {Player.Name} ({Player.UserId}) использовал токен '{_itemId}', выбрав правило '{ruleId}'.");
+        _sawmill.Info(
+            $"[Token] {Player.Name} ({Player.UserId}) использовал токен '{_itemId}', выбрав правило '{ruleId}'.");
         _chat.SendAdminAnnouncement(Loc.GetString("reserve-token-used",
             ("playerName", Player.Name),
             ("tokenType", _itemId),
@@ -224,6 +247,7 @@ public sealed class AntagSelectionEui : BaseEui
 
         await _lenaApi.TakeItemFromApi(user.Id, usedItem.Id);
         user.UsableItems.RemoveAll(i => i.ItemId == _itemId);
+        _lenaApi.LockOutPlayerGlobally(Player.UserId);
         _lenaApi.NotifyItemRemoved(Player.UserId, _itemId);
 
         Close();
@@ -234,10 +258,58 @@ public sealed class AntagSelectionEui : BaseEui
         var ruleEnt = _gameTicker.AddGameRule(ruleId);
         if (_entMan.HasComponent<LoadMapRuleComponent>(ruleEnt))
             _entMan.RemoveComponent<LoadMapRuleComponent>(ruleEnt);
-        var antagComp = _entMan.GetComponent<AntagSelectionComponent>(ruleEnt);
-        antagComp.AssignmentComplete = true;
-        _gameTicker.StartGameRule(ruleEnt);
-        if (antagComp.Definitions.Count > 0)
-            _antagSelection.MakeAntag((ruleEnt, antagComp), Player, antagComp.Definitions[0]);
+
+        if (_entMan.TryGetComponent<AntagSelectionComponent>(ruleEnt, out var antagComp))
+        {
+            antagComp.AssignmentComplete = true;
+            _gameTicker.StartGameRule(ruleEnt);
+
+            if (antagComp.Definitions.Count > 0)
+            {
+                var def = antagComp.Definitions[0];
+                if (def.PickPlayer)
+                {
+                    _antagSelection.MakeAntag((ruleEnt, antagComp), Player, def);
+                }
+                else
+                {
+                    var existingRoles = new HashSet<EntityUid>();
+                    foreach (var r in _ghostRoles.GhostRoles)
+                    {
+                        existingRoles.Add(r.Owner);
+                    }
+
+                    _antagSelection.MakeAntag((ruleEnt, antagComp), null, def);
+
+                    foreach (var role in _ghostRoles.GhostRoles)
+                    {
+                        if (existingRoles.Contains(role.Owner))
+                            continue;
+                        _ghostRoles.Takeover(Player, role.Comp.Identifier);
+                        return;
+                    }
+                }
+            }
+        }
+        else if (_entMan.TryGetComponent<RandomEntityStorageSpawnRuleComponent>(ruleEnt, out var spawnComp))
+        {
+            _gameTicker.StartGameRule(ruleEnt);
+
+            var query = _entMan.EntityQueryEnumerator<GhostRoleComponent, MetaDataComponent>();
+            while (query.MoveNext(out var uid, out var ghostRole, out var meta))
+            {
+                if (meta.EntityPrototype?.ID != spawnComp.Prototype.Id)
+                    continue;
+                if (_entMan.TryGetComponent<MindContainerComponent>(uid, out var mindCont) && mindCont.HasMind)
+                    continue;
+
+                _ghostRoles.GhostRoleInternalCreateMindAndTransfer(Player, uid, uid, ghostRole);
+                break;
+            }
+        }
+        else
+        {
+            _gameTicker.StartGameRule(ruleEnt);
+        }
     }
 }

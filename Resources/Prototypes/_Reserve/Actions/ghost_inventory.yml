@@ -5,8 +5,8 @@
 - type: entity
   parent: BaseMentalAction
   id: ActionGhostInventory
-  name: action-ghost-inventory
-  description: action-ghost-inventory-desc
+  name: Инвентарь
+  description: Открыть меню инвентаря.
   components:
   - type: Action
     icon: Interface/Actions/shop.png

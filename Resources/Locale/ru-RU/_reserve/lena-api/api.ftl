@@ -10,3 +10,4 @@ reserve-command-requires-integration-enabled = Эта команда досту�
 
 reserve-token-use-failed = Использовать токен не удалось.
 reserve-token-used = Игрок { $playerName } активировал токен { $tokenType } выбрав антагониста { $chosenAntag }
+reserve-token-alive-only = Этот токен можно использовать только будучи живым.
