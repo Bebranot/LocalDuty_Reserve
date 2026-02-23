@@ -9,13 +9,17 @@ using Content.Server.Antag.Components;
 using Content.Server.Chat.Managers;
 using Content.Server.EUI;
 using Content.Server.GameTicking;
+using Content.Server.Ghost.Roles;
 using Content.Server._Reserve.LenaApi;
 using Content.Server.GameTicking.Rules.Components;
+using Content.Server.Ghost.Roles.Components;
 using Content.Server.Popups;
+using Content.Server.StationEvents.Components;
 using Content.Shared._Reserve.Inventory.UI;
 using Content.Shared.Eui;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Ghost;
+using Content.Shared.Ghost.Roles.Components;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mindshield.Components;
 using Content.Shared.Mobs.Components;
@@ -33,6 +37,7 @@ public sealed class AntagSelectionEui : BaseEui
     private readonly LenaApiManager _lenaApi;
     private readonly AntagSelectionSystem _antagSelection;
     private readonly GameTicker _gameTicker;
+    private readonly GhostRoleSystem _ghostRoles;
     private readonly IEntityManager _entMan;
     private readonly MobStateSystem _mobState;
     private readonly SharedRoleSystem _roles;
@@ -57,6 +62,7 @@ public sealed class AntagSelectionEui : BaseEui
         _mobState = sysMan.GetEntitySystem<MobStateSystem>();
         _roles = sysMan.GetEntitySystem<SharedRoleSystem>();
         _popup = sysMan.GetEntitySystem<PopupSystem>();
+        _ghostRoles = sysMan.GetEntitySystem<GhostRoleSystem>();
         _sawmill = Logger.GetSawmill("lena-api");
     }
 
@@ -240,6 +246,7 @@ public sealed class AntagSelectionEui : BaseEui
 
         await _lenaApi.TakeItemFromApi(user.Id, usedItem.Id);
         user.UsableItems.RemoveAll(i => i.ItemId == _itemId);
+        _lenaApi.LockOutPlayerGlobally(Player.UserId);
         _lenaApi.NotifyItemRemoved(Player.UserId, _itemId);
 
         Close();
@@ -250,10 +257,33 @@ public sealed class AntagSelectionEui : BaseEui
         var ruleEnt = _gameTicker.AddGameRule(ruleId);
         if (_entMan.HasComponent<LoadMapRuleComponent>(ruleEnt))
             _entMan.RemoveComponent<LoadMapRuleComponent>(ruleEnt);
-        var antagComp = _entMan.GetComponent<AntagSelectionComponent>(ruleEnt);
-        antagComp.AssignmentComplete = true;
-        _gameTicker.StartGameRule(ruleEnt);
-        if (antagComp.Definitions.Count > 0)
-            _antagSelection.MakeAntag((ruleEnt, antagComp), Player, antagComp.Definitions[0]);
+
+        if (_entMan.TryGetComponent<AntagSelectionComponent>(ruleEnt, out var antagComp))
+        {
+            antagComp.AssignmentComplete = true;
+            _gameTicker.StartGameRule(ruleEnt);
+            if (antagComp.Definitions.Count > 0)
+                _antagSelection.MakeAntag((ruleEnt, antagComp), Player, antagComp.Definitions[0]);
+        }
+        else if (_entMan.TryGetComponent<RandomEntityStorageSpawnRuleComponent>(ruleEnt, out var spawnComp))
+        {
+            _gameTicker.StartGameRule(ruleEnt);
+
+            var query = _entMan.EntityQueryEnumerator<GhostRoleComponent, MetaDataComponent>();
+            while (query.MoveNext(out var uid, out var ghostRole, out var meta))
+            {
+                if (meta.EntityPrototype?.ID != spawnComp.Prototype.Id)
+                    continue;
+                if (_entMan.TryGetComponent<MindContainerComponent>(uid, out var mindCont) && mindCont.HasMind)
+                    continue;
+
+                _ghostRoles.GhostRoleInternalCreateMindAndTransfer(Player, uid, uid, ghostRole);
+                break;
+            }
+        }
+        else
+        {
+            _gameTicker.StartGameRule(ruleEnt);
+        }
     }
 }

@@ -28,6 +28,7 @@ public sealed class LenaApiManager
     private readonly Dictionary<string, TokenConditions> _tokenConditions = new();
     private readonly Dictionary<NetUserId, HashSet<string>> _lockedOutTokens = new();
     private readonly Dictionary<NetUserId, HashSet<string>> _processingTokens = new();
+    private readonly HashSet<NetUserId> _globallyLockedPlayers = new();
     private readonly Dictionary<NetUserId, Action<string>> _inventoryRemoveCallbacks = new();
     private readonly Dictionary<string, List<string>> _cosmeticItems = new();
 
@@ -232,7 +233,8 @@ public sealed class LenaApiManager
     #region lockout
 
     public bool IsTokenLockedOut(NetUserId userId, string itemId)
-        => _lockedOutTokens.TryGetValue(userId, out var tokens) && tokens.Contains(itemId);
+        => _globallyLockedPlayers.Contains(userId)
+           || (_lockedOutTokens.TryGetValue(userId, out var tokens) && tokens.Contains(itemId));
 
     public void LockOutToken(NetUserId userId, string itemId)
     {
@@ -241,7 +243,14 @@ public sealed class LenaApiManager
         tokens.Add(itemId);
     }
 
-    public void ClearAllLockouts() => _lockedOutTokens.Clear();
+    public void LockOutPlayerGlobally(NetUserId userId)
+        => _globallyLockedPlayers.Add(userId);
+
+    public void ClearAllLockouts()
+    {
+        _lockedOutTokens.Clear();
+        _globallyLockedPlayers.Clear();
+    }
 
     public bool TryBeginTokenUse(NetUserId userId, string itemId)
     {

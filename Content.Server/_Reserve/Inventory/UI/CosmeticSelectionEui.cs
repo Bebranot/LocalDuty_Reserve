@@ -148,6 +148,7 @@ public sealed class CosmeticSelectionEui : BaseEui
         _hands.TryPickupAnyHand(playerEnt.Value, spawnedEnt);
 
         user.UsableItems.RemoveAll(i => i.ItemId == _itemId);
+        _lenaApi.LockOutPlayerGlobally(Player.UserId);
         _lenaApi.NotifyItemRemoved(Player.UserId, _itemId);
 
         Close();

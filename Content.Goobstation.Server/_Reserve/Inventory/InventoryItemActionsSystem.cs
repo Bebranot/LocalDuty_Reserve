@@ -48,7 +48,7 @@ public sealed class InventoryItemActionsSystem : EntitySystem
         _lenaApi.RegisterItemAction("ghost_tier_token", (session, item) => OpenAntagSelection(session, item.ItemId));
         _lenaApi.RegisterItemIcon("ghost_tier_token",
             "/Textures/Effects/crayondecals.rsi/ghost.png");
-        _lenaApi.RegisterAntagRule("ghost_tier_token", "ClosetSkeleton", "Скелет из шкафа", forAlive: false);
+        _lenaApi.RegisterAntagRule("ghost_tier_token", "SkeletonMidround", "Скелет из шкафа", forAlive: false);
         _lenaApi.RegisterAntagRule("ghost_tier_token", "LoneAbductorSpawn", "Одинокий абдуктор", forAlive: false);
         _lenaApi.RegisterAntagRule("ghost_tier_token", "GreyTideAntagMidround", "Грейтайд", forAlive: false);
         _lenaApi.RegisterAntagRule("ghost_tier_token", "MimeAssassinMidround", "Мим-ассасин", forAlive: false);
@@ -88,12 +88,12 @@ public sealed class InventoryItemActionsSystem : EntitySystem
 
         _lenaApi.RegisterItemAction("high_tier_token", (session, item) => OpenAntagSelection(session, item.ItemId));
         _lenaApi.RegisterItemIcon("high_tier_token", "/Textures/Clothing/Mask/gassyndicate.rsi/icon.png");
-        _lenaApi.RegisterAntagRule("high_tier_token", "ClosetSkeleton", "Скелет из шкафа", forAlive: false);
+        _lenaApi.RegisterAntagRule("high_tier_token", "SkeletonMidround", "Скелет из шкафа", forAlive: false);
         _lenaApi.RegisterAntagRule("high_tier_token", "LoneAbductorSpawn", "Одинокий абдуктор", forAlive: false);
         _lenaApi.RegisterAntagRule("high_tier_token", "NinjaSpawn", "Ниндзя", forAlive: false);
         _lenaApi.RegisterAntagRule("high_tier_token", "LoneOpsSpawn", "Ядерный оперативник", forAlive: false);
         _lenaApi.RegisterAntagRule("high_tier_token", "Wizard", "Маг", forAlive: false);
-        _lenaApi.RegisterAntagRule("high_tier_token", "BlobRule", "Блоб", forAlive: false);
+        _lenaApi.RegisterAntagRule("high_tier_token", "BlobMidround", "Блоб", forAlive: false);
         _lenaApi.RegisterAntagRule("high_tier_token", "GreyTideAntagMidround", "Грейтайд", forAlive: false);
         _lenaApi.RegisterAntagRule("high_tier_token", "MimeAssassinMidround", "Мим-ассасин", forAlive: false);
         _lenaApi.RegisterAntagRule("high_tier_token", "TunnelClownMidround", "Клоун-гоблин", forAlive: false);
