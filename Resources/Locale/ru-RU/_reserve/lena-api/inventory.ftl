@@ -1,5 +1,5 @@
-action-ghost-inventory = Инвентарь
-action-ghost-inventory-desc = Открыть меню инвентаря.
+ent-ActionGhostInventory = Инвентарь
+ent-ActionGhostInventory.desc = Открыть меню инвентаря.
 
 reserve-inventory-title = Инвентарь
 reserve-inventory-loading = Загрузка...
