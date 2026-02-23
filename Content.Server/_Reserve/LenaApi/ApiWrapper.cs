@@ -13,11 +13,13 @@ namespace Content.Server._Reserve.LenaApi;
 
 public sealed partial class ApiWrapper
 {
-    private readonly HttpClient _httpClient;
+    private HttpClient _httpClient;
+    private readonly Func<string> _apiKeyProvider;
     private readonly JsonSerializerOptions _jsonSerializerOptions;
 
     public ApiWrapper(string baseUri, Func<string> apiKeyProvider)
     {
+        _apiKeyProvider = apiKeyProvider;
         _httpClient = new HttpClient(new ApiKeyHandler(apiKeyProvider));
         _httpClient.BaseAddress = new Uri(baseUri);
 
@@ -28,12 +30,14 @@ public sealed partial class ApiWrapper
         };
         _jsonSerializerOptions.Converters.Add(new OptionalJsonConverter<string>());
         _jsonSerializerOptions.Converters.Add(new OptionalJsonConverter<int?>());
-
     }
 
     public void SetBaseUri(string baseUri)
     {
+        var old = _httpClient;
+        _httpClient = new HttpClient(new ApiKeyHandler(_apiKeyProvider));
         _httpClient.BaseAddress = new Uri(baseUri);
+        old.Dispose();
     }
 
     private async Task<Result<T>> Send<T>(

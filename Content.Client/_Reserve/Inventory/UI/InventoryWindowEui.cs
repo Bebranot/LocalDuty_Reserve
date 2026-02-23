@@ -16,7 +16,11 @@ public sealed class InventoryEui : BaseEui
     {
         _window = new InventoryWindow();
         _window.OnClose += () => SendMessage(new InventoryEuiMsg.Close());
-        _window.OnUseItem += itemId => SendMessage(new InventoryEuiMsg.UseItem { ItemId = itemId });
+        _window.OnUseItem += itemId =>
+        {
+            SendMessage(new InventoryEuiMsg.UseItem { ItemId = itemId });
+            _window.Close();
+        };
     }
 
     public override void Opened()
