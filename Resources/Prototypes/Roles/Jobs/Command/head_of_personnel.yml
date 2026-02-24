@@ -217,7 +217,7 @@
     ears: ClothingHeadsetAltCommand
     eyes: ClothingEyesGlassesCommand # Reserve-CommandHUD
     belt: BoxFolderClipboard
-    eyes: ClothingEyesHudCommand
+    # eyes: ClothingEyesHudCommand  # Reserve-CommandHUD
   storage:
     back:
     - Flash
