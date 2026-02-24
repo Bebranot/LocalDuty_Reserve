@@ -35,7 +35,7 @@ public sealed partial class Electrocute : EntityEffect
     {
         if (args is EntityEffectReagentArgs reagentArgs)
         {
-            reagentArgs.EntityManager.System<ElectrocutionSystem>().TryDoElectrocution(reagentArgs.TargetEntity, null,
+            reagentArgs.EntityManager.System<SharedElectrocutionSystem>().TryDoElectrocution(reagentArgs.TargetEntity, null,
                 Math.Max((reagentArgs.Quantity * ElectrocuteDamageScale).Int(), 1), TimeSpan.FromSeconds(ElectrocuteTime), Refresh, electrocutionChance: ElectrocutionChance, ignoreInsulation: true); //Reserve edit - electrocutionChance
 
             if (reagentArgs.Reagent != null)
