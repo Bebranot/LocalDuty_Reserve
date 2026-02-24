@@ -34,7 +34,6 @@ using Content.Shared.Chat;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.EntityEffects.EffectConditions;
 using Content.Shared.EntityEffects.Effects.PlantMetabolism;
-using Content.Server.EntityEffects.Effects.PlantMetabolism;
 using Content.Shared.EntityEffects.Effects;
 using Content.Shared.EntityEffects;
 using Content.Shared.Flash;

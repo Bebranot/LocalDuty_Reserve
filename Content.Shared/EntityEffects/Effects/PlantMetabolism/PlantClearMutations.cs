@@ -4,14 +4,9 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Linq;
-using Content.Server.Botany.Components;
 using Content.Shared.EntityEffects.Effects.PlantMetabolism;
-using Content.Shared.EntityEffects;
-using Robust.Shared.Random;
-using System.Collections.Generic;
 
-namespace Content.Server.EntityEffects.Effects.PlantMetabolism;
+namespace Content.Shared.EntityEffects.Effects.PlantMetabolism;
 
 public sealed partial class PlantClearMutations : PlantAdjustAttribute<PlantClearMutations>
 {
