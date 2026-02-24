@@ -150,6 +150,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Players;
 using Content.Shared.Players.RateLimiting;
 using Content.Shared.Radio;
+using Content.Shared.Station.Components;
 using Content.Shared.Whitelist;
 using Content.Goobstation.Common.Chat;
 using Content.Goobstation.Common.Traits;
@@ -838,7 +839,7 @@ public sealed partial class ChatSystem : SharedChatSystem
 
         // get the entity's name by visual identity (if no override provided).
         string nameIdentity = FormattedMessage.EscapeText(nameOverride ?? Identity.Name(source, EntityManager));
-        
+
         // Reserve edit: Port from WD START
         var nameEv = new TransformSpeakerNameEvent(source, Name(source));
         RaiseLocalEvent(source, nameEv);
@@ -852,7 +853,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         if (nameOverride != null)
             name = nameOverride;
         // Reserve edit: Port from WD END
-        
+
         name = FormattedMessage.EscapeText(name);
 
         if (!language.SpeechOverride.RequireSpeech && language.SpeechOverride.RequireLOS)
