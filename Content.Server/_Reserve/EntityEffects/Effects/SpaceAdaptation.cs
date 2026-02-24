@@ -12,14 +12,18 @@ using Robust.Server.Containers;
 using Robust.Server.GameObjects;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization.Manager.Attributes;
 using System.Linq;
 
 namespace Content.Server.EntityEffects.Effects;
 
 public sealed partial class SpaceAdaptation : EntityEffect
 {
-    private readonly string _spaceHeartProto = "OrganSpaceAnimalHeart";
-    private readonly string _spaceLungsProto = "OrganSpaceAnimalLungs";
+    [DataField("spaceHeartProto")]
+    public string SpaceHeartProto = "OrganSpaceAnimalHeart";
+
+    [DataField("spaceLungsProto")]
+    public string SpaceLungsProto = "OrganSpaceAnimalLungs";
 
     public override void Effect(EntityEffectBaseArgs args)
     {
@@ -37,13 +41,13 @@ public sealed partial class SpaceAdaptation : EntityEffect
         {
             if (entityManager.HasComponent<HeartComponent>(organ.Id))
             {
-                ReplaceOrgan(organ.Id, _spaceHeartProto, entityManager, xFormSystem, containerSystem);
+                ReplaceOrgan(organ.Id, SpaceHeartProto, entityManager, xFormSystem, containerSystem);
                 continue;
             }
 
             if (entityManager.HasComponent<LungComponent>(organ.Id))
             {
-                ReplaceOrgan(organ.Id, _spaceLungsProto, entityManager, xFormSystem, containerSystem);
+                ReplaceOrgan(organ.Id, SpaceLungsProto, entityManager, xFormSystem, containerSystem);
                 continue;
             }
         }
