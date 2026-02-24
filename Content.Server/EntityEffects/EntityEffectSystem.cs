@@ -8,6 +8,8 @@ using Content.Server.Body.Systems;
 using Content.Server.Botany.Components;
 using Content.Server.Botany.Systems;
 using Content.Server.Botany;
+using Content.Shared._Shitmed.Body.Organ;
+using Robust.Server.Containers;
 using Content.Server.Chat.Systems;
 using Content.Server.Emp;
 using Content.Server.Explosion.EntitySystems;
@@ -80,6 +82,8 @@ public sealed class EntityEffectSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _xform = default!;
     [Dependency] private readonly VomitSystem _vomit = default!;
     [Dependency] private readonly TurfSystem _turf = default!; //todo Goobstation? The only thing im using this for is meant to be in RT? Fix if you havent
+    [Dependency] private readonly BodySystem _bodySystem = default!;
+    [Dependency] private readonly ContainerSystem _containerSystem = default!;
 
     public override void Initialize()
     {
@@ -132,6 +136,7 @@ public sealed class EntityEffectSystem : EntitySystem
         SubscribeLocalEvent<ExecuteEntityEffectEvent<PlantSpeciesChange>>(OnExecutePlantSpeciesChange);
         SubscribeLocalEvent<ExecuteEntityEffectEvent<PolymorphEffect>>(OnExecutePolymorph);
         SubscribeLocalEvent<ExecuteEntityEffectEvent<ResetNarcolepsy>>(OnExecuteResetNarcolepsy);
+        SubscribeLocalEvent<ExecuteEntityEffectEvent<Content.Shared._Reserve.EntityEffects.Effects.SpaceAdaptation>>(OnExecuteSpaceAdaptation);
     }
 
     private void OnCheckTemperature(ref CheckEntityEffectConditionEvent<TemperatureCondition> args)
@@ -1041,4 +1046,47 @@ public sealed class EntityEffectSystem : EntitySystem
 
         _narcolepsy.AdjustNarcolepsyTimer(args.Args.TargetEntity, args.Effect.TimerReset);
     }
+
+    // Reserve edit - Carpozine begin
+    private void OnExecuteSpaceAdaptation(ref ExecuteEntityEffectEvent<Content.Shared._Reserve.EntityEffects.Effects.SpaceAdaptation> args)
+    {
+        if (!HasComp<BodyComponent>(args.Args.TargetEntity))
+            return;
+
+        var organs = _bodySystem.GetBodyOrgans(args.Args.TargetEntity);
+
+        foreach (var organ in organs)
+        {
+            if (HasComp<HeartComponent>(organ.Id))
+            {
+                ReplaceOrgan(organ.Id, args.Effect.SpaceHeartProto);
+                continue;
+            }
+
+            if (HasComp<LungComponent>(organ.Id))
+            {
+                ReplaceOrgan(organ.Id, args.Effect.SpaceLungsProto);
+                continue;
+            }
+        }
+    }
+
+    private void ReplaceOrgan(EntityUid organ, string replaceWithProto)
+    {
+        var metaComp = MetaData(organ);
+        if (metaComp.EntityPrototype is not null && metaComp.EntityPrototype.ID == replaceWithProto)
+            return;
+
+        var xForm = Comp<TransformComponent>(organ);
+        var container = _containerSystem.GetContainingContainers((organ, xForm)).First();
+
+        var newOrgan = Spawn(replaceWithProto);
+
+        _xform.DetachEntity(organ, xForm);
+        QueueDel(organ);
+
+        _containerSystem.Insert(newOrgan, container);
+    }
+    // Reserve edit - Carpozine end
+
 }
