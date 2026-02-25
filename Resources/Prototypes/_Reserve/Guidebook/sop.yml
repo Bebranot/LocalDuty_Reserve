@@ -20,7 +20,7 @@
 
 # Alert Levels Main Directory
 - type: guideEntry
-  id: Alert Levels Reserve
+  id: AlertLevelsReserve
   name: guide-entry-sop-alert-levels
   text: "/ServerInfo/_Reserve/Guidebook/SoP/AlertLevels/AlertLevelsSOP.xml"
   priority: 0
@@ -58,12 +58,12 @@
   name: guide-entry-sop-standards
   text: "/ServerInfo/_Reserve/Guidebook/SoP/StandardProcedures/StandardProceduresSOP.xml"
   children:
-  - Alert Levels Reserve
+  - AlertLevelsReserve
   - EmergenciesSOPReserve
   - DemotingSOPReserve
   - EarlyEvacuationSOPReserve
   - HiringSOPReserve
-  - Succession Reserve
+  - SuccessionReserve
 
 - type: guideEntry
   id: LegalSOPReserve
@@ -225,7 +225,7 @@
   priority: 10
 
 - type: guideEntry
-  id: Succession Reserve
+  id: SuccessionReserve
   name: guide-entry-sop-succession # Is named as "Chain of Command" in game.
   text: "/ServerInfo/_Reserve/Guidebook/SoP/StandardProcedures/CommandSuccession.xml"
   priority: 10
