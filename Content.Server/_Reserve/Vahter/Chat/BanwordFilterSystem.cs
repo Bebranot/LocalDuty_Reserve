@@ -164,8 +164,8 @@ public sealed class BanwordFilterSystem : EntitySystem
     {
         _popup.PopupEntity(Loc.GetString("banword-filter-popup-level-two"), source, session, PopupType.Large);
 
-        _stun.TryStun(source, TimeSpan.FromSeconds(_tortureStunDuration), true);
-        _stun.TryKnockdown(source, TimeSpan.FromSeconds(_tortureStunDuration), true);
+        _stun.TryUpdateStunDuration(source, TimeSpan.FromSeconds(_tortureStunDuration));
+        _stun.TryKnockdown(source, TimeSpan.FromSeconds(_tortureStunDuration));
         Chat.TrySendInGameICMessage(
             source,
             Loc.GetString("banword-filter-torture-me-action-one"),
@@ -202,8 +202,8 @@ public sealed class BanwordFilterSystem : EntitySystem
     private void ApplyExecution(EntityUid source, ICommonSession session)
     {
         _popup.PopupEntity(Loc.GetString("banword-filter-popup-level-three"), source, session, PopupType.Large);
-        _stun.TryStun(source, TimeSpan.FromSeconds(_tortureStunDuration), true);
-        _stun.TryKnockdown(source, TimeSpan.FromSeconds(_tortureStunDuration), true);
+        _stun.TryUpdateStunDuration(source, TimeSpan.FromSeconds(_tortureStunDuration));
+        _stun.TryKnockdown(source, TimeSpan.FromSeconds(_tortureStunDuration));
 
         Chat.TrySendInGameICMessage(
             source,
