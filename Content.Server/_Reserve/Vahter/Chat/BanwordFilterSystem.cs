@@ -2,14 +2,15 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using System.Text.RegularExpressions;
 using Content.Goobstation.Shared.MisandryBox.Smites;
 using Content.Server.Body.Systems;
 using Content.Server.Chat.Systems;
 using Content.Server.Explosion.EntitySystems;
 using Content.Server.Medical;
 using Content.Server.Body.Components;
+using Content.Server.Chat.Managers;
 using Content.Shared._Reserve.Vahter.Chat;
-using Content.Shared.Body.Components;
 using Content.Shared.Body.Part;
 using Content.Shared.Chat;
 using Content.Shared.Popups;
@@ -25,6 +26,7 @@ using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Timer = Robust.Shared.Timing.Timer;
 using Content.Shared._Shitmed.Body.Organ;
+using Content.Shared.Body.Components;
 
 namespace Content.Server._Reserve.Vahter.Chat;
 
@@ -34,8 +36,10 @@ public sealed class BanwordFilterSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly ILogManager _logManager = default!;
     [Dependency] private readonly StatusEffectsSystem _statusEffect = default!;
     [Dependency] private readonly BodySystem _bodySystem = default!;
+    [Dependency] private readonly IChatManager _chatManager = default!;
     [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly VomitSystem _vomit = default!;
@@ -45,6 +49,7 @@ public sealed class BanwordFilterSystem : EntitySystem
 
     private ChatSystem Chat => _chat ??= EntityManager.System<ChatSystem>();
     private ChatSystem? _chat;
+    private ISawmill _sawmill = default!;
 
     private readonly HashSet<string> _words = new();
     private bool _cached;
@@ -68,6 +73,7 @@ public sealed class BanwordFilterSystem : EntitySystem
         _cfg.OnValueChanged(VahterCVars.MinimumForExecution, v => _minimumForExecution = v, true);
 
         _proto.PrototypesReloaded += _ => CacheWords();
+        _sawmill = _logManager.GetSawmill("vahter");
     }
 
     private void CacheWords()
@@ -76,7 +82,7 @@ public sealed class BanwordFilterSystem : EntitySystem
         foreach (var proto in _proto.EnumeratePrototypes<BanwordListPrototype>())
         {
             foreach (var word in proto.Words)
-                _words.Add(word);
+                _words.Add(word.ToLowerInvariant());
         }
 
         _cached = true;
@@ -96,9 +102,9 @@ public sealed class BanwordFilterSystem : EntitySystem
             CacheWords();
 
         var foundCount = 0;
-        foreach (var word in _words)
+        foreach (var token in Regex.Split(message, @"[^\p{L}\d]+"))
         {
-            if (message.Contains(word, StringComparison.OrdinalIgnoreCase))
+            if (token.Length > 0 && _words.Contains(token.ToLowerInvariant()))
                 foundCount++;
         }
 
@@ -110,13 +116,32 @@ public sealed class BanwordFilterSystem : EntitySystem
 
         if (foundCount >= _minimumForExecution)
         {
+            _statusEffect.TryAddStatusEffect<MutedComponent>( // суки спамят
+                source,
+                "Muted",
+                TimeSpan.FromSeconds(60),
+                true);
             ApplyExecution(source, session);
             ShowRules(session);
         }
         else if (foundCount >= _minimumForTorture)
+        {
+            _statusEffect.TryAddStatusEffect<MutedComponent>( // суки спамят
+                source,
+                "Muted",
+                TimeSpan.FromSeconds(60),
+                true);
             ApplyTorture(source, session);
+        }
         else if (foundCount >= _minimumForMute)
             ApplyMute(source, session);
+
+        _sawmill.Info(
+            $"{session.Name} ({session.UserId}) отправил сообщение с банвордами (всего {foundCount} слов)");
+        _chatManager.SendAdminAnnouncement(Loc.GetString("banword-admin-warning",
+            ("playerName", session.Name),
+            ("userId", session.UserId),
+            ("count", foundCount)));
 
         return true;
     }
