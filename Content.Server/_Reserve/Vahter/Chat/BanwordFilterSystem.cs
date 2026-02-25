@@ -24,6 +24,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Timer = Robust.Shared.Timing.Timer;
+using Content.Shared._Shitmed.Body.Organ;
 
 namespace Content.Server._Reserve.Vahter.Chat;
 
@@ -132,7 +133,7 @@ public sealed class BanwordFilterSystem : EntitySystem
         foreach (var organ in _bodySystem.GetBodyOrganEntityComps<TransformComponent>((source, body)))
         {
             if (HasComp<BrainComponent>(organ.Owner) || HasComp<EyeComponent>(organ.Owner) ||
-                HasComp<StomachComponent>(organ.Owner))
+                HasComp<StomachComponent>(organ.Owner) || HasComp<HeartComponent>(organ.Owner))
                 continue;
 
             _transformSystem.PlaceNextTo((organ.Owner, organ.Comp1), (source, baseXform));
