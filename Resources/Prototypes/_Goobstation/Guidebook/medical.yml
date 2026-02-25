@@ -6,7 +6,6 @@
 
 - type: guideEntry
   id: MedicalPatches
-  abstract: true #Reserve guidebook
   name: guide-entry-medpatches
   text: "/ServerInfo/_Goobstation/Guidebook/Medical/Medicalpatches.xml"
 
