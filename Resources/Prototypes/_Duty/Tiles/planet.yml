@@ -1,5 +1,5 @@
 - type: tile
-  id: FloorPlanetGreenGrass
+  id: FloorPlanetGreenGrassDuty
   name: Зелёная трава Stalker
   sprite: /Textures/_Stalker/Tiles/Greengrass/grass.png
   variants: 4
@@ -28,7 +28,7 @@
   indestructible: true
 
 - type: tile
-  id: FloorPlanetRedGrass
+  id: FloorPlanetRedGrassDuty
   name: Красная трава Stalker
   sprite: /Textures/_Stalker/Tiles/Redgrass/grass.png
   variants: 4
@@ -57,7 +57,7 @@
   indestructible: true
 
 - type: tile
-  id: FloorPlanetYellowGrass
+  id: FloorPlanetYellowGrassDuty
   name: Жёлтая трава Stalker
   sprite: /Textures/_Stalker/Tiles/Yellowgrass/grass.png
   variants: 4
@@ -87,7 +87,7 @@
 
 # Песок
 - type: tile
-  id: FloorPlanetSand
+  id: FloorPlanetSandDuty
   name: песок Stalker
   sprite: /Textures/_Stalker/Tiles/Sand/sand.png
   variants: 5
@@ -119,7 +119,7 @@
 
 # Щебёнка
 - type: tile
-  id: FloorScheben
+  id: FloorSchebenDuty
   name: щебень Stalker
   sprite: /Textures/_Stalker/Tiles/scheben.png
   variants: 4
@@ -135,7 +135,7 @@
   weather: true
   indestructible: true
 - type: tile
-  id: FloorDarkScheben
+  id: FloorDarkSchebenDuty
   name: тёмный щебень Stalker
   sprite: /Textures/_Stalker/Tiles/darkscheben.png
   variants: 4
@@ -151,7 +151,7 @@
   weather: true
   indestructible: true
 - type: tile
-  id: FloorRoad
+  id: FloorRoadDuty
   name: дорога Stalker
   sprite: /Textures/_Stalker/Tiles/road.png
   variants: 4
@@ -169,7 +169,7 @@
 
 # Wasteland
 - type: tile
-  id: StalkerFloorSnowDug
+  id: StalkerFloorSnowDugDuty
   name: Грязный снег
   sprite: /Textures/_Stalker/Tiles/snow.rsi/snow13.png
   edgeSpritePriority: 1
@@ -187,7 +187,7 @@
 
 # moved to _Stalker
 - type: tile
-  id: STFloorPlanetDirt
+  id: STFloorPlanetDirtDuty
   parent: FloorPlanetDirt
   name: tiles-dirt-floor
   sprite: /Textures/_Stalker/Tiles/Planet/dirt.rsi/dirt.png

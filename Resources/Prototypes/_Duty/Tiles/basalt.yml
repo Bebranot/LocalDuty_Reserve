@@ -1,5 +1,5 @@
 - type: tile
-  id: StalkerMapBaslat
+  id: StalkerMapBaslatDuty
   name: StalkerBasalt
   sprite: /Textures/_Stalker/Tiles/cursed-basalt.png
   placementVariants:

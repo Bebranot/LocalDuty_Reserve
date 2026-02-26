@@ -15,7 +15,7 @@ public sealed partial class CCVars
     /// </summary>
     /// <seealso cref="AhelpRateLimitCount"/>
     public static readonly CVarDef<float> AhelpRateLimitPeriod =
-        CVarDef.Create("ahelp.rate_limit_period", 0,25f, CVar.SERVERONLY);
+        CVarDef.Create("ahelp.rate_limit_period", 0.25f, CVar.SERVERONLY);
 
     /// <summary>
     ///     How many ahelp messages are allowed in a single rate limit period.

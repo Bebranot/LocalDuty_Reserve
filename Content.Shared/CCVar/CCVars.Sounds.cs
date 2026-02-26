@@ -36,5 +36,5 @@ public sealed partial class CCVars
         CVarDef.Create("audio.old_ahelp_sound", "/Audio/Effects/adminhelp.ogg", CVar.ARCHIVE | CVar.CLIENTONLY);
 
     public static readonly CVarDef<string> AHelpSound =
-        CVarDef.Create("audio.ahelp_sound", "/Audio/Effects/newadminhelp.ogg", CVar.ARCHIVE | CVar.CLIENTONLY);
+        CVarDef.Create("audio.ahelp_sound", "/Audio/_Duty/ahelp_send.ogg", CVar.ARCHIVE | CVar.CLIENTONLY);
 }

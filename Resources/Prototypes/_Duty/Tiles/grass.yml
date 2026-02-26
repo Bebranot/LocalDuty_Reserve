@@ -1,5 +1,5 @@
 - type: entity
-  id: StalkerMapGrass1
+  id: StalkerMapGrass1Duty
   suffix: Stalker, Mapping
   name: Трава
   components:
@@ -17,24 +17,24 @@
         - HideContextMenu
 
 - type: entity
-  id: StalkerMapGrass2
-  parent: StalkerMapGrass1
+  id: StalkerMapGrass2Duty
+  parent: StalkerMapGrass1Duty
   components:
     - type: Sprite
       layers:
         - state: grass2
 
 - type: entity
-  id: StalkerMapGrass3
-  parent: StalkerMapGrass1
+  id: StalkerMapGrass3Duty
+  parent: StalkerMapGrass1Duty
   components:
     - type: Sprite
       layers:
         - state: grass3
 
 - type: entity
-  id: StalkerMapGrass4
-  parent: StalkerMapGrass1
+  id: StalkerMapGrass4Duty
+  parent: StalkerMapGrass1Duty
   components:
     - type: Sprite
       layers:
@@ -42,48 +42,48 @@
 
 
 - type: entity
-  id: StalkerMapGrass5
-  parent: StalkerMapGrass1
+  id: StalkerMapGrass5Duty
+  parent: StalkerMapGrass1Duty
   components:
     - type: Sprite
       layers:
         - state: grass5
 
 - type: entity
-  id: StalkerMapGrass6
-  parent: StalkerMapGrass1
+  id: StalkerMapGrass6Duty
+  parent: StalkerMapGrass1Duty
   components:
     - type: Sprite
       layers:
         - state: grass6
 
 - type: entity
-  id: StalkerMapGrass7
-  parent: StalkerMapGrass1
+  id: StalkerMapGrass7Duty
+  parent: StalkerMapGrass1Duty
   components:
     - type: Sprite
       layers:
         - state: grass7
 
 - type: entity
-  id: StalkerMapGrass8
-  parent: StalkerMapGrass1
+  id: StalkerMapGrass8Duty
+  parent: StalkerMapGrass1Duty
   components:
     - type: Sprite
       layers:
         - state: grass8
 
 - type: entity
-  id: StalkerMapGrass9
-  parent: StalkerMapGrass1
+  id: StalkerMapGrass9Duty
+  parent: StalkerMapGrass1Duty
   components:
     - type: Sprite
       layers:
         - state: grass9
 
 - type: entity
-  id: StalkerMapGrass10
-  parent: StalkerMapGrass1
+  id: StalkerMapGrass10Duty
+  parent: StalkerMapGrass1Duty
   components:
     - type: Sprite
       layers:
