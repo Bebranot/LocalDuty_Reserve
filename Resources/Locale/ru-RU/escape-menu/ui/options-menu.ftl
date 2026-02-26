@@ -30,6 +30,7 @@ ui-options-general-accessibility = Доступность
 ui-options-master-volume = Основная громкость:
 ui-options-midi-volume = Громкость MIDI (Муз. инструменты):
 ui-options-ambient-music-volume = Громкость музыки окружения:
+ui-options-duty-dynamic-ambient-volume = Громкость динамической фоновой музыки:
 ui-options-ambience-volume = Громкость окружения:
 ui-options-lobby-volume = Громкость лобби и окончания раунда:
 ui-options-interface-volume = Громкость интерфейса:

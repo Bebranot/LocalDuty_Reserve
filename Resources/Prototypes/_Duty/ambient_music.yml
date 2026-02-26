@@ -1,0 +1,35 @@
+- type: dynamicAmbientMusic
+  id: DutyAmbientMusic
+
+  # Спокойная музыка — играет периодически когда игрок не в боевом режиме.
+  # Каждый раз выбирается случайный трек из списка.
+  calmTracks:
+    - !type:SoundPathSpecifier
+      path: /Audio/_Duty/AdminMusic/Relax/OneShot OST - Children of the Ruins.ogg
+    - !type:SoundPathSpecifier
+      path: /Audio/_Duty/AdminMusic/Relax/Search'nDestroyARID.ogg
+  # Боевая музыка — играет в петле пока игрок в боевом режиме.
+  # При выходе из боевого режима плавно затухает.
+  combatTracks:
+    - !type:SoundPathSpecifier
+      path: /Audio/_Duty/AdminMusic/Z-City SoundTrack - Pharmacia (Fury-13).ogg
+    - !type:SoundPathSpecifier
+      path: /Audio/_Duty/AdminMusic/Activy_battle/ScavWarRemix.ogg
+
+  # Минимальная пауза между спокойными треками (секунды)
+  calmMinInterval: 1
+
+  # Максимальная пауза между спокойными треками (секунды)
+  calmMaxInterval: 2
+
+  # Длительность плавного нарастания громкости спокойной музыки (секунды)
+  calmFadeInDuration: 2.5
+
+  # Длительность плавного затухания спокойной музыки (секунды)
+  calmFadeOutDuration: 2.5
+
+  # Длительность плавного затухания боевой музыки при выходе из боя (секунды)
+  combatFadeOutDuration: 2.5
+
+  # Длительность плавного нарастания громкости боевой музыки (секунды)
+  combatFadeInDuration: 2.5
