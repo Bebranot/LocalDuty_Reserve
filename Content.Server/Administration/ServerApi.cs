@@ -49,7 +49,8 @@ using Content.Shared.Database;
 using Content.Server.ADT.Discord;
 using Content.Server.ADT.Discord.Bans;
 using Content.Server.ADT.Discord.Bans.PayloadGenerators;
-using Content.Server.MoMMI; // Reserve api-ooc-handler
+using Content.Server.MoMMI;
+using Content.Shared._Reserve.LenaApi; // Reserve api-ooc-handler
 
 namespace Content.Server.Administration;
 
@@ -814,9 +815,10 @@ public sealed partial class ServerApi : IPostInjectInit
             return;
 
         var oocEnabled = _config.GetCVar(CCVars.OocEnabled);
-        if (!oocEnabled)
+        var doocEnabled = _config.GetCVar(LenaApiCVars.DoocEnabled);
+        if (!oocEnabled && !doocEnabled)
         {
-            await RespondBadRequest(context, $"OOC chat currently disabled");
+            await RespondBadRequest(context, "OOC chat currently disabled");
             return;
         }
 
