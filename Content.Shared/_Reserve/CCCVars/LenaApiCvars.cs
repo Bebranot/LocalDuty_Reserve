@@ -35,7 +35,5 @@ public sealed class LenaApiCVars : CVars
         CVarDef.Create("lena.ignore_sub_name", true, CVar.SERVERONLY);
 
     public static readonly CVarDef<bool> DoocEnabled =
-        CVarDef.Create("lena.dooc_enabled", true, CVar.SERVERONLY);
-
-
+        CVarDef.Create("lena.dooc_enabled", true, CVar.SERVER);
 }
