@@ -5,3 +5,4 @@ banword-filter-popup-level-three = Вы чувствуете сожаление.
 banword-filter-torture-me-action-one = падает на спину
 banword-filter-torture-me-action-two = выплевывает кровавое месиво
 
+banword-admin-warning = Игрок { $playerName } ({ $userId }) отправил сообщение в котором есть { $count } банвордов

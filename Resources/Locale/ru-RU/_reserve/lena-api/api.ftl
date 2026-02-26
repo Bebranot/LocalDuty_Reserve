@@ -11,3 +11,6 @@ reserve-command-requires-integration-enabled = Эта команда досту�
 reserve-token-use-failed = Использовать токен не удалось.
 reserve-token-used = Игрок { $playerName } активировал токен { $tokenType } выбрав антагониста { $chosenAntag }
 reserve-token-alive-only = Этот токен можно использовать только будучи живым.
+
+reserve-chat-manager-dooc-chat-enabled-message = DOOC чат включен
+reserve-chat-manager-dooc-chat-disabled-message = DOOC чат выключен
