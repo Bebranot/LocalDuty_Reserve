@@ -22,6 +22,9 @@
   files:
   - /Audio/Voice/Human/male_cough_1.ogg
   - /Audio/Voice/Human/male_cough_2.ogg
+  - /Audio/_Duty/Effects/uh/Player/Cough/m_cough1.ogg
+  - /Audio/_Duty/Effects/uh/Player/Cough/m_cough2.ogg
+  - /Audio/_Duty/Effects/uh/Player/Cough/m_cough3.ogg
 
 - type: soundCollection
   id: FemaleCoughs
