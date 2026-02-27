@@ -345,3 +345,15 @@ Entries:
       message: Добавлен IC вахтер. Фильтруйте базар
   id: 48
   time: '2026-02-25T14:09:01.0000000+00:00'
+- author: ca4tuk
+  changes:
+    - type: Remove
+      message: Санта Клаус больше не спавнится
+  id: 49
+  time: '2026-02-26T22:56:35.0000000+00:00'
+- author: Svashik
+  changes:
+    - type: Add
+      message: Королевская Битва вернулась!
+  id: 50
+  time: '2026-02-27T07:48:36.0000000+00:00'
